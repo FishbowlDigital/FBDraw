@@ -7,6 +7,7 @@
 #include "Rectangle.h"
 #include "Macros.h"
 
+
 // Constructor
 Rectangle::Rectangle(int h, int w, BGRA_Color color)
 {
