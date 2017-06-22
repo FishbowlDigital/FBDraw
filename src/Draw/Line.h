@@ -1,5 +1,5 @@
 // Line.h
-// Header file for the Point class
+// Header file for the Line class
 //
 // Copyright Fishbowl Digital 2017
 //

@@ -7,6 +7,7 @@
 #include "Canvas.h"
 #include "Types.h"
 #include "Line.h"
+#include "Rectangle.h"
 #include "Point.h"
 
 // TEMP FOR TESTING
@@ -57,12 +58,13 @@ namespace GraphicLibWrapper {
 		int numPixels = width*height;
 
 		// Create a Canvas and draw some stuff
-		Canvas canvas(width, height, BGRA_Color{ 0xFF, 0x00, 0xFF, 0x00 });
+		Canvas canvas(width, height, BGRA_Color{ 0x00, 0x00, 0x00, 0x00 });
 		Line line1(Point(100, 100), Point(400, 400), BGRA_Color{ 0x00, 0xFF, 0x00, 0x00 });
 		Line line2(Point(100, 400), Point(400, 100), BGRA_Color{ 0x00, 0xFF, 0x00, 0x00 });
-
+		Rectangle rec1(60, 120, Point(190, 240), BGRA_Color{ 0xFF, 0x00, 0xFF, 0x00 });
 		canvas.AddDrawable(&line1);
 		canvas.AddDrawable(&line2);
+		canvas.AddDrawable(&rec1);
 
 		// Render it
 		canvas.Render();

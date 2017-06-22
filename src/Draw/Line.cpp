@@ -1,5 +1,5 @@
 // Line.cpp
-// Implementation file for the Point class
+// Implementation file for the Line class
 //
 // Copyright Fishbowl Digital 2017
 //
