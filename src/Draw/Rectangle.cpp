@@ -4,38 +4,20 @@
 // Copyright Fishbowl Digital 2017
 //
 
-#include "Line.h"
+#include "Rectangle.h"
 #include "Macros.h"
 
 // Constructor
-Line::Line(Point p1, Point p2, BGRA_Color lineColor)
+Rectangle::Rectangle(int h, int w, BGRA_Color color)
 {
-	m_p1 = p1;
-	m_p2 = p2;
-	m_lineColor = lineColor;
+	r_height = h;
+	r_width = w;
+	r_Color = color;
 }
 
-/* Copy constructor
-Line::Line(Line& line)
-{
-	m_p1 = Line.p1;
-	m_p2 = Line.p2;
-}
-
-// Operator overloads
 /*
-Point Point::operator=(const Point& point)
+void Rectangle::Render(color32_t* backBuffer, int width, int height)
 {
-	X = point.X;
-	Y = point.Y;
-
-	return *this;
-}
-*/
-
-void Line::Render(color32_t* backBuffer, int width, int height)
-{
-	/* Vertical line? */
 	if (m_p1.X == m_p2.X)
 	{
 		int yStart = m_p2.Y > m_p1.Y ? m_p1.Y : m_p2.Y;
@@ -43,12 +25,12 @@ void Line::Render(color32_t* backBuffer, int width, int height)
 
 		for (int iY = yStart; iY <= yEnd; iY++)
 		{
-			backBuffer[(iY * width) + m_p1.X] = BGRAColorToU32(m_lineColor);
+			backBuffer[(iY * width) + m_p1.X] = BGRAColorToU32(r_Color);
 		}
 	}
 	else
 	{
-		/* floating point for now */
+
 		float m = ((float)(m_p2.Y - m_p1.Y)) / ((float)(m_p2.X - m_p1.X));
 		float b = m_p1.Y - (m * m_p1.X);
 
@@ -58,7 +40,8 @@ void Line::Render(color32_t* backBuffer, int width, int height)
 		for (int iX = xStart; iX <= xEnd; iX++)
 		{
 			int iY = ((m*iX) + b);
-			backBuffer[(iY * width) + iX] = BGRAColorToU32(m_lineColor);
+			backBuffer[(iY * width) + iX] = BGRAColorToU32(r_Color);
 		}
 	}
 }
+*/

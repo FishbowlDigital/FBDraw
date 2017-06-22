@@ -16,6 +16,7 @@
     <ClInclude Include="..\Draw\Line.h" />
     <ClInclude Include="..\Draw\Macros.h" />
     <ClInclude Include="..\Draw\Point.h" />
+    <ClInclude Include="..\Draw\Rectangle.h" />
     <ClInclude Include="..\Draw\Test.h" />
     <ClInclude Include="..\Draw\Types.h" />
   </ItemGroup>
@@ -24,6 +25,7 @@
     <ClCompile Include="..\Draw\IDrawable.cpp" />
     <ClCompile Include="..\Draw\Line.cpp" />
     <ClCompile Include="..\Draw\Point.cpp" />
+    <ClCompile Include="..\Draw\Rectangle.cpp" />
     <ClCompile Include="..\Draw\Test.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
