@@ -55,12 +55,12 @@ namespace GraphicLibWrapper {
 	array<Byte>^ GraphicLib::DoATest()
 	{
 		//// TEMP!
-		int width = 500;
-		int height = 500;
+		int width = 100;
+		int height = 100;
 		int numPixels = width*height;
 
 		//Buffer to test image renderer
-		int imgWidth = 200;
+		/*int imgWidth = 200;
 		int imgHeight = 160;
 		int imgNumPixels = imgWidth * imgHeight;
 		color32_t* testImage = new color32_t[imgNumPixels];
@@ -68,22 +68,25 @@ namespace GraphicLibWrapper {
 		{
 			for (int iX = 0; iX < imgWidth; iX++)
 			{
-				//testImage[(iY*imgWidth) + iX] = BGRAColorToU32((BGRA_Color{ (uint8_t)iX, (uint8_t)iY, 0x00, 0x00 }));
-				testImage[(iY*imgWidth) + iX] = BGRAColorToU32((BGRA_Color{ (uint8_t)iX, (uint8_t)iY, 0x00, 0x00 }));
+				testImage[(iY*imgWidth) + iX] = BGRAColorToU32((BGRA_Color{ (uint8_t)iX, (uint8_t)iY, 0x00, 0x80 }));
 			}
-		}
+		}*/
 			
 		// Create a Canvas and draw some stuff
-		Canvas canvas(width, height, BGRA_Color{ 0x00, 0xFF, 0x00, 0x00 });
-		Line line1(Point(100, 100), Point(400, 400), BGRA_Color{ 0x00, 0x00, 0x00, 0x00 });
-		Line line2(Point(100, 400), Point(400, 100), BGRA_Color{ 0x00, 0x00, 0x00, 0x00 });
-		Rectangle rec1(60, 120, Point(220, 210), BGRA_Color{ 0xFF, 0x00, 0xFF, 0x00 });
-		Image img(Point(50, 50), imgWidth, imgHeight, testImage);
+		Canvas canvas(width, height, BGRA_Color{ 0x00, 0x00, 0x00, 0x00 });
+		Line line1(Point(35, 5), Point(60, 90), BGRA_Color{ 0x00, 0xFF, 0x00, 0x00 });
+		Line line2(Point(80, 5), Point(20, 65), BGRA_Color{ 0xFF, 0x00, 0xFF, 0x00 });
+		Line line3(Point(2, 45), Point(90, 55), BGRA_Color{ 0xFF, 0x80, 0x00, 0x00 });
+		Line line4(Point(95, 15), Point(45, 75), BGRA_Color{ 0x00, 0x00, 0xFF, 0x00 });
+		/*Rectangle rec1(60, 120, Point(325, 210), BGRA_Color{ 0xFF, 0x80, 0x00, 0x00 });
+		Image img(Point(150, 80), imgWidth, imgHeight, testImage);*/
 
 		canvas.AddDrawable(&line1);
 		canvas.AddDrawable(&line2);
-		canvas.AddDrawable(&rec1);
-		canvas.AddDrawable(&img);
+		canvas.AddDrawable(&line3);
+		canvas.AddDrawable(&line4);
+		/*canvas.AddDrawable(&rec1);
+		canvas.AddDrawable(&img);*/
 
 		// Render it
 		canvas.Render();

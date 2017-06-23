@@ -39,7 +39,7 @@ namespace GraphicTest
         {
             Byte[] bmpData = GraphicLib.DoATest();
 
-            m_image.Source = CreateBitmap(bmpData, 500, 500);   // HARD CODED!
+            m_image.Source = CreateBitmap(bmpData, 100, 100);   // HARD CODED!
         }
 
     }

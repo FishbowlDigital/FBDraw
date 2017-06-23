@@ -28,8 +28,6 @@ class Line : public IDrawable
 		Point		m_p1;
 		Point		m_p2;
 		BGRA_Color	m_lineColor;
-
-
 };
 
 
