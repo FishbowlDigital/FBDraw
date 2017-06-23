@@ -8,21 +8,21 @@
 #define _IMAGE_H
 #include "Types.h"
 #include "IDrawable.h"
+#include "Point.h"
 
 class Image : public IDrawable
 {
 	public:
-	Image(int w, int h, color32_t* image);
-	Image(int w, int h, color32_t* image, BGRA_Color color);
+	Image(Point loc, int w, int h, color32_t* image);
 
 	virtual void Render(color32_t* backBuffer, int width, int height);
 
 	private:
 		// Properties
-		int			i_height; 
-		int			i_width;
-		BGRA_Color	i_color;
-		color32_t*	i_imageBuffer;
+		Point		m_location;
+		int			m_height; 
+		int			m_width;
+		color32_t*	m_imageBuffer;
 };
 
 #endif			// #define _POINT_H
