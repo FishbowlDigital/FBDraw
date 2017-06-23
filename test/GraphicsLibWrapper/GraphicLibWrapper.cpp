@@ -68,14 +68,15 @@ namespace GraphicLibWrapper {
 		{
 			for (int iX = 0; iX < imgWidth; iX++)
 			{
+				//testImage[(iY*imgWidth) + iX] = BGRAColorToU32((BGRA_Color{ (uint8_t)iX, (uint8_t)iY, 0x00, 0x00 }));
 				testImage[(iY*imgWidth) + iX] = BGRAColorToU32((BGRA_Color{ (uint8_t)iX, (uint8_t)iY, 0x00, 0x00 }));
 			}
 		}
 			
 		// Create a Canvas and draw some stuff
-		Canvas canvas(width, height, BGRA_Color{ 0x00, 0x00, 0x00, 0x00 });
-		Line line1(Point(100, 100), Point(400, 400), BGRA_Color{ 0x00, 0xFF, 0x00, 0x00 });
-		Line line2(Point(100, 400), Point(400, 100), BGRA_Color{ 0x00, 0xFF, 0x00, 0x00 });
+		Canvas canvas(width, height, BGRA_Color{ 0x00, 0xFF, 0x00, 0x00 });
+		Line line1(Point(100, 100), Point(400, 400), BGRA_Color{ 0x00, 0x00, 0x00, 0x00 });
+		Line line2(Point(100, 400), Point(400, 100), BGRA_Color{ 0x00, 0x00, 0x00, 0x00 });
 		Rectangle rec1(60, 120, Point(220, 210), BGRA_Color{ 0xFF, 0x00, 0xFF, 0x00 });
 		Image img(Point(50, 50), imgWidth, imgHeight, testImage);
 

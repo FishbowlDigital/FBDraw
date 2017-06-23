@@ -20,6 +20,8 @@ Image::Image(Point loc, int w, int h, color32_t* image)
 
 void Image::Render(color32_t* backBuffer, int width, int height)
 {
+	BGRA_Color mixBGRA = BGRA_Color{ 0x00, 0x00, 0x00, 0x00 };
+
 	if (m_imageBuffer == NULL)
 		return;
 
@@ -32,7 +34,16 @@ void Image::Render(color32_t* backBuffer, int width, int height)
 		int iImageRowStart = (iY * m_width);
 		for (int iX = 0; iX < m_width; iX++)
 		{
-			backBuffer[iCanvasRowStart + iX] = m_imageBuffer[iImageRowStart + iX];
+			BGRA_Color imgBGRA, backBGRA;
+			imgBGRA = U32toBGRAColor(m_imageBuffer[iImageRowStart + iX]);
+			backBGRA = U32toBGRAColor(backBuffer[iCanvasRowStart + iX]);
+
+			mixBGRA.Red = AlphaMix8(backBGRA.Red, imgBGRA.Red, imgBGRA.Alpha);
+			mixBGRA.Green = AlphaMix8(backBGRA.Green, imgBGRA.Green, imgBGRA.Alpha);
+			mixBGRA.Blue = AlphaMix8(backBGRA.Blue, imgBGRA.Blue, imgBGRA.Alpha);
+
+			backBuffer[iCanvasRowStart + iX] = BGRAColorToU32(mixBGRA);
+			//backBuffer[iCanvasRowStart + iX] = m_imageBuffer[iImageRowStart + iX];
 		}
 	}
 }
