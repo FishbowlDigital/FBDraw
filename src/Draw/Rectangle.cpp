@@ -1,9 +1,3 @@
-// Line.cpp
-// Implementation file for the Point class
-//
-// Copyright Fishbowl Digital 2017
-//
-
 // Rectangle.cpp
 // Implementation file for the Rectangle class
 //

@@ -6,6 +6,8 @@
 
 #include "Canvas.h"
 #include "Types.h"
+#include "Macros.h"
+#include "Image.h"
 #include "Line.h"
 #include "Rectangle.h"
 #include "Point.h"
@@ -57,14 +59,23 @@ namespace GraphicLibWrapper {
 		int height = 500;
 		int numPixels = width*height;
 
+		//Buffer to test image renderer
+		color32_t* testImage = new color32_t[width * height];
+		for (int i = 0; i < (width*height); i++)
+		{
+			testImage[i] = BGRAColorToU32((BGRA_Color{ 0xFF, 0xFF, 0xFF, 0x00 }));
+		}
+
 		// Create a Canvas and draw some stuff
 		Canvas canvas(width, height, BGRA_Color{ 0x00, 0x00, 0x00, 0x00 });
 		Line line1(Point(100, 100), Point(400, 400), BGRA_Color{ 0x00, 0xFF, 0x00, 0x00 });
 		Line line2(Point(100, 400), Point(400, 100), BGRA_Color{ 0x00, 0xFF, 0x00, 0x00 });
-		Rectangle rec1(60, 120, Point(190, 240), BGRA_Color{ 0xFF, 0x00, 0xFF, 0x00 });
+		Rectangle rec1(60, 120, Point(220, 210), BGRA_Color{ 0xFF, 0x00, 0xFF, 0x00 });
+		Image img(width, height, testImage);
 		canvas.AddDrawable(&line1);
 		canvas.AddDrawable(&line2);
 		canvas.AddDrawable(&rec1);
+		canvas.AddDrawable(&img);
 
 		// Render it
 		canvas.Render();

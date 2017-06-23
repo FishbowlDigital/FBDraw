@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClInclude Include="..\Draw\Canvas.h" />
     <ClInclude Include="..\Draw\IDrawable.h" />
+    <ClInclude Include="..\Draw\Image.h" />
     <ClInclude Include="..\Draw\Line.h" />
     <ClInclude Include="..\Draw\Macros.h" />
     <ClInclude Include="..\Draw\Point.h" />
@@ -23,6 +24,7 @@
   <ItemGroup>
     <ClCompile Include="..\Draw\Canvas.cpp" />
     <ClCompile Include="..\Draw\IDrawable.cpp" />
+    <ClCompile Include="..\Draw\Image.cpp" />
     <ClCompile Include="..\Draw\Line.cpp" />
     <ClCompile Include="..\Draw\Point.cpp" />
     <ClCompile Include="..\Draw\Rectangle.cpp" />
