@@ -60,18 +60,19 @@ namespace GraphicLibWrapper {
 		int numPixels = width*height;
 
 		//Buffer to test image renderer
-		color32_t* testImage = new color32_t[width * height];
-		for (int i = 0; i < (width*height); i++)
+		color32_t* testImage = new color32_t[numPixels];
+		for (int i = 0; i < (numPixels); i++)
 		{
-			testImage[i] = BGRAColorToU32((BGRA_Color{ 0xFF, 0xFF, 0xFF, 0x00 }));
+			testImage[i] = BGRAColorToU32((BGRA_Color{ 0x80, 0x80, 0xFF, 0x00 }));
 		}
-
+			
 		// Create a Canvas and draw some stuff
 		Canvas canvas(width, height, BGRA_Color{ 0x00, 0x00, 0x00, 0x00 });
 		Line line1(Point(100, 100), Point(400, 400), BGRA_Color{ 0x00, 0xFF, 0x00, 0x00 });
 		Line line2(Point(100, 400), Point(400, 100), BGRA_Color{ 0x00, 0xFF, 0x00, 0x00 });
 		Rectangle rec1(60, 120, Point(220, 210), BGRA_Color{ 0xFF, 0x00, 0xFF, 0x00 });
 		Image img(width, height, testImage);
+
 		canvas.AddDrawable(&line1);
 		canvas.AddDrawable(&line2);
 		canvas.AddDrawable(&rec1);

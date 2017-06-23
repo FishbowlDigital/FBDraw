@@ -50,8 +50,9 @@ void Image::Render(color32_t* backBuffer, int width, int height)
 		for (color32_t iX = 0; iX < i_width; iX++)
 		{
 			//backBuffer[(iY * width) + iX] = BGRAColorToU32(r_Color);
-			int color = i_imageBuffer[i_RowStart + iX];
+			//int color = i_imageBuffer[i_RowStart + iX];
 			backBuffer[((iY) * width) + (i_imageBuffer[i_RowStart + iX])] = BGRAColorToU32(i_color);
+			//backBuffer[(iY * width) + iX] = BGRAColorToU32(i_color);
 		}
 	}
 }
