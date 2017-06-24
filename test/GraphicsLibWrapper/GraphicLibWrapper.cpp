@@ -78,6 +78,7 @@ namespace GraphicLibWrapper {
 		Line line2(Point(80, 5), Point(20, 65), BGRA_Color{ 0xFF, 0x00, 0xFF, 0x00 });
 		Line line3(Point(2, 45), Point(90, 55), BGRA_Color{ 0xFF, 0x80, 0x00, 0x00 });
 		Line line4(Point(95, 15), Point(45, 75), BGRA_Color{ 0x00, 0x00, 0xFF, 0x00 });
+		Line line5(Point(45, 15), Point(95, 75), BGRA_Color{ 0x00, 0x00, 0xFF, 0x00 });
 		/*Rectangle rec1(60, 120, Point(325, 210), BGRA_Color{ 0xFF, 0x80, 0x00, 0x00 });
 		Image img(Point(150, 80), imgWidth, imgHeight, testImage);*/
 
@@ -85,6 +86,7 @@ namespace GraphicLibWrapper {
 		canvas.AddDrawable(&line2);
 		canvas.AddDrawable(&line3);
 		canvas.AddDrawable(&line4);
+		canvas.AddDrawable(&line5);
 		/*canvas.AddDrawable(&rec1);
 		canvas.AddDrawable(&img);*/
 
