@@ -9,10 +9,10 @@
 #include "Line.h"
 
 // Constructor
-Plot1D::Plot1D(int* data, int start, BGRA_Color color)
+Plot1D::Plot1D(int* data, Point start, BGRA_Color color)
 {
 	m_yData = data;
-	m_xStart = start;
+	m_start = start;
 	m_color = color;
 }
 
@@ -24,8 +24,8 @@ void Plot1D::Render(color32_t* backBuffer, int width, int height)
 	for (int iX = 0; iX < (sizeof(m_yData)-1); iX++)
 	{
 		//Establishing two points to compute to line.
-		Point p1((iX + width), m_yData[iX]);
-		Point p2(iX, m_yData[iX + 1]);
+		Point p1((iX + m_start.X), m_yData[iX + m_start.Y]);
+		Point p2((iX + 1) + m_start.X, m_yData[(iX + 1) + m_start.X]);
 
 		Line ln(p1, p2, m_color);
 		ln.Render(backBuffer, width, height);
