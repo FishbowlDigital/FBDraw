@@ -1,7 +1,9 @@
 // This is the main DLL file.
 
-#include "stdafx.h"
+#include <iostream>
+#include <math.h>
 
+#include "stdafx.h"
 #include "GraphicLibWrapper.h"
 
 #include "Canvas.h"
@@ -11,6 +13,7 @@
 #include "Line.h"
 #include "Rectangle.h"
 #include "Point.h"
+#include "Plot1D.h"
 
 // TEMP FOR TESTING
 //#include "Test.h"
@@ -55,8 +58,8 @@ namespace GraphicLibWrapper {
 	array<Byte>^ GraphicLib::DoATest()
 	{
 		//// TEMP!
-		int width = 100;
-		int height = 100;
+		int width = 500;
+		int height = 500;
 		int numPixels = width*height;
 
 		//Buffer to test image renderer
@@ -72,6 +75,18 @@ namespace GraphicLibWrapper {
 			}
 		}*/
 			
+
+		int testPlot[500];
+		for (int i = 0; i < 500; i++)
+		{
+			float ySin = (System::Math::Sin(((float)i * .1)));
+			float yValue = (100 * ySin);
+
+			testPlot[i] = (int)yValue;
+			//std::cout << testPlot[i] << "\n";
+			System::Diagnostics::Debug::WriteLine(testPlot[i]);
+		}
+
 		// Create a Canvas and draw some stuff
 		Canvas canvas(width, height, BGRA_Color{ 0x00, 0x00, 0x00, 0x00 });
 		Line line1(Point(35, 5), Point(60, 90), BGRA_Color{ 0x00, 0xFF, 0x00, 0x00 });
@@ -79,14 +94,17 @@ namespace GraphicLibWrapper {
 		Line line3(Point(2, 45), Point(90, 55), BGRA_Color{ 0xFF, 0x80, 0x00, 0x00 });
 		Line line4(Point(95, 15), Point(45, 75), BGRA_Color{ 0x00, 0x00, 0xFF, 0x00 });
 		Line line5(Point(45, 15), Point(95, 75), BGRA_Color{ 0x00, 0x00, 0xFF, 0x00 });
+		Plot1D plot(testPlot, 500, Point(0, 250), BGRA_Color{ 0x00, 0xFF, 0xFF, 0x00 });
+		
 		/*Rectangle rec1(60, 120, Point(325, 210), BGRA_Color{ 0xFF, 0x80, 0x00, 0x00 });
 		Image img(Point(150, 80), imgWidth, imgHeight, testImage);*/
 
-		canvas.AddDrawable(&line1);
+		/*canvas.AddDrawable(&line1);
 		canvas.AddDrawable(&line2);
 		canvas.AddDrawable(&line3);
 		canvas.AddDrawable(&line4);
-		canvas.AddDrawable(&line5);
+		canvas.AddDrawable(&line5);*/
+		canvas.AddDrawable(&plot);
 		/*canvas.AddDrawable(&rec1);
 		canvas.AddDrawable(&img);*/
 

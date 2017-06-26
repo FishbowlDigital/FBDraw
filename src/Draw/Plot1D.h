@@ -13,13 +13,14 @@
 class Plot1D : public IDrawable
 {
 public:
-	Plot1D(int* data, Point start, BGRA_Color color);
+	Plot1D(int* data, int dataLength, Point start, BGRA_Color color);
 
 	virtual void Render(color32_t* backBuffer, int width, int height);
 	
 private:
 	// Properties
 	int* m_yData;
+	int m_yDataLength;
 	Point m_start;
 	BGRA_Color	m_color;
 };
