@@ -15,18 +15,27 @@ class Line : public IDrawable
 	public:
 
 	// Constructor/Destructor
-	Line(Point p1, Point p2, BGRA_Color lineColor);
-	//Line(Line& line);
+		Line(Point p1, Point p2, BGRA_Color lineColor);
+		Line(Point p1, Point p2, BGRA_Color lineColor, int thickness);
 
-	// Operators
-	//Line operator=(const Line& Line);
+	// Get/Set Parameters
+		Point GetPoint1();
+		Point GetPoint2();
+		BGRA_Color GetColor();
+		int GetThickness();
 
-	virtual void Render(color32_t* backBuffer, int width, int height);
+		void SetPoint1(Point p1);
+		void SetPoint2(Point p2);
+		void SetColor(BGRA_Color color);
+		void SetThickness(int thickness);
+		
+		virtual void Render(color32_t* backBuffer, int width, int height);
 
 	private:
 	// Properties
 		Point		m_p1;
 		Point		m_p2;
+		int			m_thickness;
 		BGRA_Color	m_lineColor;
 };
 

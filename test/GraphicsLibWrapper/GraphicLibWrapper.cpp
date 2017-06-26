@@ -58,8 +58,8 @@ namespace GraphicLibWrapper {
 	array<Byte>^ GraphicLib::DoATest()
 	{
 		//// TEMP!
-		int width = 500;
-		int height = 500;
+		const int width = 500;
+		const int height = 500;
 		int numPixels = width*height;
 
 		//Buffer to test image renderer
@@ -76,8 +76,8 @@ namespace GraphicLibWrapper {
 		}*/
 			
 
-		int testPlot[500];
-		for (int i = 0; i < 500; i++)
+		int testPlot[width];
+		for (int i = 0; i < width; i++)
 		{
 			float ySin = (System::Math::Sin(((float)i * .1)));
 			float yValue = (100 * ySin);
@@ -89,12 +89,12 @@ namespace GraphicLibWrapper {
 
 		// Create a Canvas and draw some stuff
 		Canvas canvas(width, height, BGRA_Color{ 0x00, 0x00, 0x00, 0x00 });
-		Line line1(Point(35, 5), Point(60, 90), BGRA_Color{ 0x00, 0xFF, 0x00, 0x00 });
-		Line line2(Point(80, 5), Point(20, 65), BGRA_Color{ 0xFF, 0x00, 0xFF, 0x00 });
-		Line line3(Point(2, 45), Point(90, 55), BGRA_Color{ 0xFF, 0x80, 0x00, 0x00 });
-		Line line4(Point(95, 15), Point(45, 75), BGRA_Color{ 0x00, 0x00, 0xFF, 0x00 });
-		Line line5(Point(45, 15), Point(95, 75), BGRA_Color{ 0x00, 0x00, 0xFF, 0x00 });
-		Plot1D plot(testPlot, 500, Point(0, 250), BGRA_Color{ 0x00, 0xFF, 0xFF, 0x00 });
+		//Line line1(Point(35, 5), Point(60, 90), BGRA_Color{ 0x00, 0xFF, 0x00, 0x00 }, 12);
+		//Line line2(Point(80, 5), Point(20, 65), BGRA_Color{ 0xFF, 0x00, 0xFF, 0x00 }, 6);
+		//Line line3(Point(2, 45), Point(90, 55), BGRA_Color{ 0xFF, 0x80, 0x00, 0x00 }, 16);
+		//Line line4(Point(95, 15), Point(45, 75), BGRA_Color{ 0x00, 0x00, 0xFF, 0x00 }, 6);
+		//Line line5(Point(45, 15), Point(95, 75), BGRA_Color{ 0x00, 0x00, 0xFF, 0x00 }, 6);
+		Plot1D sinePlot(testPlot, 500, Point(0, 250), BGRA_Color{ 0x00, 0xFF, 0xFF, 0x00 }, 16);
 		
 		/*Rectangle rec1(60, 120, Point(325, 210), BGRA_Color{ 0xFF, 0x80, 0x00, 0x00 });
 		Image img(Point(150, 80), imgWidth, imgHeight, testImage);*/
@@ -104,9 +104,9 @@ namespace GraphicLibWrapper {
 		canvas.AddDrawable(&line3);
 		canvas.AddDrawable(&line4);
 		canvas.AddDrawable(&line5);*/
-		canvas.AddDrawable(&plot);
-		/*canvas.AddDrawable(&rec1);
-		canvas.AddDrawable(&img);*/
+		canvas.AddDrawable(&sinePlot);
+		//canvas.AddDrawable(&rec1);
+		//canvas.AddDrawable(&img);
 
 		// Render it
 		canvas.Render();

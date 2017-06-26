@@ -13,26 +13,54 @@ Line::Line(Point p1, Point p2, BGRA_Color lineColor)
 {
 	m_p1 = p1;
 	m_p2 = p2;
+	m_thickness = 0; //Minimum thickness
 	m_lineColor = lineColor;
 }
 
-/* Copy constructor
-Line::Line(Line& line)
+Line::Line(Point p1, Point p2, BGRA_Color lineColor, int thickness) : Line(p1, p2, lineColor)
 {
-	m_p1 = Line.p1;
-	m_p2 = Line.p2;
+	m_thickness = thickness;
 }
 
-// Operator overloads
-/*
-Point Point::operator=(const Point& point)
+Point Line::GetPoint1()
 {
-	X = point.X;
-	Y = point.Y;
-
-	return *this;
+	return m_p1;
 }
-*/
+
+Point Line::GetPoint2()
+{
+	return m_p2;
+}
+
+BGRA_Color Line::GetColor()
+{
+	return m_lineColor;
+}
+
+int Line::GetThickness()
+{
+	return m_thickness;
+}
+
+void Line::SetPoint1(Point p1)
+{
+	m_p1 = p1;
+}
+
+void Line::SetPoint2(Point p2)
+{
+	m_p2 = p2;
+}
+
+void Line::SetColor(BGRA_Color Color)
+{
+	m_lineColor = Color;
+}
+
+void Line::SetThickness(int thickness)
+{
+	m_thickness = thickness;
+}
 
 void Line::Render(color32_t* backBuffer, int width, int height)
 {
@@ -65,7 +93,7 @@ void Line::Render(color32_t* backBuffer, int width, int height)
 			//calculate the slope
 			int iY = (int) ((m * iX) + b);
 			int iY2 = (int) ((m * (iX + 1)) + b);
-			int barHeight = abs(iY2 - iY);
+			int barHeight = (abs(iY2 - iY)) + m_thickness;
 			if (barHeight < 1) { barHeight = 1; }
 
 			fbhRemAccum += fbhRem;	// Increment remainder

@@ -28,8 +28,7 @@ Canvas::Canvas(int width, int height)
 	m_drawables = new IDrawable* [DEFAULT_NUM_DRAWABLES];
 }
 
-Canvas::Canvas(int width, int height, BGRA_Color backgroundColor)
-	: Canvas(width, height)
+Canvas::Canvas(int width, int height, BGRA_Color backgroundColor) : Canvas(width, height)
 {
 	// Store configuration
 	m_backgroundColor = backgroundColor;
