@@ -12,23 +12,31 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Draw\Canvas.h" />
+    <ClInclude Include="..\Draw\CoordinatesTranslator.h" />
+    <ClInclude Include="..\Draw\Data1D.h" />
+    <ClInclude Include="..\Draw\IData.h" />
     <ClInclude Include="..\Draw\IDrawable.h" />
     <ClInclude Include="..\Draw\Image.h" />
     <ClInclude Include="..\Draw\Line.h" />
     <ClInclude Include="..\Draw\Macros.h" />
     <ClInclude Include="..\Draw\Plot1D.h" />
     <ClInclude Include="..\Draw\Point.h" />
+    <ClInclude Include="..\Draw\Range.h" />
     <ClInclude Include="..\Draw\Rectangle.h" />
     <ClInclude Include="..\Draw\Test.h" />
     <ClInclude Include="..\Draw\Types.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Draw\Canvas.cpp" />
+    <ClCompile Include="..\Draw\CoordinatesTranslator.cpp" />
+    <ClCompile Include="..\Draw\Data1D.cpp" />
+    <ClCompile Include="..\Draw\IData.cpp" />
     <ClCompile Include="..\Draw\IDrawable.cpp" />
     <ClCompile Include="..\Draw\Image.cpp" />
     <ClCompile Include="..\Draw\Line.cpp" />
     <ClCompile Include="..\Draw\Plot1D.cpp" />
     <ClCompile Include="..\Draw\Point.cpp" />
+    <ClCompile Include="..\Draw\Range.cpp" />
     <ClCompile Include="..\Draw\Rectangle.cpp" />
     <ClCompile Include="..\Draw\Test.cpp" />
   </ItemGroup>
@@ -40,13 +48,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>

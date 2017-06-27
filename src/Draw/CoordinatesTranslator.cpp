@@ -1,15 +1,15 @@
-// Plot1D.cpp
-// Implementation file for the Plot1D class
+// Data1D.cpp
+// Implementation file for the Data1D class
 //
 // Copyright Fishbowl Digital 2017
 //
 
-#include "Plot1D.h"
+#include "Data1D.h"
 #include "Macros.h"
 #include "Line.h"
 
 // Constructor
-Plot1D::Plot1D(int* data, int dataLength, Point start, BGRA_Color color)
+Data1D::Data1D(int* data, int dataLength, Point start, BGRA_Color color)
 {
 	m_yData = data;
 	m_yDataLength = dataLength;
@@ -18,7 +18,7 @@ Plot1D::Plot1D(int* data, int dataLength, Point start, BGRA_Color color)
 	m_thickness = 0;
 }
 
-Plot1D::Plot1D(int* data, int dataLength, Point start, BGRA_Color color, int thickness) : Plot1D(data, dataLength, start, color)
+Data1D::Data1D(int* data, int dataLength, Point start, BGRA_Color color, int thickness) : Data1D(data, dataLength, start, color)
 {
 	m_thickness = thickness;
 }
@@ -43,7 +43,7 @@ void Line::SetThickness(int thickness)
 	m_thickness = thickness;
 }
 
-void Plot1D::Render(color32_t* backBuffer, int width, int height)
+void Data1D::Render(color32_t* backBuffer, int width, int height)
 {
 
 	for (int iX = 0; iX < (m_yDataLength-1); iX++)
