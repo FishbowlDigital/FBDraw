@@ -80,7 +80,7 @@ void Line::Render(color32_t* backBuffer, int width, int height)
 		/* floating point for now */
 		float m = ((float)(m_p2.Y - m_p1.Y)) / ((float)(m_p2.X - m_p1.X));
 		float b = m_p1.Y - (m * m_p1.X);
-		float fBarHeight = fmax(abs(m), 1);
+		float fBarHeight = (float) fmax(fabs(m), 1.0f);
 		int iBarHeight = ((int)fBarHeight);
 		float fbhRem = fBarHeight - iBarHeight;	// floating pt bar height remainder
 
