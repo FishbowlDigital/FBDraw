@@ -27,7 +27,6 @@ Image::Image(Point loc, int w, int h)
 
 void Image::Render(color32_t* backBuffer, int width, int height)
 {
-	BGRA_Color mixBGRA = BGRA_Color{ 0x00, 0x00, 0x00, 0x00 };
 
 	if (m_imageBuffer == NULL)
 		return;
@@ -35,6 +34,7 @@ void Image::Render(color32_t* backBuffer, int width, int height)
 	int iCanvasStart = ((m_location.Y) * width) + m_location.X;
 
 	// Copy the image to the backbuffer
+	BGRA_Color mixBGRA = BGRA_Color{ 0x00, 0x00, 0x00, 0x00 };
 	for (int iY = 0; iY < m_height; iY++)
 	{
 		int iCanvasRowStart = iCanvasStart + (iY * width);
