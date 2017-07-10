@@ -18,11 +18,17 @@ typedef uint32_t				color32_t;
 //#pragma pack(1)		// FIX!!!  DOUBLE CHECK THIS ON WINDOWS
 typedef struct			/* packed as BGRA32 */
 {
-	uint8_t Alpha;
-	uint8_t Red;
-	uint8_t Green;
 	uint8_t Blue;
+	uint8_t Green;
+	uint8_t Red;
+	uint8_t Alpha;
 } BGRA_Color;
+
+typedef union
+{
+	BGRA_Color	Color;
+	color32_t	U32;
+} BGRA_Bytes;
 
 #ifndef NULL
 	#define NULL		0

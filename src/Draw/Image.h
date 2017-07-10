@@ -12,12 +12,15 @@
 
 class Image : public IDrawable
 {
-	public:
+public:
 	Image(Point loc, int w, int h, color32_t* image);
+	Image(Point loc, int w, int h);
+
+	color32_t* GetBuffer() { return m_imageBuffer; }
 
 	virtual void Render(color32_t* backBuffer, int width, int height);
 
-	private:
+private:
 		// Properties
 		Point		m_location;
 		int			m_height; 

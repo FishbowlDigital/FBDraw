@@ -59,11 +59,12 @@ void Canvas::Render()
 	// Draw background
 	color32_t bColor = BGRAColorToU32(m_backgroundColor);
 
-	int numPx = m_width * m_height;
-	for (int i = 0; i < numPx; i++)
-	{
-		m_backBuffer[i] = bColor;
-	}
+	// TEMPORARILY DONT ERASE BACKGROUND!
+	//int numPx = m_width * m_height;
+	//for (int i = 0; i < numPx; i++)
+	//{
+	//	m_backBuffer[i] = bColor;
+	//}
 
 	// Draw objects in the scene
 	for (int i = 0; i < m_numDrawables; i++)

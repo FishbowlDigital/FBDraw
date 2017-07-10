@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Draw\Canvas.h" />
+    <ClInclude Include="..\Draw\Draw.h" />
     <ClInclude Include="..\Draw\IDrawable.h" />
     <ClInclude Include="..\Draw\Image.h" />
     <ClInclude Include="..\Draw\Line.h" />
@@ -38,13 +39,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -63,8 +64,8 @@
     <IntDir>$(ProjectDir)\..\..\bin\x86\$(Configuration)\obj\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)\..\..\bin\x86\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)\..\..\bin\x86\$(Configuration)\obj</IntDir>
+    <OutDir>$(ProjectDir)\..\..\bin\x86\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)\..\..\bin\x86\$(Configuration)\obj\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
