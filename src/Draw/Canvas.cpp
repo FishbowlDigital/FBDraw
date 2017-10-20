@@ -7,6 +7,8 @@
 #include "Canvas.h"
 #include "Macros.h"
 
+#include <stdlib.h>
+
 #define DEFAULT_NUM_DRAWABLES			10
 
 
@@ -15,6 +17,7 @@ Canvas::Canvas(int width, int height)
 {
 	// Create the backbuffer
 	m_backBuffer = new color32_t[width * height];
+	m_frontBuffer = new color32_t[width * height];
 
 	// Store configuration
 	m_width = width;
@@ -87,6 +90,16 @@ BGRA_Color Canvas::GetBackgroundColor()
 color32_t* Canvas::GetBackBuffer()
 {
 	return m_backBuffer;
+}
+
+color32_t* Canvas::GetFrontBuffer()
+{
+	// Mem copy back to front
+	int numPx = m_width * m_height;
+	for (int i = 0; i < numPx; i++) { m_frontBuffer[i] = m_backBuffer[i]; }
+
+	// Return it
+	return m_frontBuffer;
 }
 
 

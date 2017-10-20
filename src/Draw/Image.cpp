@@ -50,6 +50,7 @@ void Image::Render(color32_t* backBuffer, int width, int height)
 			mixColor.Color.Blue = AlphaMix8(backColor.Color.Blue, imgColor.Color.Blue, imgColor.Color.Alpha);
 
 			backBuffer[iCanvasRowStart + iX] = mixColor.U32;
+			//backBuffer[iCanvasRowStart + iX] = imgColor.U32;
 			//backBuffer[iCanvasRowStart + iX] = m_imageBuffer[iImageRowStart + iX];
 		}
 	}

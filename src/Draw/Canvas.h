@@ -29,6 +29,7 @@ public:
 	BGRA_Color	GetBackgroundColor();
 
 	color32_t*	GetBackBuffer();
+	color32_t*	GetFrontBuffer();
 
 private:
 	// Dimensions
@@ -40,6 +41,7 @@ private:
 
 	// The rendering backbuffer (always 32-bit color)
 	color32_t*		m_backBuffer;
+	color32_t*		m_frontBuffer;
 
 	// List of drawables
 	IDrawable**		m_drawables;
