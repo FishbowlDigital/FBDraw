@@ -10,45 +10,49 @@
 #include "Types.h"
 #include "IDrawable.h"
 
-class Canvas
+namespace FBDraw
 {
-public:
-	// Constructor/Destructor
-	Canvas(int width, int height);
-	Canvas(int width, int height, BGRA_Color backgroundColor);
-	~Canvas();
 
-	//Add drawable
-	void AddDrawable(IDrawable* drawable);
+	class Canvas
+	{
+	public:
+		// Constructor/Destructor
+		Canvas(int width, int height);
+		Canvas(int width, int height, BGRA_Color backgroundColor);
+		~Canvas();
 
-	// Draw
-	void Render();
+		//Add drawable
+		void AddDrawable(IDrawable* drawable);
 
-	// Configuration & Property Access
-	void		SetBackgroundColor(BGRA_Color color);
-	BGRA_Color	GetBackgroundColor();
+		// Draw
+		void Render();
 
-	color32_t*	GetBackBuffer();
-	color32_t*	GetFrontBuffer();
+		// Configuration & Property Access
+		void		SetBackgroundColor(BGRA_Color color);
+		BGRA_Color	GetBackgroundColor();
 
-private:
-	// Dimensions
-	int m_width;
-	int m_height;
+		color32_t*	GetBackBuffer();
+		color32_t*	GetFrontBuffer();
 
-	// Default colors
-	BGRA_Color		m_backgroundColor;
+	private:
+		// Dimensions
+		int m_width;
+		int m_height;
 
-	// The rendering backbuffer (always 32-bit color)
-	color32_t*		m_backBuffer;
-	color32_t*		m_frontBuffer;
+		// Default colors
+		BGRA_Color		m_backgroundColor;
 
-	// List of drawables
-	IDrawable**		m_drawables;
-	int				m_numDrawables;
+		// The rendering backbuffer (always 32-bit color)
+		color32_t*		m_backBuffer;
+		color32_t*		m_frontBuffer;
 
-};
+		// List of drawables
+		IDrawable**		m_drawables;
+		int				m_numDrawables;
 
+	};
+
+}
 
 #endif			// #define _CANVAS_H
 

@@ -7,14 +7,18 @@
 #include "IData.h"
 #include <iostream>
 
-IData::IData()
+namespace FBDraw
 {
-	//Instantiate default Label
-}
 
-IData::~IData()
-{
-	// Does nothing
-}
+	IData::IData()
+	{
+		//Instantiate default Label
+	}
 
+	IData::~IData()
+	{
+		// Does nothing
+	}
+
+}
 

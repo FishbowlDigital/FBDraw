@@ -5,71 +5,77 @@
 //
 
 #include <DirectXMath.h>
-#include <math>
+#include <math.h>
 #include "Data1D.h"
 #include "Macros.h"
 #include "Line.h"
 
-// Constructor
-Data1D::Data1D(float* data, int dataLength) : IData()
+namespace FBDraw
 {
-	m_Data = data;
-	m_DataLength = dataLength;
-	m_Resolution = 3;
-	m_LowerBoundX = 0;
 
-}
+	// Constructor
+	Data1D::Data1D(float* data, int dataLength) : IData()
+	{
+		m_Data = data;
+		m_DataLength = dataLength;
+		m_Resolution = 3;
+		m_LowerBoundX = 0;
 
-Data1D::Data1D(float* data, int dataLength, char* label, float resolution, float lowerBoundX) : Data1D(data, dataLength)
-{
-	m_Label = label;
-	m_Resolution = resolution;
-	m_LowerBoundX = lowerBoundX;
-}
+	}
+
+	Data1D::Data1D(float* data, int dataLength, char* label, float resolution, float lowerBoundX) : Data1D(data, dataLength)
+	{
+		m_Label = label;
+		m_Resolution = resolution;
+		m_LowerBoundX = lowerBoundX;
+	}
 
 
-char* Data1D::getLabel()
-{
-	return m_Label;
-}
+	char* Data1D::getLabel()
+	{
+		return m_Label;
+	}
 
-void Data1D::setLabel(char* label)
-{
-	m_Label = label;
-}
+	void Data1D::setLabel(char* label)
+	{
+		m_Label = label;
+	}
 
-float* Data1D::getData()
-{
-	return m_Data
-}
-void Data1D::setData(float* data, int size)
-{
-	m_Data = data;
-	m_DataLength = size;
-}
+	float* Data1D::getData()
+	{
+		return m_Data;
+	}
 
-int Data1D::getSize()
-{
-	return m_DataLength;
-}
+	void Data1D::setData(float* data, int size)
+	{
+		m_Data = data;
+		m_DataLength = size;
+	}
 
-float Data1D::getResolution()
-{
-	return m_Resolution;
-}
-void Data1D::setResolution(float resolution)
-{
-	m_Resolution = resolution;
-}
+	int Data1D::getSize()
+	{
+		return m_DataLength;
+	}
 
-float Data1D::getLowerBoundX()
-{
-	return math.abs(m_LowerBoundX);
-}
+	float Data1D::getResolution()
+	{
+		return m_Resolution;
+	}
+	void Data1D::setResolution(float resolution)
+	{
+		m_Resolution = resolution;
+	}
 
-void Data1D::setLowerBoundX(float lowerBoundX)
-{
-	m_LowerBoundX = lowerBoundX;
+	float Data1D::getLowerBoundX()
+	{
+		return abs(m_LowerBoundX);
+	}
+
+	void Data1D::setLowerBoundX(float lowerBoundX)
+	{
+		m_LowerBoundX = lowerBoundX;
+	}
+
 }
 
 //void Data1D::Render(color32_t* backBuffer, int width, int height)

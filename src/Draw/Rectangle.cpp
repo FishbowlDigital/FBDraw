@@ -7,27 +7,83 @@
 #include "Rectangle.h"
 #include "Macros.h"
 
-
-// Constructor
-Rectangle::Rectangle(int h, int w, Point p, BGRA_Color color)
+namespace FBDraw
 {
-	r_height = h;
-	r_width = w;
-	r_startPoint = p;
-	r_Color = color;
-}
-
-void Rectangle::Render(color32_t* backBuffer, int width, int height)
-{
-	int xEnd = r_startPoint.X + r_width;
-	int yEnd = r_startPoint.Y + r_height;
-
-	for (int iY = r_startPoint.Y; iY<yEnd; iY++)
+	// Constructor
+	Rectangle::Rectangle(int h, int w, Point startPoint, bool fill, BGRA_Color color)
 	{
-		for (int iX = r_startPoint.X; iX<xEnd; iX++)
+		m_height = h;
+		m_width = w;
+		m_startPoint = startPoint;
+		m_fill = fill;
+		m_thickness = 0;
+		m_color = color;
+
+		m_borderLine = new Line(m_startPoint, m_startPoint, color, m_thickness);
+	}
+
+	Rectangle::Rectangle(int h, int w, Point startPoint, bool fill, int thickness, BGRA_Color color)
+	{
+		m_height = h;
+		m_width = w;
+		m_startPoint = startPoint;
+		m_fill = fill;
+		m_thickness = thickness;
+		m_color = color;
+
+		m_borderLine = new Line(m_startPoint, m_startPoint, color, m_thickness);
+	}
+	
+	Rectangle::~Rectangle()
+	{
+		delete m_borderLine;
+	}
+
+	void Rectangle::Render(color32_t* backBuffer, int width, int height)
+	{
+		BGRA_Bytes backColor, mixColor;
+		int xEnd = m_startPoint.X + m_width;
+		int yEnd = m_startPoint.Y + m_height;
+
+		if (m_fill)
 		{
-			backBuffer[(iY * width) + iX] = BGRAColorToU32(r_Color);
-			//backBuffer[iY] = BGRAColorToU32(r_Color);
+			for (int iY = m_startPoint.Y; iY < yEnd; iY++)
+			{
+				for (int iX = m_startPoint.X; iX < xEnd; iX++)
+				{
+					/*backBuffer[(iY * width) + iX] = BGRAColorToU32(m_color);*/
+
+					int iBack = (iY * width) + iX;
+					backColor.U32 = backBuffer[iBack];
+					mixColor.Color.Red = AlphaMix8(backColor.Color.Red, m_color.Red, m_color.Alpha);
+					mixColor.Color.Green = AlphaMix8(backColor.Color.Green, m_color.Green, m_color.Alpha);
+					mixColor.Color.Blue = AlphaMix8(backColor.Color.Blue, m_color.Blue, m_color.Alpha);
+
+					backBuffer[iBack] = mixColor.U32;
+				}
+			}
+		}
+		else
+		{
+			//Left
+			m_borderLine->SetPoint1(m_startPoint);
+			m_borderLine->SetPoint2(Point(m_startPoint.X, yEnd));
+			m_borderLine->Render(backBuffer, width, height);
+
+			//Bottom
+			m_borderLine->SetPoint1(Point(m_startPoint.X, yEnd));
+			m_borderLine->SetPoint2(Point(xEnd, yEnd));
+			m_borderLine->Render(backBuffer, width, height);
+
+			//Right
+			m_borderLine->SetPoint1(Point(xEnd, yEnd));
+			m_borderLine->SetPoint2(Point(xEnd, m_startPoint.Y));
+			m_borderLine->Render(backBuffer, width, height);
+
+			//Top
+			m_borderLine->SetPoint1(Point(xEnd, m_startPoint.Y));
+			m_borderLine->SetPoint2(m_startPoint);
+			m_borderLine->Render(backBuffer, width, height);
 		}
 	}
 }

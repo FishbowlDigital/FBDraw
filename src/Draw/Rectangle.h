@@ -6,24 +6,34 @@
 
 #ifndef _RECTANGLE_H
 #define _RECTANGLE_H
+
+#include "IDrawable.h"
+#include "Line.h"
 #include "Types.h"
 #include "Point.h"
-#include "IDrawable.h"
 
-class Rectangle : public IDrawable
+namespace FBDraw
 {
+	class Rectangle : public IDrawable
+	{
 	public:
-	Rectangle(int h, int w, Point p, BGRA_Color color);
+		Rectangle(int h, int w, Point startPoint, bool fill, BGRA_Color color);
+		Rectangle(int h, int w, Point startPoint, bool fill, int thickness, BGRA_Color color);
+		~Rectangle();
 
-	virtual void Render(color32_t* backBuffer, int width, int height);
+		virtual void Render(color32_t* backBuffer, int width, int height);
 
 	private:
 		// Properties
-		int			r_height;
-		int			r_width;
-		Point		r_startPoint;
-		BGRA_Color	r_Color;
-};
+		int			m_height;
+		int			m_width;
+		bool		m_fill;
+		int			m_thickness;
+		Point		m_startPoint;
+		Line*		m_borderLine;
+		BGRA_Color	m_color;
+	};
 
-#endif			// #define _POINT_H
+}
+#endif			// #define _RECTANGLE_H
 

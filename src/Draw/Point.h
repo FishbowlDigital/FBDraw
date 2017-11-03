@@ -7,23 +7,26 @@
 #ifndef _POINT_H
 #define _POINT_H
 
-
-class Point
+namespace FBDraw
 {
-public:
-	// Constructor/Destructor
-	Point();
-	Point(int x, int y);
-	Point(Point& point);
 
-	// Operators
-	Point operator=(const Point& point);
+	class Point
+	{
+	public:
+		// Constructor/Destructor
+		Point();
+		Point(int x, int y);
+		Point(Point& point);
 
-	// Properties
-	int		X;
-	int		Y;
-};
+		// Operators
+		Point operator=(const Point& point);
 
+		// Properties
+		int		X;
+		int		Y;
+	};
+
+}
 
 #endif			// #define _POINT_H
 

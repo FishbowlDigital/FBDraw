@@ -6,9 +6,12 @@
 
 #include "IDrawable.h"
 
-IDrawable::~IDrawable()
+namespace FBDraw
 {
-	// Does nothing
+
+	IDrawable::~IDrawable()
+	{
+		// Does nothing
+	}
+
 }
-
-

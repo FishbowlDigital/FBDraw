@@ -10,33 +10,37 @@
 #include "Point.h"
 #include "IData.h"
 
-class Data1D : public IData
+namespace FBDraw
 {
-public:
-	Data1D(float* data, int dataLength);
-	Data1D(float* data, int dataLength, char* label, float resolution, float lowerBoundX);
 
-	virtual char* getLabel();
-	virtual void setLabel(char* label);
+	class Data1D : public IData
+	{
+	public:
+		Data1D(float* data, int dataLength);
+		Data1D(float* data, int dataLength, char* label, float resolution, float lowerBoundX);
 
-	virtual float* getData();
-	virtual void setData(float* data, int size);
-	
-	virtual int getSize();
-	
-	virtual float getResolution();
-	virtual void setResolution(float resolution);
-	
-	virtual float getLowerBoundX();
-	virtual void setLowerBoundX(float lowerBoundX);
+		virtual char* getLabel();
+		virtual void setLabel(char* label);
 
-private:
-	// Properties
-	float* m_Data;
-	char* m_Label;
-	int m_DataLength;
-	float m_Resolution;
-	float m_LowerBoundX;
-};
+		virtual float* getData();
+		virtual void setData(float* data, int size);
+
+		virtual int getSize();
+
+		virtual float getResolution();
+		virtual void setResolution(float resolution);
+
+		virtual float getLowerBoundX();
+		virtual void setLowerBoundX(float lowerBoundX);
+
+	private:
+		// Properties
+		float* m_Data;
+		char* m_Label;
+		int m_DataLength;
+		float m_Resolution;
+		float m_LowerBoundX;
+	};
+}
 #endif			// #define _POINT_H
 

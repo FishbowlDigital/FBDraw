@@ -10,23 +10,28 @@
 #include "IDrawable.h"
 #include "Point.h"
 
-class Image : public IDrawable
+namespace FBDraw
 {
-public:
-	Image(Point loc, int w, int h, color32_t* image);
-	Image(Point loc, int w, int h);
 
-	color32_t* GetBuffer() { return m_imageBuffer; }
+	class Image : public IDrawable
+	{
+	public:
+		Image(Point loc, int w, int h, color32_t* image);
+		Image(Point loc, int w, int h);
 
-	virtual void Render(color32_t* backBuffer, int width, int height);
+		color32_t* GetBuffer() { return m_imageBuffer; }
 
-private:
+		virtual void Render(color32_t* backBuffer, int width, int height);
+
+	private:
 		// Properties
 		Point		m_location;
-		int			m_height; 
+		int			m_height;
 		int			m_width;
 		color32_t*	m_imageBuffer;
-};
+	};
+
+}
 
 #endif			// #define _POINT_H
 

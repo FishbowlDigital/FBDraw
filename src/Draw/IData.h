@@ -12,23 +12,28 @@
 
 #define MAX_LABEL_LEN			50
 
-class IData
+namespace FBDraw
 {
-public:
 
-	IData();
-	~IData();
+	class IData
+	{
+	public:
 
-	virtual char* getLabel() = 0;
-	virtual void setLabel() = 0;
+		IData();
+		~IData();
 
-	/*virtual void Undo() = 0;
-	virtual void Redo() = 0;*/
+		virtual char* getLabel() = 0;
+		virtual void setLabel() = 0;
 
-private:
-	static int m_dataCount;
-	char m_label[MAX_LABEL_LEN];
-};
+		/*virtual void Undo() = 0;
+		virtual void Redo() = 0;*/
+
+	private:
+		static int m_dataCount;
+		char m_label[MAX_LABEL_LEN];
+	};
+
+}
 
 #endif			// #define _IData_H
 

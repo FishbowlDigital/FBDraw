@@ -10,15 +10,18 @@
 #include "Point.h"
 #include "IDrawable.h"
 
-class Line : public IDrawable
+namespace FBDraw
 {
+
+	class Line : public IDrawable
+	{
 	public:
 
-	// Constructor/Destructor
+		// Constructor/Destructor
 		Line(Point p1, Point p2, BGRA_Color lineColor);
 		Line(Point p1, Point p2, BGRA_Color lineColor, int thickness);
 
-	// Get/Set Parameters
+		// Get/Set Parameters
 		Point GetPoint1();
 		Point GetPoint2();
 		BGRA_Color GetColor();
@@ -28,18 +31,18 @@ class Line : public IDrawable
 		void SetPoint2(Point p2);
 		void SetColor(BGRA_Color color);
 		void SetThickness(int thickness);
-		
+
 		virtual void Render(color32_t* backBuffer, int width, int height);
 
 	private:
-	// Properties
+		// Properties
 		Point		m_p1;
 		Point		m_p2;
 		int			m_thickness;
 		BGRA_Color	m_lineColor;
-};
+	};
 
+}
 
-
-#endif			// #define _POINT_H
+#endif			// #define _LINE_H
 

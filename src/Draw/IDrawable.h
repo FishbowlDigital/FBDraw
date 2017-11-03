@@ -9,14 +9,18 @@
 
 #include "Types.h"
 
-class IDrawable
+namespace FBDraw
 {
-public:
-	~IDrawable();
 
-	virtual void Render(color32_t* backBuffer, int width, int height) = 0;
-};
+	class IDrawable
+	{
+	public:
+		~IDrawable();
 
+		virtual void Render(color32_t* backBuffer, int width, int height) = 0;
+	};
+
+}
 
 #endif			// #define _IDRAWABLE_H
 
