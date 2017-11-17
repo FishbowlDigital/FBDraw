@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Draw\Canvas.h" />
+    <ClInclude Include="..\Draw\ColorLUT.h" />
+    <ClInclude Include="..\Draw\ColorTable.h" />
     <ClInclude Include="..\Draw\Data1D.h" />
     <ClInclude Include="..\Draw\Draw.h" />
     <ClInclude Include="..\Draw\IData.h" />
@@ -35,6 +37,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Draw\Canvas.cpp" />
+    <ClCompile Include="..\Draw\ColorLUT.cpp" />
+    <ClCompile Include="..\Draw\ColorTable.cpp" />
     <ClCompile Include="..\Draw\Data1D.cpp" />
     <ClCompile Include="..\Draw\IData.cpp" />
     <ClCompile Include="..\Draw\IDrawable.cpp" />

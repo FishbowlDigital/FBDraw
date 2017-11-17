@@ -23,7 +23,7 @@ namespace FBDraw
 	//#pragma pack(1)		// FIX!!!  DOUBLE CHECK THIS ON WINDOWS
 #pragma pack (push, 1)
 	typedef struct			/* packed as BGRA32 */
-	{						/* Format: BGRA_Color{ Alpha, Red, Green, Blue }) */
+	{						/* Format: BGRA_Color{ Blue, Green, Red, Alpha }) */
 		uint8_t Blue;
 		uint8_t Green;
 		uint8_t Red;
