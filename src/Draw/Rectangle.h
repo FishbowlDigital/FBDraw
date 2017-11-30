@@ -19,7 +19,7 @@ namespace FBDraw
 	public:
 		Rectangle(int h, int w, Point startPoint, bool fill, BGRA_Color color);
 		Rectangle(int h, int w, Point startPoint, bool fill, int thickness, BGRA_Color color);
-		~Rectangle();
+		virtual ~Rectangle();
 
 		virtual void Render(color32_t* backBuffer, int width, int height);
 

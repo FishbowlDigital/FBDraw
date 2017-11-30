@@ -26,6 +26,11 @@ namespace FBDraw
 		m_thickness = thickness;
 	}
 
+	Plot1D::~Plot1D()
+	{
+
+	}
+
 	BGRA_Color Plot1D::GetColor()
 	{
 		return m_color;

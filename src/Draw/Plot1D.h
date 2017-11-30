@@ -13,12 +13,13 @@
 
 namespace FBDraw
 {
-
 	class Plot1D : public IDrawable
 	{
 	public:
 		Plot1D(int* data, int dataLength, Point start, BGRA_Color color);
 		Plot1D(int* data, int dataLength, Point start, BGRA_Color color, int thickness);
+
+		virtual ~Plot1D();
 
 		virtual void Render(color32_t* backBuffer, int width, int height);
 

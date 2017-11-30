@@ -89,6 +89,17 @@ namespace FBDraw
 		return m_backgroundColor;
 	}
 
+	int Canvas::GetWidth()
+	{
+		return m_width;
+	}
+
+	int Canvas::GetHeight()
+	{
+		return m_height;
+	}
+
+
 	color32_t* Canvas::GetBackBuffer()
 	{
 		return m_backBuffer;

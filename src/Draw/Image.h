@@ -16,8 +16,8 @@ namespace FBDraw
 	class Image : public IDrawable
 	{
 	public:
-		Image(Point loc, int w, int h, color32_t* image);
-		Image(Point loc, int w, int h);
+		Image(int x, int y, int w, int h, color32_t* image);
+		Image(int x, int y, int w, int h);
 
 		color32_t* GetBuffer() { return m_imageBuffer; }
 

@@ -31,6 +31,9 @@ namespace FBDraw
 		void		SetBackgroundColor(BGRA_Color color);
 		BGRA_Color	GetBackgroundColor();
 
+		int			GetWidth();
+		int			GetHeight();
+
 		color32_t*	GetBackBuffer();
 		color32_t*	GetFrontBuffer();
 

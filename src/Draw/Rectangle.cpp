@@ -67,21 +67,21 @@ namespace FBDraw
 		{
 			//Left
 			m_borderLine->SetPoint1(m_startPoint);
-			m_borderLine->SetPoint2(Point(m_startPoint.X, yEnd));
+			m_borderLine->SetPoint2(m_startPoint.X, yEnd);
 			m_borderLine->Render(backBuffer, width, height);
 
 			//Bottom
-			m_borderLine->SetPoint1(Point(m_startPoint.X, yEnd));
-			m_borderLine->SetPoint2(Point(xEnd, yEnd));
+			m_borderLine->SetPoint1(m_startPoint.X, yEnd);
+			m_borderLine->SetPoint2(xEnd, yEnd);
 			m_borderLine->Render(backBuffer, width, height);
 
 			//Right
-			m_borderLine->SetPoint1(Point(xEnd, yEnd));
-			m_borderLine->SetPoint2(Point(xEnd, m_startPoint.Y));
+			m_borderLine->SetPoint1(xEnd, yEnd);
+			m_borderLine->SetPoint2(xEnd, m_startPoint.Y);
 			m_borderLine->Render(backBuffer, width, height);
 
 			//Top
-			m_borderLine->SetPoint1(Point(xEnd, m_startPoint.Y));
+			m_borderLine->SetPoint1(xEnd, m_startPoint.Y);
 			m_borderLine->SetPoint2(m_startPoint);
 			m_borderLine->Render(backBuffer, width, height);
 		}

@@ -4,7 +4,6 @@
 // Copyright Fishbowl Digital 2017
 //
 
-#include <DirectXMath.h>
 #include <math.h>
 #include "Data1D.h"
 #include "Macros.h"

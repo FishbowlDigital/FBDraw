@@ -11,17 +11,17 @@ namespace FBDraw
 {
 
 	// Constructor
-	Image::Image(Point loc, int w, int h, color32_t* image)
+	Image::Image(int x, int y, int w, int h, color32_t* image)
 	{
-		m_location = loc;
+		m_location = Point(x, y);
 		m_height = h;
 		m_width = w;
 		m_imageBuffer = image;
 	}
 
-	Image::Image(Point loc, int w, int h)
+	Image::Image(int x, int y, int w, int h)
 	{
-		m_location = loc;
+		m_location = Point(x, y);
 		m_height = h;
 		m_width = w;
 		m_imageBuffer = new color32_t[w * h];
