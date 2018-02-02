@@ -19,11 +19,17 @@ namespace FBDraw
 		m_start = start;
 		m_color = color;
 		m_thickness = 0;
+
+		// Default is Visible
+		Visible = true;
 	}
 
 	Plot1D::Plot1D(int* data, int dataLength, Point start, BGRA_Color color, int thickness) : Plot1D(data, dataLength, start, color)
 	{
 		m_thickness = thickness;
+
+		// Default is Visible
+		Visible = true;
 	}
 
 	Plot1D::~Plot1D()

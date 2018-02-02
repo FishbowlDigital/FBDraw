@@ -15,10 +15,14 @@ namespace FBDraw
 		m_height = h;
 		m_lutSize = size;
 
-		m_invTableLength = 1.0f / m_width;
+		m_invWidth = 1.0f / m_width;
+		m_invHeight = 1.0f / m_height;
 
 		m_LUT = new ColorLUT(colors, m_lutSize, 0, m_lutSize); // Min and max defaulted to size of array for now. (Should min and max get passed in?)
 		m_border = new Rectangle(m_height, m_width, m_location, false, 2, BGRA_Color{ 0xFF, 0xFF, 0xFF, 0xCF });
+
+		// Default is Visible
+		Visible = true;
 	}
 
 	ColorTable::ColorTable(Point loc, int w, int h)
@@ -29,6 +33,9 @@ namespace FBDraw
 		m_LUT = new ColorLUT(0, 256);
 
 		m_border = new Rectangle(m_height, m_width, m_location, false, 2, BGRA_Color{ 0xFF, 0xFF, 0xFF, 0xCF });
+
+		// Default is Visible
+		Visible = true;
 	}
 
 	ColorTable::~ColorTable()
@@ -53,8 +60,8 @@ namespace FBDraw
 		BGRA_Bytes color, backColor, mixColor;
 		int xStart = m_location.X + 1; // Taking into account the width of the border
 		int xEnd = m_location.X + m_width;
-		int yStart = m_location.Y;
-		int yEnd = m_location.Y + m_height;
+		int yStart = m_location.Y + 1;
+		int yEnd = m_location.Y + m_height - 2;
 		int colorValue;
 		float scale;
 
@@ -64,20 +71,20 @@ namespace FBDraw
 		{
 			for (int iX = xStart; iX < xEnd; iX++)
 			{
-				scale = ((iX - xStart) * m_invTableLength); 
-				colorValue = (scale * m_lutSize);
+				scale = ((iY - yStart) * m_invHeight);
+				colorValue = (scale * (m_lutSize-1));
 				color = m_LUT->GetColor(colorValue);
 
-				backBuffer[(iY * width) + iX] = color.U32;
+				//backBuffer[((yEnd-iY) * width) + iX] = color.U32;
 
 				//Uncomment for alpha mixing
-				/*int iBack = (iY * width) + iX;
+				int iBack = ((yEnd-iY) * width) + iX;
 				backColor.U32 = backBuffer[iBack];
-				mixColor.Color.Red = AlphaMix8(backColor.Color.Red, m_color.Red, m_color.Alpha);
-				mixColor.Color.Green = AlphaMix8(backColor.Color.Green, m_color.Green, m_color.Alpha);
-				mixColor.Color.Blue = AlphaMix8(backColor.Color.Blue, m_color.Blue, m_color.Alpha);
+				mixColor.Color.Red = AlphaMix8(backColor.Color.Red, color.Color.Red, color.Color.Alpha);
+				mixColor.Color.Green = AlphaMix8(backColor.Color.Green, color.Color.Green, color.Color.Alpha);
+				mixColor.Color.Blue = AlphaMix8(backColor.Color.Blue, color.Color.Blue, color.Color.Alpha);
 
-				backBuffer[iBack] = mixColor.U32;*/
+				backBuffer[iBack] = mixColor.U32;
 			}
 		}
 	}

@@ -17,6 +17,9 @@ namespace FBDraw
 		m_height = h;
 		m_width = w;
 		m_imageBuffer = image;
+
+		// Default is Visible
+		Visible = true;
 	}
 
 	Image::Image(int x, int y, int w, int h)
@@ -25,6 +28,9 @@ namespace FBDraw
 		m_height = h;
 		m_width = w;
 		m_imageBuffer = new color32_t[w * h];
+
+		// Default is Visible
+		Visible = true;
 	}
 
 	void Image::Render(color32_t* backBuffer, int width, int height)
@@ -43,6 +49,7 @@ namespace FBDraw
 			int iImageRowStart = (iY * m_width);
 			for (int iX = 0; iX < m_width; iX++)
 			{
+#if 1
 				// Alpha mix the image pixel and the back buffer
 				BGRA_Bytes imgColor, backColor, mixColor;
 				imgColor.U32 = m_imageBuffer[iImageRowStart + iX];
@@ -52,8 +59,10 @@ namespace FBDraw
 				mixColor.Color.Blue = AlphaMix8(backColor.Color.Blue, imgColor.Color.Blue, imgColor.Color.Alpha);
 
 				backBuffer[iCanvasRowStart + iX] = mixColor.U32;
+#else
 				//backBuffer[iCanvasRowStart + iX] = imgColor.U32;
-				//backBuffer[iCanvasRowStart + iX] = m_imageBuffer[iImageRowStart + iX];
+				backBuffer[iCanvasRowStart + iX] = m_imageBuffer[iImageRowStart + iX];
+#endif
 			}
 		}
 	}

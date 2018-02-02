@@ -18,6 +18,9 @@ namespace FBDraw
 		m_p2 = p2;
 		m_thickness = 0; //Minimum thickness
 		m_lineColor = lineColor;
+
+		// Default is Visible
+		Visible = true;
 	}
 
 	Line::Line(Point p1, Point p2, BGRA_Color lineColor, int thickness) 
@@ -26,6 +29,9 @@ namespace FBDraw
 		m_p2 = p2;
 		m_thickness = thickness; //Minimum thickness
 		m_lineColor = lineColor;
+
+		// Default is Visible
+		Visible = true;
 	}
 
 	Point Line::GetPoint1()

@@ -20,6 +20,9 @@ namespace FBDraw
 		m_color = color;
 
 		m_borderLine = new Line(m_startPoint, m_startPoint, color, m_thickness);
+
+		// Default is Visible
+		Visible = true;
 	}
 
 	Rectangle::Rectangle(int h, int w, Point startPoint, bool fill, int thickness, BGRA_Color color)
@@ -32,6 +35,9 @@ namespace FBDraw
 		m_color = color;
 
 		m_borderLine = new Line(m_startPoint, m_startPoint, color, m_thickness);
+
+		// Default is Visible
+		Visible = true;
 	}
 	
 	Rectangle::~Rectangle()

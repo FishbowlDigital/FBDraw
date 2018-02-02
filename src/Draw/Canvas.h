@@ -52,6 +52,7 @@ namespace FBDraw
 		// List of drawables
 		IDrawable**		m_drawables;
 		int				m_numDrawables;
+		int				m_maxDrawables;
 
 	};
 

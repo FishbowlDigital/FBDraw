@@ -11,8 +11,6 @@
 
 namespace FBDraw
 {
-
-	//template <typename T>
 	class ColorLUT
 	{
 	public:

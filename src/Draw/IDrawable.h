@@ -15,9 +15,12 @@ namespace FBDraw
 	class IDrawable
 	{
 	public:
-		~IDrawable();
+		virtual ~IDrawable();
 
 		virtual void Render(color32_t* backBuffer, int width, int height) = 0;
+
+		// Properties
+		bool Visible;
 	};
 
 }
