@@ -32,6 +32,9 @@ namespace FBDraw
 		m_numDrawables = 0;
 		m_maxDrawables = DEFAULT_MAX_DRAWABLES;
 		m_drawables = new IDrawable*[DEFAULT_MAX_DRAWABLES];
+
+		// Default property values
+		m_eraseBackground = false;
 	}
 
 	Canvas::Canvas(int width, int height, BGRA_Color backgroundColor) : Canvas(width, height)
@@ -84,11 +87,14 @@ namespace FBDraw
 		color32_t bColor = BGRAColorToU32(m_backgroundColor);
 
 		// TEMPORARILY DONT ERASE BACKGROUND!
-		//int numPx = m_width * m_height;
-		//for (int i = 0; i < numPx; i++)
-		//{
-		//	m_backBuffer[i] = bColor;
-		//}
+		if (m_eraseBackground)
+		{
+			int numPx = m_width * m_height;
+			for (int i = 0; i < numPx; i++)
+			{
+				m_backBuffer[i] = bColor;
+			}
+		}
 
 		// Draw objects in the scene
 		for (int i = 0; i < m_numDrawables; i++)

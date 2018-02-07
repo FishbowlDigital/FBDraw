@@ -45,6 +45,9 @@ namespace FBDraw
 		// Default colors
 		BGRA_Color		m_backgroundColor;
 
+		// Config properties
+		bool 			m_eraseBackground;
+
 		// The rendering backbuffer (always 32-bit color)
 		color32_t*		m_backBuffer;
 		color32_t*		m_frontBuffer;

@@ -16,12 +16,16 @@ namespace FBDraw
 	class Image : public IDrawable
 	{
 	public:
-		Image(int x, int y, int w, int h, color32_t* image);
-		Image(int x, int y, int w, int h);
+		Image(int x, int y, int w, int h, color32_t* image, bool hasAlpha = true);
+		Image(int x, int y, int w, int h, bool hasAlpha = true);
 
-		color32_t* GetBuffer() { return m_imageBuffer; }
+		color32_t* 		GetBuffer() { return m_imageBuffer; }
 
-		virtual void Render(color32_t* backBuffer, int width, int height);
+		virtual void 	Render(color32_t* backBuffer, int width, int height);
+
+		// properties
+		void 			HasAlpha(bool hasit) 	{ m_bHasAlpha = hasit; }
+		bool 			HasAlpha()				{ return m_bHasAlpha; }
 
 	private:
 		// Properties
@@ -29,6 +33,8 @@ namespace FBDraw
 		int			m_height;
 		int			m_width;
 		color32_t*	m_imageBuffer;
+
+		bool		m_bHasAlpha;
 	};
 
 }
