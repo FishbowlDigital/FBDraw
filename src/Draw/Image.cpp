@@ -17,6 +17,7 @@ namespace FBDraw
 		m_height = h;
 		m_width = w;
 		m_imageBuffer = image;
+		m_bOwnsBuffer = false;
 		m_bHasAlpha = hasAlpha;
 
 		// Default is Visible
@@ -29,10 +30,43 @@ namespace FBDraw
 		m_height = h;
 		m_width = w;
 		m_imageBuffer = new color32_t[w * h];
+		m_bOwnsBuffer = true;
 		m_bHasAlpha = hasAlpha;
 
 		// Default is Visible
 		Visible = true;
+	}
+
+	Image::~Image()
+	{
+		if (m_bOwnsBuffer)
+			delete m_imageBuffer;
+	}
+
+	void Image::ReplaceBuffer(color32_t* image)
+	{
+		ReplaceBuffer(image, m_location, m_width, m_height);
+	};
+
+	void Image::ReplaceBuffer(color32_t* image, int w, int h)
+	{
+		ReplaceBuffer(image, m_location, w, h);
+	}
+
+	void Image::ReplaceBuffer(color32_t* image, Point loc, int w, int h)
+	{
+		// Clean old buffer?
+		if (m_bOwnsBuffer)
+			delete m_imageBuffer;
+
+		// Replace
+		m_imageBuffer = image;
+		m_location = loc;
+		m_width = w;
+		m_height = h;
+
+		// Set new ownership state
+		m_bOwnsBuffer = false;		// Don't cleanup this buffer on delete
 	}
 
 	__attribute__((optimize("unroll-loops")))
@@ -56,7 +90,7 @@ namespace FBDraw
 					// Alpha mix the image pixel and the back buffer
 					BGRA_Bytes imgColor, backColor, mixColor;
 					imgColor.U32 = m_imageBuffer[iImageRowStart + iX];
-					backColor.U32 = backBuffer[iImageRowStart + iX];
+					backColor.U32 = backBuffer[iCanvasRowStart + iX];
 					mixColor.Color.Red = AlphaMix8(backColor.Color.Red, imgColor.Color.Red, imgColor.Color.Alpha);
 					mixColor.Color.Green = AlphaMix8(backColor.Color.Green, imgColor.Color.Green, imgColor.Color.Alpha);
 					mixColor.Color.Blue = AlphaMix8(backColor.Color.Blue, imgColor.Color.Blue, imgColor.Color.Alpha);

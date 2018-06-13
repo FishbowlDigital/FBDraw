@@ -18,12 +18,20 @@ namespace FBDraw
 	public:
 		Image(int x, int y, int w, int h, color32_t* image, bool hasAlpha = true);
 		Image(int x, int y, int w, int h, bool hasAlpha = true);
+		~Image();
 
 		color32_t* 		GetBuffer() { return m_imageBuffer; }
+		void			ReplaceBuffer(color32_t* image);
+		void			ReplaceBuffer(color32_t* image, int w, int h);
+		void			ReplaceBuffer(color32_t* image, Point loc, int w, int h);
 
 		virtual void 	Render(color32_t* backBuffer, int width, int height);
 
 		// properties
+		Point			Location() 				{ return m_location; }
+		int				Width()					{ return m_width; }
+		int				Height()				{ return m_height; }
+
 		void 			HasAlpha(bool hasit) 	{ m_bHasAlpha = hasit; }
 		bool 			HasAlpha()				{ return m_bHasAlpha; }
 
@@ -35,6 +43,7 @@ namespace FBDraw
 		color32_t*	m_imageBuffer;
 
 		bool		m_bHasAlpha;
+		bool		m_bOwnsBuffer;
 	};
 
 }

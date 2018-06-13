@@ -14,7 +14,15 @@
 #define U32toBGRAColor(color)					BGRA_Color{ (color >> 24) & 0xFF, (color >> 16) & 0xFF, (color >> 8) & 0xFF, (color & 0xFF)}
 
 //#define AlphaMix8(backcolor, forecolor, alpha)	(((((alpha+1)*forecolor + ((255-alpha)*backcolor))) & 0xFFFF) >> 8)
-#define AlphaMix8(backcolor, forecolor, alpha)	(((((uint32_t)alpha)*forecolor + ((uint32_t)(0xFF-alpha))*backcolor)) >> 8)
+//#define AlphaMix8(backcolor, forecolor, alpha)	(((((uint32_t)alpha)*backcolor + ((uint32_t)(0xFF-alpha))*forecolor)) >> 8)
+//#define AlphaMix8(backcolor, forecolor, alpha)		((uint8_t) ( (((uint32_t)alpha)*backcolor) + (((uint32_t)(0xFF-alpha))*forecolor) ) >> 8)
+
+#define AlphaMix8(backcolor, forecolor, alpha)		(													\
+														(												\
+																(((uint32_t)alpha)*backcolor) + 		\
+																(((uint32_t)(0xFF-alpha))*forecolor) 	\
+														) >> 8 											\
+													)
 
 //inline uint8_t AlphaMix8(uint16_t backcolor, uint16_t forecolor, uint16_t alpha) { return (uint8_t) (((alpha*forecolor) + ((0xFF - alpha)*backcolor)) >> 8); } 
 

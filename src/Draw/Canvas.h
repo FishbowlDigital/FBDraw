@@ -22,22 +22,22 @@ namespace FBDraw
 		~Canvas();
 
 		//Add drawable
-		void AddDrawable(IDrawable* drawable);
+		void 			AddDrawable(IDrawable* drawable);
 
 		// Draw
-		void Render();
+		virtual void 	Render();
 
 		// Configuration & Property Access
-		void		SetBackgroundColor(BGRA_Color color);
-		BGRA_Color	GetBackgroundColor();
+		void			SetBackgroundColor(BGRA_Color color);
+		BGRA_Color		GetBackgroundColor();
 
-		int			GetWidth();
-		int			GetHeight();
+		int				GetWidth();
+		int				GetHeight();
 
-		color32_t*	GetBackBuffer();
-		color32_t*	GetFrontBuffer();
+		color32_t*		GetBackBuffer();
+		color32_t*		GetFrontBuffer();
 
-	private:
+	protected:
 		// Dimensions
 		int m_width;
 		int m_height;
