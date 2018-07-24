@@ -31,6 +31,9 @@ namespace FBDraw
 		void			SetBackgroundColor(BGRA_Color color);
 		BGRA_Color		GetBackgroundColor();
 
+		void			SetEraseBackground(bool erase) { m_eraseBackground = erase; }
+		bool			GetEraseBackground() { return m_eraseBackground; }
+
 		int				GetWidth();
 		int				GetHeight();
 

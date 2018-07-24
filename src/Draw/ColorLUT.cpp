@@ -72,6 +72,7 @@ namespace FBDraw
 	void ColorLUT::SetMin(int value)
 	{
 		m_min = value;
+		m_invRange = 1.0f / (m_max - m_min); // Precalculate the range. Inverse to provide faster division
 	}
 
 	int ColorLUT::GetMax()
@@ -81,6 +82,7 @@ namespace FBDraw
 	void ColorLUT::SetMax(int value)
 	{
 		m_max = value;
+		m_invRange = 1.0f / (m_max - m_min); // Precalculate the range. Inverse to provide faster division
 	}
 
 }
