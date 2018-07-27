@@ -19,7 +19,7 @@ namespace FBDraw
 		m_invHeight = 1.0f / m_height;
 
 		m_LUT = new ColorLUT(colors, m_lutSize, 0, m_lutSize); // Min and max defaulted to size of array for now. (Should min and max get passed in?)
-		m_border = new Rectangle(m_height, m_width, m_location, false, 2, BGRA_Color{ 0xFF, 0xFF, 0xFF, 0xCF });
+		m_border = new Rectangle(m_location, m_width, m_height, false, 2, BGRA_Color{ 0xFF, 0xFF, 0xFF, 0xCF });
 
 		// Default is Visible
 		Visible = true;
@@ -32,7 +32,7 @@ namespace FBDraw
 		m_height = h;
 		m_LUT = new ColorLUT(0, 256);
 
-		m_border = new Rectangle(m_height, m_width, m_location, false, 2, BGRA_Color{ 0xFF, 0xFF, 0xFF, 0xCF });
+		m_border = new Rectangle(m_location, m_width, m_height, false, 2, BGRA_Color{ 0xFF, 0xFF, 0xFF, 0xCF });
 
 		// Default is Visible
 		Visible = true;
