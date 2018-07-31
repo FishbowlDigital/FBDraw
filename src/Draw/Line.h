@@ -28,7 +28,9 @@ namespace FBDraw
 		int GetThickness();
 
 		void SetPoint1(Point p1);
+		void SetPoint1(int x, int y);
 		void SetPoint2(Point p2);
+		void SetPoint2(int x, int y);
 		void SetColor(BGRA_Color color);
 		void SetThickness(int thickness);
 

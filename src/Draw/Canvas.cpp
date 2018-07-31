@@ -9,7 +9,7 @@
 
 #include <stdlib.h>
 
-#define DEFAULT_NUM_DRAWABLES			10
+#define DEFAULT_MAX_DRAWABLES			10
 
 namespace FBDraw
 {
@@ -30,7 +30,11 @@ namespace FBDraw
 
 		// Initialize the array of drawables
 		m_numDrawables = 0;
-		m_drawables = new IDrawable*[DEFAULT_NUM_DRAWABLES];
+		m_maxDrawables = DEFAULT_MAX_DRAWABLES;
+		m_drawables = new IDrawable*[DEFAULT_MAX_DRAWABLES];
+
+		// Default property values
+		m_eraseBackground = false;
 	}
 
 	Canvas::Canvas(int width, int height, BGRA_Color backgroundColor) : Canvas(width, height)
@@ -49,6 +53,25 @@ namespace FBDraw
 
 	void Canvas::AddDrawable(IDrawable* drawable)
 	{
+		// Need to increase the list size?
+		if (m_numDrawables >= m_maxDrawables)
+		{
+			// add 10 more in a new buffer
+			m_maxDrawables += 10;
+			IDrawable** newDrawableList = new IDrawable*[m_maxDrawables];
+
+			// Copy pointers to new list
+			for (int i=0; i<m_numDrawables; i++)
+			{
+				newDrawableList[i] = m_drawables[i];
+			}
+
+			// Delete old and update array pointer
+			delete m_drawables;
+			m_drawables = newDrawableList;
+		}
+
+		// Add it to the list
 		m_drawables[m_numDrawables++] = drawable;
 	}
 
@@ -64,16 +87,20 @@ namespace FBDraw
 		color32_t bColor = BGRAColorToU32(m_backgroundColor);
 
 		// TEMPORARILY DONT ERASE BACKGROUND!
-		//int numPx = m_width * m_height;
-		//for (int i = 0; i < numPx; i++)
-		//{
-		//	m_backBuffer[i] = bColor;
-		//}
+		if (m_eraseBackground)
+		{
+			int numPx = m_width * m_height;
+			for (int i = 0; i < numPx; i++)
+			{
+				m_backBuffer[i] = bColor;
+			}
+		}
 
 		// Draw objects in the scene
 		for (int i = 0; i < m_numDrawables; i++)
 		{
-			m_drawables[i]->Render(m_backBuffer, m_width, m_height);
+			if (m_drawables[i]->Visible)
+				m_drawables[i]->Render(m_backBuffer, m_width, m_height);
 		}
 
 	}
@@ -88,6 +115,17 @@ namespace FBDraw
 	{
 		return m_backgroundColor;
 	}
+
+	int Canvas::GetWidth()
+	{
+		return m_width;
+	}
+
+	int Canvas::GetHeight()
+	{
+		return m_height;
+	}
+
 
 	color32_t* Canvas::GetBackBuffer()
 	{

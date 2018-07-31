@@ -17,11 +17,17 @@ namespace FBDraw
 	class Rectangle : public IDrawable
 	{
 	public:
-		Rectangle(int h, int w, Point startPoint, bool fill, BGRA_Color color);
-		Rectangle(int h, int w, Point startPoint, bool fill, int thickness, BGRA_Color color);
-		~Rectangle();
+		Rectangle(Point topLeft, int width, int height, bool fill, BGRA_Color color);
+		Rectangle(Point topLeft, int width, int height, bool fill, int thickness, BGRA_Color color);
+		virtual ~Rectangle();
 
-		virtual void Render(color32_t* backBuffer, int width, int height);
+		virtual void 	Render(color32_t* backBuffer, int width, int height);
+
+		void 			SetColor(BGRA_Color color) { m_color = color; m_borderLine->SetColor(color); }
+		BGRA_Color 		GetColor() { return m_color; }
+
+		void			SetThickness(int thickness) { m_thickness = thickness; }
+		int				GetThickness() { return m_thickness; }
 
 	private:
 		// Properties
@@ -29,7 +35,7 @@ namespace FBDraw
 		int			m_width;
 		bool		m_fill;
 		int			m_thickness;
-		Point		m_startPoint;
+		Point		m_topLeft;
 		Line*		m_borderLine;
 		BGRA_Color	m_color;
 	};

@@ -22,25 +22,34 @@ namespace FBDraw
 		~Canvas();
 
 		//Add drawable
-		void AddDrawable(IDrawable* drawable);
+		void 			AddDrawable(IDrawable* drawable);
 
 		// Draw
-		void Render();
+		virtual void 	Render();
 
 		// Configuration & Property Access
-		void		SetBackgroundColor(BGRA_Color color);
-		BGRA_Color	GetBackgroundColor();
+		void			SetBackgroundColor(BGRA_Color color);
+		BGRA_Color		GetBackgroundColor();
 
-		color32_t*	GetBackBuffer();
-		color32_t*	GetFrontBuffer();
+		void			SetEraseBackground(bool erase) { m_eraseBackground = erase; }
+		bool			GetEraseBackground() { return m_eraseBackground; }
 
-	private:
+		int				GetWidth();
+		int				GetHeight();
+
+		color32_t*		GetBackBuffer();
+		color32_t*		GetFrontBuffer();
+
+	protected:
 		// Dimensions
 		int m_width;
 		int m_height;
 
 		// Default colors
 		BGRA_Color		m_backgroundColor;
+
+		// Config properties
+		bool 			m_eraseBackground;
 
 		// The rendering backbuffer (always 32-bit color)
 		color32_t*		m_backBuffer;
@@ -49,6 +58,7 @@ namespace FBDraw
 		// List of drawables
 		IDrawable**		m_drawables;
 		int				m_numDrawables;
+		int				m_maxDrawables;
 
 	};
 

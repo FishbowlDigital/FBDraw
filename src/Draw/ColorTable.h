@@ -32,7 +32,7 @@ namespace FBDraw
 		int			m_width;
 
 		float		m_invWidth;
-		float		m_invTableLength;
+		float		m_invHeight;
 
 		int			m_lutSize;
 		ColorLUT*	m_LUT;

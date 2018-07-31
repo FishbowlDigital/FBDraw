@@ -10,28 +10,34 @@
 namespace FBDraw
 {
 	// Constructor
-	Rectangle::Rectangle(int h, int w, Point startPoint, bool fill, BGRA_Color color)
+	Rectangle::Rectangle(Point topLeft, int width, int height, bool fill, BGRA_Color color)
 	{
-		m_height = h;
-		m_width = w;
-		m_startPoint = startPoint;
+		m_width = width;
+		m_height = height;
+		m_topLeft = topLeft;
 		m_fill = fill;
 		m_thickness = 0;
 		m_color = color;
 
-		m_borderLine = new Line(m_startPoint, m_startPoint, color, m_thickness);
+		m_borderLine = new Line(m_topLeft, m_topLeft, color, m_thickness);
+
+		// Default is Visible
+		Visible = true;
 	}
 
-	Rectangle::Rectangle(int h, int w, Point startPoint, bool fill, int thickness, BGRA_Color color)
+	Rectangle::Rectangle(Point topLeft, int width, int height, bool fill, int thickness, BGRA_Color color)
 	{
-		m_height = h;
-		m_width = w;
-		m_startPoint = startPoint;
+		m_width = width;
+		m_height = height;
+		m_topLeft = topLeft;
 		m_fill = fill;
 		m_thickness = thickness;
 		m_color = color;
 
-		m_borderLine = new Line(m_startPoint, m_startPoint, color, m_thickness);
+		m_borderLine = new Line(m_topLeft, m_topLeft, color, m_thickness);
+
+		// Default is Visible
+		Visible = true;
 	}
 	
 	Rectangle::~Rectangle()
@@ -42,14 +48,14 @@ namespace FBDraw
 	void Rectangle::Render(color32_t* backBuffer, int width, int height)
 	{
 		BGRA_Bytes backColor, mixColor;
-		int xEnd = m_startPoint.X + m_width;
-		int yEnd = m_startPoint.Y + m_height;
+		int xEnd = m_topLeft.X + m_width;
+		int yEnd = m_topLeft.Y + m_height;
 
 		if (m_fill)
 		{
-			for (int iY = m_startPoint.Y; iY < yEnd; iY++)
+			for (int iY = m_topLeft.Y; iY < yEnd; iY++)
 			{
-				for (int iX = m_startPoint.X; iX < xEnd; iX++)
+				for (int iX = m_topLeft.X; iX < xEnd; iX++)
 				{
 					/*backBuffer[(iY * width) + iX] = BGRAColorToU32(m_color);*/
 
@@ -66,23 +72,23 @@ namespace FBDraw
 		else
 		{
 			//Left
-			m_borderLine->SetPoint1(m_startPoint);
-			m_borderLine->SetPoint2(Point(m_startPoint.X, yEnd));
+			m_borderLine->SetPoint1(m_topLeft);
+			m_borderLine->SetPoint2(m_topLeft.X, yEnd);
 			m_borderLine->Render(backBuffer, width, height);
 
 			//Bottom
-			m_borderLine->SetPoint1(Point(m_startPoint.X, yEnd));
-			m_borderLine->SetPoint2(Point(xEnd, yEnd));
+			m_borderLine->SetPoint1(m_topLeft.X, yEnd);
+			m_borderLine->SetPoint2(xEnd, yEnd);
 			m_borderLine->Render(backBuffer, width, height);
 
 			//Right
-			m_borderLine->SetPoint1(Point(xEnd, yEnd));
-			m_borderLine->SetPoint2(Point(xEnd, m_startPoint.Y));
+			m_borderLine->SetPoint1(xEnd, yEnd);
+			m_borderLine->SetPoint2(xEnd, m_topLeft.Y);
 			m_borderLine->Render(backBuffer, width, height);
 
 			//Top
-			m_borderLine->SetPoint1(Point(xEnd, m_startPoint.Y));
-			m_borderLine->SetPoint2(m_startPoint);
+			m_borderLine->SetPoint1(xEnd, m_topLeft.Y);
+			m_borderLine->SetPoint2(m_topLeft);
 			m_borderLine->Render(backBuffer, width, height);
 		}
 	}
