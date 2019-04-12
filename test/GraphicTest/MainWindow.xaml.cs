@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using GraphicLibWrapper;
+using GraphicsLibWrapper;
 
 namespace GraphicTest
 {
@@ -37,9 +37,12 @@ namespace GraphicTest
 
         private void m_btnTest_Click(object sender, RoutedEventArgs e)
         {
-            Byte[] bmpData = GraphicLib.DoATest();
+            //Byte[] bmpData = GraphicsLibWrapper.GraphicLib.DoATest();
+            //Byte[] bmpData = GraphicLib.DoATest();
+            Byte[] bmpData = GraphicsLibWrapper.GraphicLib.DoAFontTest();
 
-            m_image.Source = CreateBitmap(bmpData, 500, 500);   // HARD CODED!
+            if (bmpData != null)
+                m_image.Source = CreateBitmap(bmpData, 500, 500);   // HARD CODED!
         }
 
     }

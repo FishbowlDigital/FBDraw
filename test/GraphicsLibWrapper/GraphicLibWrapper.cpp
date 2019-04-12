@@ -1,5 +1,6 @@
 // This is the main DLL file.
 
+#include <stdio.h>
 #include <iostream>
 #include <math.h>
 
@@ -14,14 +15,18 @@
 #include "Rectangle.h"
 #include "Point.h"
 #include "Plot1D.h"
+#include "Text.h"
 
 // TEMP FOR TESTING
 //#include "Test.h"
 
 #include <string.h>
 
+using namespace System::IO;
+using namespace FBDraw;
 
-namespace GraphicLibWrapper {
+
+namespace GraphicsLibWrapper {
 
 	array<Byte>^ GraphicLib::GetDisplayBuffer()
 	{
@@ -120,6 +125,48 @@ namespace GraphicLibWrapper {
 
 		// Return the managed buffer
 		return data;
+	}
+
+	array<Byte>^ GraphicLib::DoAFontTest()
+	{
+		const int width = 500;
+		const int height = 500;
+		int numPixels = width * height;
+		color32_t buffer[128*8*18];
+		
+		// Create a Canvas and draw some stuff
+		Canvas canvas(width, height, BGRA_Color{ 0x00, 0x00, 0x00, 0x00 });
+		canvas.SetEraseBackground(true);
+
+		String^ fileName = "C:\\Dev\\aibio\\testdata\\Consolas_16pt.bin";
+		if (File::Exists(fileName))
+		{
+			array<Byte>^ managedBuffer = File::ReadAllBytes(fileName);
+			pin_ptr<System::Byte> p = &managedBuffer[0];
+			uint32_t* buffer = (uint32_t *) p;
+
+			color32_t* charTable = new color32_t[managedBuffer->Length / sizeof(color32_t)];
+			memcpy(charTable, buffer, managedBuffer->Length);
+
+			// Create some text
+			Font font(charTable, 8, 18, (char)32, (char)125);
+			FBDraw::Text text(&font, 2, 2, "Kiss my ass!");
+
+			canvas.AddDrawable(&text);
+			canvas.Render();
+
+			UInt32* backBuffer = canvas.GetBackBuffer();
+			array<Byte>^ data = gcnew array<Byte>(numPixels * sizeof(UInt32));
+			pin_ptr<System::Byte> p2 = &data[0];
+			unsigned char* pData = p2;
+			memcpy(pData, backBuffer, numPixels * sizeof(UInt32));
+
+			// Return the managed buffer
+			return data;
+
+		}
+
+		return nullptr;
 	}
 
 }

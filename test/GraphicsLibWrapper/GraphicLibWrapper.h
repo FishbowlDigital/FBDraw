@@ -4,7 +4,7 @@
 
 using namespace System;
 
-namespace GraphicLibWrapper {
+namespace GraphicsLibWrapper {
 
 	public ref class GraphicLib
 	{
@@ -12,5 +12,6 @@ namespace GraphicLibWrapper {
 		static array<Byte>^				GetDisplayBuffer();
 		static array<Byte>^				DoATest();
 
+		static array<Byte>^				DoAFontTest();
 	};
 }

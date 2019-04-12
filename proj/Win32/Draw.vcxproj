@@ -19,35 +19,41 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Draw\Canvas.h" />
-    <ClInclude Include="..\Draw\ColorLUT.h" />
-    <ClInclude Include="..\Draw\ColorTable.h" />
-    <ClInclude Include="..\Draw\Data1D.h" />
-    <ClInclude Include="..\Draw\Draw.h" />
-    <ClInclude Include="..\Draw\IData.h" />
-    <ClInclude Include="..\Draw\IDrawable.h" />
-    <ClInclude Include="..\Draw\Image.h" />
-    <ClInclude Include="..\Draw\Line.h" />
-    <ClInclude Include="..\Draw\Macros.h" />
-    <ClInclude Include="..\Draw\Plot1D.h" />
-    <ClInclude Include="..\Draw\Point.h" />
-    <ClInclude Include="..\Draw\Rectangle.h" />
-    <ClInclude Include="..\Draw\Test.h" />
-    <ClInclude Include="..\Draw\Types.h" />
+    <ClInclude Include="..\..\src\Draw\Canvas.h" />
+    <ClInclude Include="..\..\src\Draw\ColorLUT.h" />
+    <ClInclude Include="..\..\src\Draw\ColorTable.h" />
+    <ClInclude Include="..\..\src\Draw\Data1D.h" />
+    <ClInclude Include="..\..\src\Draw\Draw.h" />
+    <ClInclude Include="..\..\src\Draw\Font.h" />
+    <ClInclude Include="..\..\src\Draw\IData.h" />
+    <ClInclude Include="..\..\src\Draw\IDrawable.h" />
+    <ClInclude Include="..\..\src\Draw\Image.h" />
+    <ClInclude Include="..\..\src\Draw\Line.h" />
+    <ClInclude Include="..\..\src\Draw\Macros.h" />
+    <ClInclude Include="..\..\src\Draw\Plot1D.h" />
+    <ClInclude Include="..\..\src\Draw\Point.h" />
+    <ClInclude Include="..\..\src\Draw\Range.h" />
+    <ClInclude Include="..\..\src\Draw\Rectangle.h" />
+    <ClInclude Include="..\..\src\Draw\Test.h" />
+    <ClInclude Include="..\..\src\Draw\Text.h" />
+    <ClInclude Include="..\..\src\Draw\Types.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Draw\Canvas.cpp" />
-    <ClCompile Include="..\Draw\ColorLUT.cpp" />
-    <ClCompile Include="..\Draw\ColorTable.cpp" />
-    <ClCompile Include="..\Draw\Data1D.cpp" />
-    <ClCompile Include="..\Draw\IData.cpp" />
-    <ClCompile Include="..\Draw\IDrawable.cpp" />
-    <ClCompile Include="..\Draw\Image.cpp" />
-    <ClCompile Include="..\Draw\Line.cpp" />
-    <ClCompile Include="..\Draw\Plot1D.cpp" />
-    <ClCompile Include="..\Draw\Point.cpp" />
-    <ClCompile Include="..\Draw\Rectangle.cpp" />
-    <ClCompile Include="..\Draw\Test.cpp" />
+    <ClCompile Include="..\..\src\Draw\Canvas.cpp" />
+    <ClCompile Include="..\..\src\Draw\ColorLUT.cpp" />
+    <ClCompile Include="..\..\src\Draw\ColorTable.cpp" />
+    <ClCompile Include="..\..\src\Draw\Data1D.cpp" />
+    <ClCompile Include="..\..\src\Draw\Font.cpp" />
+    <ClCompile Include="..\..\src\Draw\IData.cpp" />
+    <ClCompile Include="..\..\src\Draw\IDrawable.cpp" />
+    <ClCompile Include="..\..\src\Draw\Image.cpp" />
+    <ClCompile Include="..\..\src\Draw\Line.cpp" />
+    <ClCompile Include="..\..\src\Draw\Plot1D.cpp" />
+    <ClCompile Include="..\..\src\Draw\Point.cpp" />
+    <ClCompile Include="..\..\src\Draw\Range.cpp" />
+    <ClCompile Include="..\..\src\Draw\Rectangle.cpp" />
+    <ClCompile Include="..\..\src\Draw\Test.cpp" />
+    <ClCompile Include="..\..\src\Draw\Text.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{40289BAC-F7CB-4D08-9F5A-1928E7821058}</ProjectGuid>
@@ -118,6 +124,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_MBCS;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -128,6 +135,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_MBCS;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

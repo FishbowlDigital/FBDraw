@@ -69,7 +69,9 @@ namespace FBDraw
 		m_bOwnsBuffer = false;		// Don't cleanup this buffer on delete
 	}
 
+#ifndef WIN32
 	__attribute__((optimize("unroll-loops")))
+#endif
 	void Image::Render(color32_t* backBuffer, int width, int height)
 	{
 		if (m_imageBuffer == NULL)
