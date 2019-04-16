@@ -48,14 +48,37 @@ namespace FBDraw
 	void Rectangle::Render(color32_t* backBuffer, int width, int height)
 	{
 		BGRA_Bytes backColor, mixColor;
+		int xStart = m_topLeft.X;
+		int yStart = m_topLeft.Y;
 		int xEnd = m_topLeft.X + m_width;
 		int yEnd = m_topLeft.Y + m_height;
 
+		// Bounds checks
+		if (xStart < 0)
+			xStart = 0;
+		else if (xStart >= width)
+			return;
+
+		if (yStart < 0)
+			yStart = 0;
+		else if (yStart >= height)
+			return;
+
+		if (xEnd >= width)
+			xEnd = width-1;
+		else if (xEnd < 0)
+			return;
+
+		if (yEnd >= height)
+			yEnd = height-1;
+		else if (yEnd < 0)
+			return;
+
 		if (m_fill)
 		{
-			for (int iY = m_topLeft.Y; iY < yEnd; iY++)
+			for (int iY = yStart; iY < yEnd; iY++)
 			{
-				for (int iX = m_topLeft.X; iX < xEnd; iX++)
+				for (int iX = xStart; iX < xEnd; iX++)
 				{
 					/*backBuffer[(iY * width) + iX] = BGRAColorToU32(m_color);*/
 

@@ -73,7 +73,7 @@ namespace FBDraw
 			int iCanvasStart = (m_yPos * width) + xPos;
 
 			// Simple X bounds check
-			if ((xPos > 0) && ((xPos + charWidth) < width))
+			if ((xPos >= 0) && ((xPos + charWidth) < width))
 			{
 				color32_t* charBuffer = m_font->GetCharImage(c);
 

@@ -21,13 +21,15 @@ namespace FBDraw
 		Rectangle(Point topLeft, int width, int height, bool fill, int thickness, BGRA_Color color);
 		virtual ~Rectangle();
 
-		virtual void 	Render(color32_t* backBuffer, int width, int height);
+		virtual void 	Render(color32_t* backBuffer, int width, int height) override;
 
 		void 			SetColor(BGRA_Color color) { m_color = color; m_borderLine->SetColor(color); }
 		BGRA_Color 		GetColor() { return m_color; }
 
 		void			SetThickness(int thickness) { m_thickness = thickness; }
 		int				GetThickness() { return m_thickness; }
+
+		void			SetTopLeft(Point topLeft) { m_topLeft = topLeft; }
 
 	private:
 		// Properties

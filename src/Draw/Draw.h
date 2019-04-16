@@ -32,5 +32,9 @@
 #include "Image.h"
 #include "Point.h"
 
+// Fonts
+#include "Font.h"
+#include "Text.h"
+
 
 #endif		// #define _DRAW_H 
