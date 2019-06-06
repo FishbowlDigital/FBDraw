@@ -76,6 +76,7 @@ namespace FBDraw
 
 		if (m_fill)
 		{
+			mixColor.U32 = 0;
 			for (int iY = yStart; iY < yEnd; iY++)
 			{
 				for (int iX = xStart; iX < xEnd; iX++)
@@ -87,6 +88,7 @@ namespace FBDraw
 					mixColor.Color.Red = AlphaMix8(backColor.Color.Red, m_color.Red, m_color.Alpha);
 					mixColor.Color.Green = AlphaMix8(backColor.Color.Green, m_color.Green, m_color.Alpha);
 					mixColor.Color.Blue = AlphaMix8(backColor.Color.Blue, m_color.Blue, m_color.Alpha);
+					mixColor.Color.Alpha = m_color.Alpha;
 
 					backBuffer[iBack] = mixColor.U32;
 				}

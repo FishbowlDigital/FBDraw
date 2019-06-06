@@ -96,6 +96,7 @@ namespace FBDraw
 							mixColor.Color.Red = AlphaMix8(backColor.Color.Red, imgColor.Color.Red, alpha);
 							mixColor.Color.Green = AlphaMix8(backColor.Color.Green, imgColor.Color.Green, alpha);
 							mixColor.Color.Blue = AlphaMix8(backColor.Color.Blue, imgColor.Color.Blue, alpha);
+							mixColor.Color.Alpha = AlphaMix8(backColor.Color.Alpha, alpha, alpha);
 
 							backBuffer[iCanvasRowStart + iX] = mixColor.U32;
 						}
