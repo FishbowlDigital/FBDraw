@@ -31,6 +31,7 @@ namespace FBDraw
 		Point			Location() 				{ return m_location; }
 		int				Width()					{ return m_width; }
 		int				Height()				{ return m_height; }
+		color32_t*		ImageData()				{ return m_imageBuffer; }
 
 		void 			HasAlpha(bool hasit) 	{ m_bHasAlpha = hasit; }
 		bool 			HasAlpha()				{ return m_bHasAlpha; }
