@@ -15,16 +15,16 @@ namespace FBDraw
 	{
 	public:
 		ColorLUT(int min, int max);
-		ColorLUT(BGRA_Bytes* table, int size, int min, int max);
+		ColorLUT(ARGB_Bytes* table, int size, int min, int max);
 		~ColorLUT();
 
-		BGRA_Bytes GetColor(int value);
+		ARGB_Bytes GetColor(int value);
 		int GetMin();
 		void SetMin(int value);
 		int GetMax();
 		void SetMax(int value);
 
-		BGRA_Bytes*	m_colorTable;
+		ARGB_Bytes*	m_colorTable;
 
 	private:
 		// Properties

@@ -22,20 +22,20 @@ namespace FBDraw
 
 	//#pragma pack(1)		// FIX!!!  DOUBLE CHECK THIS ON WINDOWS
 #pragma pack (push, 1)
-	typedef struct			/* packed as BGRA32 */
-	{						/* Format: BGRA_Color{ Blue, Green, Red, Alpha }) */
+	typedef struct			/* packed as ARGB32 */
+	{						/* Format: ARGB_Color{ Blue, Green, Red, Alpha }) */
 		uint8_t Blue;
 		uint8_t Green;
 		uint8_t Red;
 		uint8_t Alpha;
-	} BGRA_Color;
+	} ARGB_Color;
 #pragma pack(pop)
 
 	typedef union
 	{
-		BGRA_Color	Color;
+		ARGB_Color	Color;
 		color32_t	U32;
-	} BGRA_Bytes;
+	} ARGB_Bytes;
 
 #ifndef NULL
 #define NULL		0

@@ -12,7 +12,7 @@ namespace FBDraw
 {
 
 	// Constructor
-	Plot1D::Plot1D(int* data, int dataLength, Point start, BGRA_Color color)
+	Plot1D::Plot1D(int* data, int dataLength, Point start, ARGB_Color color)
 	{
 		m_yData = data;
 		m_yDataLength = dataLength;
@@ -24,7 +24,7 @@ namespace FBDraw
 		Visible = true;
 	}
 
-	Plot1D::Plot1D(int* data, int dataLength, Point start, BGRA_Color color, int thickness) : Plot1D(data, dataLength, start, color)
+	Plot1D::Plot1D(int* data, int dataLength, Point start, ARGB_Color color, int thickness) : Plot1D(data, dataLength, start, color)
 	{
 		m_thickness = thickness;
 
@@ -37,7 +37,7 @@ namespace FBDraw
 
 	}
 
-	BGRA_Color Plot1D::GetColor()
+	ARGB_Color Plot1D::GetColor()
 	{
 		return m_color;
 	}
@@ -47,7 +47,7 @@ namespace FBDraw
 		return m_thickness;
 	}
 
-	void Plot1D::SetColor(BGRA_Color Color)
+	void Plot1D::SetColor(ARGB_Color Color)
 	{
 		m_color = Color;
 	}

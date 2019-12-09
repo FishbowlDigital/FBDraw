@@ -10,7 +10,7 @@
 namespace FBDraw
 {
 	// Constructor
-	Rectangle::Rectangle(Point topLeft, int width, int height, bool fill, BGRA_Color color)
+	Rectangle::Rectangle(Point topLeft, int width, int height, bool fill, ARGB_Color color)
 	{
 		m_width = width;
 		m_height = height;
@@ -25,7 +25,7 @@ namespace FBDraw
 		Visible = true;
 	}
 
-	Rectangle::Rectangle(Point topLeft, int width, int height, bool fill, int thickness, BGRA_Color color)
+	Rectangle::Rectangle(Point topLeft, int width, int height, bool fill, int thickness, ARGB_Color color)
 	{
 		m_width = width;
 		m_height = height;
@@ -47,7 +47,7 @@ namespace FBDraw
 
 	void Rectangle::Render(color32_t* backBuffer, int width, int height)
 	{
-		BGRA_Bytes backColor, mixColor;
+		ARGB_Bytes backColor, mixColor;
 		int xStart = m_topLeft.X;
 		int yStart = m_topLeft.Y;
 		int xEnd = m_topLeft.X + m_width;

@@ -16,17 +16,17 @@ namespace FBDraw
 	class Plot1D : public IDrawable
 	{
 	public:
-		Plot1D(int* data, int dataLength, Point start, BGRA_Color color);
-		Plot1D(int* data, int dataLength, Point start, BGRA_Color color, int thickness);
+		Plot1D(int* data, int dataLength, Point start, ARGB_Color color);
+		Plot1D(int* data, int dataLength, Point start, ARGB_Color color, int thickness);
 
 		virtual ~Plot1D();
 
 		virtual void Render(color32_t* backBuffer, int width, int height);
 
-		BGRA_Color GetColor();
+		ARGB_Color GetColor();
 		int GetThickness();
 
-		void SetColor(BGRA_Color color);
+		void SetColor(ARGB_Color color);
 		void SetThickness(int thickness);
 
 	private:
@@ -34,7 +34,7 @@ namespace FBDraw
 		int* m_yData;
 		int m_yDataLength;
 		Point m_start;
-		BGRA_Color	m_color;
+		ARGB_Color	m_color;
 		int m_thickness;
 	};
 }

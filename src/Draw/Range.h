@@ -13,15 +13,15 @@
 //class Data1D : public IDrawable
 //{
 //public:
-//	Data1D(int* data, int dataLength, Point start, BGRA_Color color);
-//	Data1D(int* data, int dataLength, Point start, BGRA_Color color, int thickness);
+//	Data1D(int* data, int dataLength, Point start, ARGB_Color color);
+//	Data1D(int* data, int dataLength, Point start, ARGB_Color color, int thickness);
 //
 //	virtual void Render(color32_t* backBuffer, int width, int height);
 //
-//	BGRA_Color GetColor();
+//	ARGB_Color GetColor();
 //	int GetThickness();
 //
-//	void SetColor(BGRA_Color color);
+//	void SetColor(ARGB_Color color);
 //	void SetThickness(int thickness);
 //
 //private:
@@ -29,7 +29,7 @@
 //	int* m_yData;
 //	int m_yDataLength;
 //	Point m_start;
-//	BGRA_Color	m_color;
+//	ARGB_Color	m_color;
 //	int m_thickness;
 //};
 #endif			// #define _POINT_H

@@ -18,20 +18,20 @@ namespace FBDraw
 	public:
 
 		// Constructor/Destructor
-		Line(Point p1, Point p2, BGRA_Color lineColor);
-		Line(Point p1, Point p2, BGRA_Color lineColor, int thickness);
+		Line(Point p1, Point p2, ARGB_Color lineColor);
+		Line(Point p1, Point p2, ARGB_Color lineColor, int thickness);
 
 		// Get/Set Parameters
 		Point GetPoint1();
 		Point GetPoint2();
-		BGRA_Color GetColor();
+		ARGB_Color GetColor();
 		int GetThickness();
 
 		void SetPoint1(Point p1);
 		void SetPoint1(int x, int y);
 		void SetPoint2(Point p2);
 		void SetPoint2(int x, int y);
-		void SetColor(BGRA_Color color);
+		void SetColor(ARGB_Color color);
 		void SetThickness(int thickness);
 
 		virtual void Render(color32_t* backBuffer, int width, int height);
@@ -41,7 +41,7 @@ namespace FBDraw
 		Point		m_p1;
 		Point		m_p2;
 		int			m_thickness;
-		BGRA_Color	m_lineColor;
+		ARGB_Color	m_lineColor;
 	};
 
 }

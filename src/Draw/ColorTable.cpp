@@ -8,7 +8,7 @@
 
 namespace FBDraw
 {
-	ColorTable::ColorTable(BGRA_Bytes* colors, int size, Point loc, int w, int h)
+	ColorTable::ColorTable(ARGB_Bytes* colors, int size, Point loc, int w, int h)
 	{
 		m_location = loc;
 		m_width = w;
@@ -19,7 +19,7 @@ namespace FBDraw
 		m_invHeight = 1.0f / m_height;
 
 		m_LUT = new ColorLUT(colors, m_lutSize, 0, m_lutSize); // Min and max defaulted to size of array for now. (Should min and max get passed in?)
-		m_border = new Rectangle(m_location, m_width, m_height, false, 2, BGRA_Color{ 0xFF, 0xFF, 0xFF, 0xCF });
+		m_border = new Rectangle(m_location, m_width, m_height, false, 2, ARGB_Color{ 0xFF, 0xFF, 0xFF, 0xCF });
 
 		// Default is Visible
 		Visible = true;
@@ -32,7 +32,7 @@ namespace FBDraw
 		m_height = h;
 		m_LUT = new ColorLUT(0, 256);
 
-		m_border = new Rectangle(m_location, m_width, m_height, false, 2, BGRA_Color{ 0xFF, 0xFF, 0xFF, 0xCF });
+		m_border = new Rectangle(m_location, m_width, m_height, false, 2, ARGB_Color{ 0xFF, 0xFF, 0xFF, 0xCF });
 
 		// Default is Visible
 		Visible = true;
@@ -44,12 +44,12 @@ namespace FBDraw
 			delete m_border;
 	}
 
-	void ColorTable::SetColorTable(BGRA_Bytes colors)
+	void ColorTable::SetColorTable(ARGB_Bytes colors)
 	{
 		//Not Yet implemented
 	}
 
-	BGRA_Bytes ColorTable::GetColor(int value)
+	ARGB_Bytes ColorTable::GetColor(int value)
 	{
 		return m_LUT->GetColor(value);
 	}
@@ -57,7 +57,7 @@ namespace FBDraw
 
 	void ColorTable::Render(color32_t* backBuffer, int width, int height)
 	{
-		BGRA_Bytes color, backColor, mixColor;
+		ARGB_Bytes color, backColor, mixColor;
 		int xStart = m_location.X + 1; // Taking into account the width of the border
 		int xEnd = m_location.X + m_width;
 		int yStart = m_location.Y + 1;

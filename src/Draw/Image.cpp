@@ -82,7 +82,7 @@ namespace FBDraw
 		// Copy the image to the backbuffer
 		if (m_bHasAlpha)
 		{
-			BGRA_Color mixBGRA = BGRA_Color{ 0x00, 0x00, 0x00, 0x00 };
+			ARGB_Color mixBGRA = ARGB_Color{ 0x00, 0x00, 0x00, 0x00 };
 			for (int iY = 0; iY < m_height; iY++)
 			{
 				int iCanvasRowStart = iCanvasStart + (iY * width);
@@ -90,7 +90,7 @@ namespace FBDraw
 				for (int iX = 0; iX < m_width; iX++)
 				{
 					// Alpha mix the image pixel and the back buffer
-					BGRA_Bytes imgColor, backColor, mixColor;
+					ARGB_Bytes imgColor, backColor, mixColor;
 					imgColor.U32 = m_imageBuffer[iImageRowStart + iX];
 					backColor.U32 = backBuffer[iCanvasRowStart + iX];
 					mixColor.Color.Red = AlphaMix8(backColor.Color.Red, imgColor.Color.Red, imgColor.Color.Alpha);

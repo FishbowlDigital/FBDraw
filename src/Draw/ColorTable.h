@@ -16,12 +16,12 @@ namespace FBDraw
 	class ColorTable : public IDrawable
 	{
 	public:
-		ColorTable(BGRA_Bytes* colors, int size, Point loc, int w, int h);
+		ColorTable(ARGB_Bytes* colors, int size, Point loc, int w, int h);
 		ColorTable(Point loc, int w, int h);
 		~ColorTable();
 
-		void SetColorTable(BGRA_Bytes colors);
-		BGRA_Bytes GetColor(int value);
+		void SetColorTable(ARGB_Bytes colors);
+		ARGB_Bytes GetColor(int value);
 
 		virtual void Render(color32_t* backBuffer, int width, int height);
 

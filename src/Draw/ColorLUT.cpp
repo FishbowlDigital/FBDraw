@@ -20,14 +20,14 @@ namespace FBDraw
 		m_invRange = 1.0f / (m_max - m_min); // Precalculate the range. Inverse to provide faster division
 
 		// No Look-up table passed in. Generate a default greyscale look-up table. 
-		m_colorTable = new BGRA_Bytes[m_size];
+		m_colorTable = new ARGB_Bytes[m_size];
 		for (int i = 0; i < m_size; i++)
 		{
-			m_colorTable[i].Color = BGRA_Color{ (uint8_t)i, (uint8_t)i, (uint8_t)i, 0xFF};
+			m_colorTable[i].Color = ARGB_Color{ (uint8_t)i, (uint8_t)i, (uint8_t)i, 0xFF};
 		}
 	}
 
-	ColorLUT::ColorLUT(BGRA_Bytes* table, int size, int min, int max)
+	ColorLUT::ColorLUT(ARGB_Bytes* table, int size, int min, int max)
 	{
 		m_colorTable = table;
 		m_size = size;
@@ -43,7 +43,7 @@ namespace FBDraw
 			delete m_colorTable;
 	}
 
-	BGRA_Bytes ColorLUT::GetColor(int value)
+	ARGB_Bytes ColorLUT::GetColor(int value)
 	{
 		float scale;
 		int returnIndex;

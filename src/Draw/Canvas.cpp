@@ -26,7 +26,7 @@ namespace FBDraw
 		m_height = height;
 
 		// Default background is black
-		m_backgroundColor = BGRA_Color{ 0, 0, 0, 0 };
+		m_backgroundColor = ARGB_Color{ 0, 0, 0, 0 };
 
 		// Initialize the array of drawables
 		m_numDrawables = 0;
@@ -37,7 +37,7 @@ namespace FBDraw
 		m_eraseBackground = false;
 	}
 
-	Canvas::Canvas(int width, int height, BGRA_Color backgroundColor) : Canvas(width, height)
+	Canvas::Canvas(int width, int height, ARGB_Color backgroundColor) : Canvas(width, height)
 	{
 		// Store configuration
 		m_backgroundColor = backgroundColor;
@@ -84,7 +84,7 @@ namespace FBDraw
 			return;
 
 		// Draw background
-		color32_t bColor = BGRAColorToU32(m_backgroundColor);
+		color32_t bColor = ARGBColorToU32(m_backgroundColor);
 
 		// TEMPORARILY DONT ERASE BACKGROUND!
 		if (m_eraseBackground)
@@ -106,12 +106,12 @@ namespace FBDraw
 	}
 
 	// Configuration & Property Access
-	void Canvas::SetBackgroundColor(BGRA_Color color)
+	void Canvas::SetBackgroundColor(ARGB_Color color)
 	{
 		m_backgroundColor = color;
 	}
 
-	BGRA_Color Canvas::GetBackgroundColor()
+	ARGB_Color Canvas::GetBackgroundColor()
 	{
 		return m_backgroundColor;
 	}

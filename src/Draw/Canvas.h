@@ -18,7 +18,7 @@ namespace FBDraw
 	public:
 		// Constructor/Destructor
 		Canvas(int width, int height);
-		Canvas(int width, int height, BGRA_Color backgroundColor);
+		Canvas(int width, int height, ARGB_Color backgroundColor);
 		~Canvas();
 
 		//Add drawable
@@ -28,8 +28,8 @@ namespace FBDraw
 		virtual void 	Render();
 
 		// Configuration & Property Access
-		void			SetBackgroundColor(BGRA_Color color);
-		BGRA_Color		GetBackgroundColor();
+		void			SetBackgroundColor(ARGB_Color color);
+		ARGB_Color		GetBackgroundColor();
 
 		void			SetEraseBackground(bool erase) { m_eraseBackground = erase; }
 		bool			GetEraseBackground() { return m_eraseBackground; }
@@ -46,7 +46,7 @@ namespace FBDraw
 		int m_height;
 
 		// Default colors
-		BGRA_Color		m_backgroundColor;
+		ARGB_Color		m_backgroundColor;
 
 		// Config properties
 		bool 			m_eraseBackground;

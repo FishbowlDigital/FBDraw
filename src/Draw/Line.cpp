@@ -12,7 +12,7 @@ namespace FBDraw
 {
 
 	// Constructor
-	Line::Line(Point p1, Point p2, BGRA_Color lineColor)
+	Line::Line(Point p1, Point p2, ARGB_Color lineColor)
 	{
 		m_p1 = p1;
 		m_p2 = p2;
@@ -23,7 +23,7 @@ namespace FBDraw
 		Visible = true;
 	}
 
-	Line::Line(Point p1, Point p2, BGRA_Color lineColor, int thickness) 
+	Line::Line(Point p1, Point p2, ARGB_Color lineColor, int thickness) 
 	{
 		m_p1 = p1;
 		m_p2 = p2;
@@ -44,7 +44,7 @@ namespace FBDraw
 		return m_p2;
 	}
 
-	BGRA_Color Line::GetColor()
+	ARGB_Color Line::GetColor()
 	{
 		return m_lineColor;
 	}
@@ -76,7 +76,7 @@ namespace FBDraw
 		m_p2.Y = y;
 	}
 
-	void Line::SetColor(BGRA_Color Color)
+	void Line::SetColor(ARGB_Color Color)
 	{
 		m_lineColor = Color;
 	}
@@ -88,7 +88,7 @@ namespace FBDraw
 
 	void Line::Render(color32_t* backBuffer, int width, int height)
 	{
-		BGRA_Bytes backColor, mixColor;
+		ARGB_Bytes backColor, mixColor;
 
 		if (m_p1.X == m_p2.X) /* Vertical line */
 		{

@@ -9,7 +9,7 @@
 //#include "Line.h"
 //
 //// Constructor
-//Range::Range(int* data, int dataLength, Point start, BGRA_Color color)
+//Range::Range(int* data, int dataLength, Point start, ARGB_Color color)
 //{
 //	m_yData = data;
 //	m_yDataLength = dataLength;
@@ -18,12 +18,12 @@
 //	m_thickness = 0;
 //}
 //
-//Range::Range(int* data, int dataLength, Point start, BGRA_Color color, int thickness) : Range(data, dataLength, start, color)
+//Range::Range(int* data, int dataLength, Point start, ARGB_Color color, int thickness) : Range(data, dataLength, start, color)
 //{
 //	m_thickness = thickness;
 //}
 //
-//BGRA_Color Line::GetColor()
+//ARGB_Color Line::GetColor()
 //{
 //	return m_lineColor;
 //}
@@ -33,7 +33,7 @@
 //	return m_thickness;
 //}
 //
-//void Line::SetColor(BGRA_Color Color)
+//void Line::SetColor(ARGB_Color Color)
 //{
 //	m_lineColor = Color;
 //}
