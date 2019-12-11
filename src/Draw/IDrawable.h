@@ -8,6 +8,7 @@
 #define _IDRAWABLE_H
 
 #include "Types.h"
+#include "Point.h"
 
 namespace FBDraw
 {
@@ -19,9 +20,14 @@ namespace FBDraw
 
 		virtual void Render(color32_t* backBuffer, int width, int height) = 0;
 
+		virtual bool HitTest(Point pt) = 0;
+		//virtual void TouchDown(Point pt) = 0;
+		//virtual void TouchUp(Point pt) = 0;
+
 		// Properties
 		bool Visible;
-	};
+
+			};
 
 }
 

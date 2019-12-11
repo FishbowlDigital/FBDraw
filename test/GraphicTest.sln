@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2035
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29201.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GraphicsLibWrapper", "GraphicsLibWrapper\GraphicsLibWrapper.vcxproj", "{81F27209-4AE7-4B43-8105-5DF0036916D7}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -29,7 +29,7 @@ Global
 		{81F27209-4AE7-4B43-8105-5DF0036916D7}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{81F27209-4AE7-4B43-8105-5DF0036916D7}.Debug|Win32.ActiveCfg = Debug|Win32
 		{81F27209-4AE7-4B43-8105-5DF0036916D7}.Debug|Win32.Build.0 = Debug|Win32
-		{81F27209-4AE7-4B43-8105-5DF0036916D7}.Debug|x64.ActiveCfg = Debug|Win32
+		{81F27209-4AE7-4B43-8105-5DF0036916D7}.Debug|x64.ActiveCfg = Debug|x64
 		{81F27209-4AE7-4B43-8105-5DF0036916D7}.Release|Any CPU.ActiveCfg = Release|Win32
 		{81F27209-4AE7-4B43-8105-5DF0036916D7}.Release|Mixed Platforms.ActiveCfg = Release|Win32
 		{81F27209-4AE7-4B43-8105-5DF0036916D7}.Release|Mixed Platforms.Build.0 = Release|Win32

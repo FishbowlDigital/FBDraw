@@ -97,7 +97,7 @@ namespace FBDraw
 					mixColor.Color.Green = AlphaMix8(backColor.Color.Green, imgColor.Color.Green, imgColor.Color.Alpha);
 					mixColor.Color.Blue = AlphaMix8(backColor.Color.Blue, imgColor.Color.Blue, imgColor.Color.Alpha);
 
-					backBuffer[iCanvasRowStart + iX] = mixColor.U32;
+					backBuffer[iCanvasRowStart + iX] = mixColor.U32 | 0xFF000000;
 				}
 			}
 		}
@@ -109,7 +109,7 @@ namespace FBDraw
 				uint32_t* pImgBuffer = &m_imageBuffer[(iY * m_width)];
 				for (int iX = 0; iX < m_width; iX++, pBackBuffer++, pImgBuffer++)
 				{
-					*pBackBuffer = *pImgBuffer;
+					*pBackBuffer = *pImgBuffer | 0xFF000000;
 				}
 			}
 		}

@@ -23,15 +23,25 @@ namespace FBDraw
 
 		virtual void 	Render(color32_t* backBuffer, int width, int height) override;
 
+		virtual bool	HitTest(Point pt)
+		{
+			return false; /* NOT YET IMPLEMENTED */
+		};
+
 		void 			SetColor(ARGB_Color color) { m_color = color; m_borderLine->SetColor(color); }
 		ARGB_Color 		GetColor() { return m_color; }
-
+		
 		void			SetThickness(int thickness) { m_thickness = thickness; }
 		int				GetThickness() { return m_thickness; }
+		Point			GetTopLeft() { return m_topLeft; }
+		int				GetWidth() { return m_width; }
+		int				GetHeight() { return m_height; }
 
 		void			SetTopLeft(Point topLeft) { m_topLeft = topLeft; }
 
-	private:
+
+	protected:
+
 		// Properties
 		int			m_height;
 		int			m_width;
@@ -40,6 +50,7 @@ namespace FBDraw
 		Point		m_topLeft;
 		Line*		m_borderLine;
 		ARGB_Color	m_color;
+
 	};
 
 }

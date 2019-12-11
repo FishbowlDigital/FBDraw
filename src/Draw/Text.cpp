@@ -4,6 +4,9 @@
 // Copyright Fishbowl Digital 2019
 //
 
+#include <string>
+
+#include "Point.h"
 #include "Text.h"
 #include "Image.h"
 #include "Macros.h"
@@ -19,6 +22,20 @@ namespace FBDraw
 		m_xPos = x;
 		m_yPos = y;
 		m_text = text;
+
+		Visible = true;
+	}
+
+	Text::Text(Font* pFont, Rectangle rectContainer, const char* text) 
+	{
+		m_font = pFont;
+		m_text = text;
+
+		int x = rectContainer.GetTopLeft().X + ((rectContainer.GetWidth() - ((strlen(text) * GetWidth()))) / 2);
+		int y = rectContainer.GetTopLeft().Y + ((rectContainer.GetHeight() - GetHeight()) / 2);
+
+		m_xPos = x;
+		m_yPos = y;
 
 		Visible = true;
 	}
@@ -92,7 +109,8 @@ namespace FBDraw
 							imgColor.U32 = charBuffer[iImageRowStart + iX];
 							backColor.U32 = backBuffer[iCanvasRowStart + iX];
 
-							uint8_t alpha = 0xFF - imgColor.Color.Alpha;	// CRAP!!! BACKWARDS!!!
+							//uint8_t alpha = 0xFF - imgColor.Color.Alpha;	// CRAP!!! BACKWARDS!!!
+							uint8_t alpha = imgColor.Color.Alpha;	// CRAP!!! BACKWARDS!!!
 							mixColor.Color.Red = AlphaMix8(backColor.Color.Red, imgColor.Color.Red, alpha);
 							mixColor.Color.Green = AlphaMix8(backColor.Color.Green, imgColor.Color.Green, alpha);
 							mixColor.Color.Blue = AlphaMix8(backColor.Color.Blue, imgColor.Color.Blue, alpha);

@@ -23,6 +23,11 @@ namespace FBDraw
 
 		virtual void Render(color32_t* backBuffer, int width, int height);
 
+		virtual bool	HitTest(Point pt)
+		{
+			return false; /* NOT YET IMPLEMENTED */
+		};
+
 		ARGB_Color GetColor();
 		int GetThickness();
 
