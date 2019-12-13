@@ -9,9 +9,17 @@
 
 #include "Types.h"
 #include "Point.h"
+//#include "Canvas.h"
+
 
 namespace FBDraw
 {
+	// Class prototypes
+	class Canvas;
+	class IDrawable;
+
+	// Event Definitions
+	typedef void (Canvas::*EventHandlerIDrawable)(IDrawable&);
 
 	class IDrawable
 	{
@@ -21,13 +29,23 @@ namespace FBDraw
 		virtual void Render(color32_t* backBuffer, int width, int height) = 0;
 
 		virtual bool HitTest(Point pt) = 0;
-		//virtual void TouchDown(Point pt) = 0;
-		//virtual void TouchUp(Point pt) = 0;
+		virtual void TouchDown(Point pt) { /* default is no implementation */ };
+		virtual void TouchUp(Point pt) { /* default is no implementation */ };
+
+		void		SetEventInvalidated(Canvas* canvas, EventHandlerIDrawable event);
+		void		ClearEventInvalidated(Canvas* canvas, EventHandlerIDrawable event);
 
 		// Properties
 		bool Visible;
 
-			};
+	protected:
+		// Events
+		EventHandlerIDrawable		m_eventInvalidated;
+		Canvas*						m_canvasInvalidateSubscriber;
+
+		// Event executors
+		void		Invalidate();
+	};
 
 }
 

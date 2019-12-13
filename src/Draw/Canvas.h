@@ -23,9 +23,15 @@ namespace FBDraw
 
 		//Add drawable
 		void 			AddDrawable(IDrawable* drawable);
+		void 			RemoveDrawable(IDrawable* drawable);
 
 		// Draw
 		virtual void 	Render();
+
+		// Interaction Events
+		virtual void	TouchDown(int x, int y);
+		virtual void	TouchUp(int x, int y);
+
 
 		// Configuration & Property Access
 		void			SetBackgroundColor(ARGB_Color color);
@@ -39,6 +45,9 @@ namespace FBDraw
 
 		color32_t*		GetBackBuffer();
 		color32_t*		GetFrontBuffer();
+
+	protected:
+		void			DrawableInvalidated(IDrawable& drawable);
 
 	protected:
 		// Dimensions

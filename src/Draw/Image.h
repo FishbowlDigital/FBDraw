@@ -34,8 +34,14 @@ namespace FBDraw
 
 		// properties
 		Point			Location() 				{ return m_location; }
+		void 			SetLocation(Point p)	{ m_location = p; }
+
 		int				Width()					{ return m_width; }
+		void 			SetWidth(int w)			{ m_width = w; }
+
 		int				Height()				{ return m_height; }
+		void 			SetHeight(int h)		{ m_height = h; }
+
 		color32_t*		ImageData()				{ return m_imageBuffer; }
 
 		void 			HasAlpha(bool hasit) 	{ m_bHasAlpha = hasit; }

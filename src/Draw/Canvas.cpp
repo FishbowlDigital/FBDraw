@@ -73,12 +73,19 @@ namespace FBDraw
 
 		// Add it to the list
 		m_drawables[m_numDrawables++] = drawable;
+		drawable->SetEventInvalidated(this, &Canvas::DrawableInvalidated);
+
 	}
+
+	void Canvas::RemoveDrawable(IDrawable* drawable)
+	{
+		
+	}
+
 
 	// Draw
 	void Canvas::Render()
 	{
-
 		// Check
 		if (m_backBuffer == NULL)
 			return;
@@ -87,8 +94,11 @@ namespace FBDraw
 		color32_t bColor = ARGBColorToU32(m_backgroundColor);
 
 		// TEMPORARILY DONT ERASE BACKGROUND!
-		if (m_eraseBackground)
+		if (true) //m_eraseBackground)
 		{
+			m_backBuffer = new color32_t[m_width * m_height];
+			m_frontBuffer = new color32_t[m_width * m_height];
+
 			int numPx = m_width * m_height;
 			for (int i = 0; i < numPx; i++)
 			{
@@ -102,8 +112,35 @@ namespace FBDraw
 			if (m_drawables[i]->Visible)
 				m_drawables[i]->Render(m_backBuffer, m_width, m_height);
 		}
-
 	}
+
+
+	void Canvas::TouchDown(int x, int y)
+	{
+		// Check for touch on IDrawables in scene, backwards for Z-order
+		for (int i = m_numDrawables-1; i >= 0; i--)
+		{
+			if (m_drawables[i]->Visible && 
+				m_drawables[i]->HitTest(Point(x, y)))
+			{
+				m_drawables[i]->TouchDown(Point(x, y));
+			}
+		}
+	}
+
+	void Canvas::TouchUp(int x, int y)
+	{
+		// Check for touch on IDrawables in scene, backwards for Z-order
+		for (int i = m_numDrawables - 1; i >= 0; i--)
+		{
+			if (m_drawables[i]->Visible &&
+				m_drawables[i]->HitTest(Point(x, y)))
+			{
+				m_drawables[i]->TouchUp(Point(x, y));
+			}
+		}
+	}
+
 
 	// Configuration & Property Access
 	void Canvas::SetBackgroundColor(ARGB_Color color)
@@ -140,6 +177,15 @@ namespace FBDraw
 
 		// Return it
 		return m_frontBuffer;
+	}
+
+	/////////////////////////////
+	// EVENTS
+
+	void Canvas::DrawableInvalidated(IDrawable& drawable)
+	{
+		// Simple re-draw for now
+		Render();
 	}
 
 }

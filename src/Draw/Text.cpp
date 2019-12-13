@@ -31,7 +31,7 @@ namespace FBDraw
 		m_font = pFont;
 		m_text = text;
 
-		int x = rectContainer.GetTopLeft().X + ((rectContainer.GetWidth() - ((strlen(text) * GetWidth()))) / 2);
+		int x = rectContainer.GetTopLeft().X + ((rectContainer.GetWidth() - GetWidth()) / 2);
 		int y = rectContainer.GetTopLeft().Y + ((rectContainer.GetHeight() - GetHeight()) / 2);
 
 		m_xPos = x;

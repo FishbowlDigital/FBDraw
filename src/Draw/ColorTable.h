@@ -30,6 +30,11 @@ namespace FBDraw
 			return false; /* NOT YET IMPLEMENTED */
 		};
 
+		virtual void	TouchDown(Point pt)
+		{
+			return; /* NOT YET IMPLEMENTED */
+		};
+
 	private:
 		// Properties
 		Point		m_location;
