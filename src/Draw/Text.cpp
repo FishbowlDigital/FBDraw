@@ -52,22 +52,32 @@ namespace FBDraw
 
 	int Text::GetWidth()
 	{
-		char c = m_text[0];
-		int iter = 0;
-
-		while (c != '\0')
+		if (m_font)
 		{
-			c = m_text[iter++];
+			char c = m_text[0];
+			int iter = 0;
+
+			while (c != '\0')
+			{
+				c = m_text[iter++];
+			}
+
+			iter--;
+
+			return (iter * m_font->Width() + iter * SPACE_BETWEEN_CHARACTERS);
 		}
 
-		iter--;
-
-		return (iter * m_font->Width() + iter * SPACE_BETWEEN_CHARACTERS);
+		return 0;
 	}
 
 	int Text::GetHeight()
 	{
-		return m_font->Height();
+		if (m_font)
+		{
+			return m_font->Height();
+		}
+
+		return 0;
 	}
 
 	void Text::Render(color32_t* backBuffer, int width, int height)

@@ -23,7 +23,7 @@ namespace FBDraw
 	}
 
 	// Copy constructor
-	Point::Point(Point& point)
+	Point::Point(const Point& point)
 	{
 		X = point.X;
 		Y = point.Y;

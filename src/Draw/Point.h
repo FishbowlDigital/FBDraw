@@ -16,7 +16,7 @@ namespace FBDraw
 		// Constructor/Destructor
 		Point();
 		Point(int x, int y);
-		Point(Point& point);
+		Point(const Point& point);
 
 		// Operators
 		Point operator=(const Point& point);
