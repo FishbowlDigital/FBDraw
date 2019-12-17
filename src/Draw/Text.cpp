@@ -22,6 +22,7 @@ namespace FBDraw
 		m_xPos = x;
 		m_yPos = y;
 		m_text = text;
+		m_color = ARGB_Color{ 0xFF, 0xFF, 0xFF, 0xFF };
 
 		Visible = true;
 	}
@@ -30,6 +31,7 @@ namespace FBDraw
 	{
 		m_font = pFont;
 		m_text = text;
+		m_color = ARGB_Color{ 0xFF, 0xFF, 0xFF, 0xFF };
 
 		int x = rectContainer.GetTopLeft().X + ((rectContainer.GetWidth() - GetWidth()) / 2);
 		int y = rectContainer.GetTopLeft().Y + ((rectContainer.GetHeight() - GetHeight()) / 2);
@@ -118,6 +120,11 @@ namespace FBDraw
 							ARGB_Bytes imgColor, backColor, mixColor;
 							imgColor.U32 = charBuffer[iImageRowStart + iX];
 							backColor.U32 = backBuffer[iCanvasRowStart + iX];
+
+							// Apply color to the font pixels which is grayscale
+							imgColor.Color.Red = (((uint16_t)m_color.Red) * imgColor.Color.Red) >> 8;
+							imgColor.Color.Green = (((uint16_t)m_color.Green) * imgColor.Color.Green) >> 8;
+							imgColor.Color.Blue = (((uint16_t)m_color.Blue) * imgColor.Color.Blue) >> 8;
 
 							//uint8_t alpha = 0xFF - imgColor.Color.Alpha;	// CRAP!!! BACKWARDS!!!
 							uint8_t alpha = imgColor.Color.Alpha;	// CRAP!!! BACKWARDS!!!

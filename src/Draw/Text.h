@@ -27,11 +27,13 @@ namespace FBDraw
 		int GetYPos()					{ return m_yPos; }
 		int GetWidth();
 		int GetHeight();
+		ARGB_Color GetColor()			{ return m_color; }
 
 		int SetXPos(int xPos)			{ m_xPos = xPos; }
 		int SetYPos(int yPos)			{ m_yPos = yPos; }
 		int SetText(const char* text)	{ m_text = text; }
-		
+		void SetColor(ARGB_Color color) { m_color = color; }
+
 		virtual void Render(color32_t* backBuffer, int width, int height);
 
 		virtual bool	HitTest(Point pt)
@@ -44,6 +46,8 @@ namespace FBDraw
 		int				m_xPos;
 		int				m_yPos;
 		const char*		m_text;
+
+		ARGB_Color		m_color;
 	};
 }
 
