@@ -58,15 +58,17 @@ namespace FBDraw
 		{
 			char c = m_text[0];
 			int iter = 0;
+			int width = 0;
 
 			while (c != '\0')
 			{
 				c = m_text[iter++];
+				width += m_font->CharWidth(c) + SPACE_BETWEEN_CHARACTERS;
 			}
 
 			iter--;
 
-			return (iter * m_font->Width() + iter * SPACE_BETWEEN_CHARACTERS);
+			return width;
 		}
 
 		return 0;
@@ -89,7 +91,6 @@ namespace FBDraw
 
 		int iter = 0;
 		int xPos = m_xPos;
-		int charWidth = m_font->Width();
 		int charHeight = m_font->Height();
 		char c = m_text[0];
 
@@ -100,6 +101,7 @@ namespace FBDraw
 		while (c != '\0')
 		{
 			int iCanvasStart = (m_yPos * width) + xPos;
+			int charWidth = m_font->CharWidth(c);
 
 			// Simple X bounds check
 			if ((xPos >= 0) && ((xPos + charWidth) < width))

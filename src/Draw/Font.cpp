@@ -11,34 +11,71 @@ namespace FBDraw
 	// Constructor
 	Font::Font(color32_t* fontBuf, int w, int h)
 	{
-		m_buffer = fontBuf;
-		m_width = w;
-		m_height = h;
+
+		m_fontDesc.ImageBuffer = fontBuf;
+		m_fontDesc.Height = h;
 		m_startChar = (char)32;  // ' ' space char, 32-126 are all typeable chars
 		m_endChar = (char)126;	// '~' tilda char
 
-		m_cpyBuffer = m_buffer;
-
 		InitializeFontTable();
+
+		// Init width and offset tables
+		m_widthTable = new int[CHARACTER_COUNT];
+		m_offsetTable = new int[CHARACTER_COUNT];
+		for (int i = 0; i < CHARACTER_COUNT; i++)
+		{
+			m_widthTable[i] = w;		// monospaced
+			m_offsetTable[i] = i * w * h * sizeof(color32_t);
+		}
+
+		m_fontDesc.WidthTable = m_widthTable;
+		m_fontDesc.OffsetTable = m_offsetTable;
+
 	}
 
 	Font::Font(color32_t* fontBuf, int w, int h, char start, char end)
 	{
-		m_buffer = fontBuf;
-		m_width = w;
-		m_height = h;
+		m_fontDesc.ImageBuffer = fontBuf;
+		m_fontDesc.Height = h;
 		m_startChar = start;
 		m_endChar = end;
 
-		m_cpyBuffer = m_buffer;
 
 		InitializeFontTable();
+
+		// Init width and offset tables
+		m_widthTable = new int[CHARACTER_COUNT];
+		m_offsetTable = new int[CHARACTER_COUNT];
+		for (int i = 0; i < CHARACTER_COUNT; i++)
+		{
+			m_widthTable[i] = w;		// monospaced
+			m_offsetTable[i] = i * w * h * sizeof(color32_t);
+		}
+
+		m_fontDesc.WidthTable = m_widthTable;
+		m_fontDesc.OffsetTable = m_offsetTable;
 	}
+	
+	Font::Font(FontDescriptor desc)
+	{
+		m_fontDesc = desc;
+		m_startChar = (char)32;  // ' ' space char, 32-126 are all typeable chars
+		m_endChar = 126;	// '~' tilda char
+
+		InitializeFontTable();
+		m_widthTable = NULL;
+		m_offsetTable = NULL;
+
+	}
+
 
 	Font::~Font()
 	{
-		if (m_buffer != NULL)
-			delete m_buffer;
+		if (m_widthTable != NULL)
+			delete m_widthTable;
+
+		if (m_offsetTable != NULL)
+			delete m_offsetTable;
 	}
 
 	void Font::InitializeFontTable()
@@ -66,13 +103,15 @@ namespace FBDraw
 
 	color32_t* Font::GetCharImage(char c)
 	{
+		uint32_t* imgbuf = (color32_t*) m_fontDesc.ImageBuffer;
 		int index = GetCharIndex(c);
 		if (index >= 0)
 		{
 			if (index >= (int)m_startChar && index <= (int)m_endChar)
 			{
 				index -= (int)m_startChar;
-				return &m_buffer[m_width * m_height * index];
+
+				return &imgbuf[m_fontDesc.OffsetTable[index] >> 2];	// divide by 4 (sizeof color32_t) as offsets are in bytes
 			}
 		}
 
