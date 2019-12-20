@@ -8,7 +8,6 @@
 #define _TEXT_H
 
 #include "IDrawable.h"
-#include "Rectangle.h"
 
 #include "Font.h"
 
@@ -19,7 +18,7 @@ namespace FBDraw
 	public:
 		// Constructor/Destructor
 		Text(Font* pFont, int x, int y, const char* text);
-		Text(Font* pFont, Rectangle rect, const char* text);
+		Text(Font* pFont, int x, int y, int containerWidth, int containerHeight, const char* text);
 		~Text();
 
 		//Properties
@@ -36,7 +35,7 @@ namespace FBDraw
 
 		virtual void Render(color32_t* backBuffer, int width, int height);
 
-		virtual bool	HitTest(Point pt)
+		virtual bool	HitTest(int x, int y)
 		{
 			return false; /* NOT YET IMPLEMENTED */
 		};
@@ -46,6 +45,9 @@ namespace FBDraw
 		int				m_xPos;
 		int				m_yPos;
 		const char*		m_text;
+
+		int				m_width;
+		int				m_height;
 
 		ARGB_Color		m_color;
 	};

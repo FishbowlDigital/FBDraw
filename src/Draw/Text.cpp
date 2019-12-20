@@ -27,17 +27,17 @@ namespace FBDraw
 		Visible = true;
 	}
 
-	Text::Text(Font* pFont, Rectangle rectContainer, const char* text) 
+	Text::Text(Font* pFont, int x, int y, int containerWidth, int containerHeight, const char* text)
 	{
 		m_font = pFont;
 		m_text = text;
-		m_color = ARGB_Color{ 0xFF, 0xFF, 0xFF, 0xFF };
 
-		int x = rectContainer.GetTopLeft().X + ((rectContainer.GetWidth() - GetWidth()) / 2);
-		int y = rectContainer.GetTopLeft().Y + ((rectContainer.GetHeight() - GetHeight()) / 2);
+		// Bounding area
+		m_width = containerWidth;
+		m_height = containerHeight;
 
-		m_xPos = x;
-		m_yPos = y;
+		m_xPos = x + ((m_width - GetWidth()) / 2);
+		m_yPos = y + ((m_height - GetHeight()) / 2);
 
 		Visible = true;
 	}
@@ -45,8 +45,6 @@ namespace FBDraw
 	// Destructor
 	Text::~Text()
 	{
-		//if (m_font != NULL)
-		//	delete m_font;
 
 		//if (m_text != NULL)
 		//	delete m_text;

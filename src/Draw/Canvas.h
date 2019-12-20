@@ -18,6 +18,7 @@ namespace FBDraw
 	public:
 		// Constructor/Destructor
 		Canvas(int width, int height);
+		Canvas(int width, int height, color32_t* backbuffer);
 		Canvas(int width, int height, ARGB_Color backgroundColor);
 		~Canvas();
 

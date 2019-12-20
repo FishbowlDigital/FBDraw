@@ -28,9 +28,9 @@ namespace FBDraw
 
 		virtual void Render(color32_t* backBuffer, int width, int height) = 0;
 
-		virtual bool HitTest(Point pt) = 0;
-		virtual void TouchDown(Point pt) { /* default is no implementation */ };
-		virtual void TouchUp(Point pt) { /* default is no implementation */ };
+		virtual bool HitTest(int x, int y) = 0;
+		virtual void TouchDown(int x, int y) { /* default is no implementation */ };
+		virtual void TouchUp(int x, int y) { /* default is no implementation */ };
 
 		void		SetEventInvalidated(Canvas* canvas, EventHandlerIDrawable event);
 		void		ClearEventInvalidated(Canvas* canvas, EventHandlerIDrawable event);

@@ -15,10 +15,16 @@ namespace FBDraw
 {
 
 	// Constructor/Destructor
-	Canvas::Canvas(int width, int height)
+	Canvas::Canvas(int width, int height) :
+		Canvas(width, height, new color32_t[width*height])
+	{
+		// Default constructor ok
+	}
+
+	Canvas::Canvas(int width, int height, color32_t* backbuffer)
 	{
 		// Create the backbuffer
-		m_backBuffer = new color32_t[width * height];
+		m_backBuffer = backbuffer;
 		m_frontBuffer = new color32_t[width * height];
 
 		// Store configuration
@@ -31,7 +37,7 @@ namespace FBDraw
 		// Initialize the array of drawables
 		m_numDrawables = 0;
 		m_maxDrawables = DEFAULT_MAX_DRAWABLES;
-		m_drawables = new IDrawable*[DEFAULT_MAX_DRAWABLES];
+		m_drawables = new IDrawable * [DEFAULT_MAX_DRAWABLES];
 
 		// Default property values
 		m_eraseBackground = false;
@@ -74,14 +80,12 @@ namespace FBDraw
 		// Add it to the list
 		m_drawables[m_numDrawables++] = drawable;
 		drawable->SetEventInvalidated(this, &Canvas::DrawableInvalidated);
-
 	}
 
 	void Canvas::RemoveDrawable(IDrawable* drawable)
 	{
 		
 	}
-
 
 	// Draw
 	void Canvas::Render()
@@ -93,12 +97,8 @@ namespace FBDraw
 		// Draw background
 		color32_t bColor = ARGBColorToU32(m_backgroundColor);
 
-		// TEMPORARILY DONT ERASE BACKGROUND!
-		if (true) //m_eraseBackground)
+		if (m_eraseBackground)
 		{
-			m_backBuffer = new color32_t[m_width * m_height];
-			m_frontBuffer = new color32_t[m_width * m_height];
-
 			int numPx = m_width * m_height;
 			for (int i = 0; i < numPx; i++)
 			{
@@ -121,9 +121,9 @@ namespace FBDraw
 		for (int i = m_numDrawables-1; i >= 0; i--)
 		{
 			if (m_drawables[i]->Visible && 
-				m_drawables[i]->HitTest(Point(x, y)))
+				m_drawables[i]->HitTest(x, y))
 			{
-				m_drawables[i]->TouchDown(Point(x, y));
+				m_drawables[i]->TouchDown(x, y);
 			}
 		}
 	}
@@ -134,9 +134,9 @@ namespace FBDraw
 		for (int i = m_numDrawables - 1; i >= 0; i--)
 		{
 			if (m_drawables[i]->Visible &&
-				m_drawables[i]->HitTest(Point(x, y)))
+				m_drawables[i]->HitTest(x, y))
 			{
-				m_drawables[i]->TouchUp(Point(x, y));
+				m_drawables[i]->TouchUp(x, y);
 			}
 		}
 	}
