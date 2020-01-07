@@ -12,17 +12,6 @@ namespace FBDraw
 {
 
 	// Constructor
-	Line::Line()
-	{
-		m_p1 = Point{ 0,0 };
-		m_p2 = Point{ 0,0 };
-		m_thickness = 0; //Minimum thickness
-		m_lineColor = { 0xff, 0xff, 0xff, 0xff };
-
-		// Default is Visible
-		Visible = true;
-	}
-
 	Line::Line(Point p1, Point p2, ARGB_Color lineColor)
 	{
 		m_p1 = p1;

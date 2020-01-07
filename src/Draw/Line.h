@@ -18,7 +18,6 @@ namespace FBDraw
 	public:
 
 		// Constructor/Destructor
-		Line();
 		Line(Point p1, Point p2, ARGB_Color lineColor);
 		Line(Point p1, Point p2, ARGB_Color lineColor, int thickness);
 

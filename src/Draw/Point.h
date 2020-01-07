@@ -24,6 +24,11 @@ namespace FBDraw
 		// Properties
 		int		X;
 		int		Y;
+
+		Point Offset(int x, int y) 
+		{
+			return Point(this->X + x, this->Y + y);
+		}
 	};
 
 }
