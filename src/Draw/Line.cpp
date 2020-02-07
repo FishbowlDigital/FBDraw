@@ -98,6 +98,12 @@ namespace FBDraw
 		m_p2.Y = y;
 	}
 
+	void Line::SetLocation(Point pt1, Point pt2)
+	{
+		m_p1 = pt1;
+		m_p2 = pt2;
+	}
+
 	void Line::SetColor(ARGB_Color Color)
 	{
 		m_lineColor = Color;

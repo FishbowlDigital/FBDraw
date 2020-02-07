@@ -34,6 +34,7 @@ namespace FBDraw
 		void SetPoint1(int x, int y);
 		void SetPoint2(Point p2);
 		void SetPoint2(int x, int y);
+		void SetLocation(Point pt1, Point pt2);
 		void SetColor(ARGB_Color color);
 		void SetThickness(int thickness);
 
