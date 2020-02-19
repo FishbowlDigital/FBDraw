@@ -28,9 +28,9 @@ namespace FBDraw
 		int GetHeight();
 		ARGB_Color GetColor()			{ return m_color; }
 
-		int SetXPos(int xPos)			{ m_xPos = xPos; }
-		int SetYPos(int yPos)			{ m_yPos = yPos; }
-		int SetText(const char* text)	{ m_text = text; }
+		void SetXPos(int xPos)			{ m_xPos = xPos; }
+		void SetYPos(int yPos)			{ m_yPos = yPos; }
+		void SetText(const char* text)	{ m_text = text; }
 		void SetColor(ARGB_Color color) { m_color = color; }
 
 		virtual void Render(color32_t* backBuffer, int width, int height);

@@ -15,11 +15,11 @@ namespace FBDraw
 {
 	typedef struct
 	{
-		int Height = 0;								// Height of all characters
+		int Height;								// Height of all characters
 		int* WidthTable;							// Contains the width of each individual character
 		int* OffsetTable;							// Contains 32-bit word offset into ImageBuffer for the individual image of each character
 
-		void* ImageBuffer = NULL;				// Contains concatenated images of characters in grayscale
+		void* ImageBuffer;				// Contains concatenated images of characters in grayscale
 
 	} FontDescriptor;
 
