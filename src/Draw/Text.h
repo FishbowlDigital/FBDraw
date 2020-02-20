@@ -30,8 +30,8 @@ namespace FBDraw
 
 		void SetXPos(int xPos)			{ m_xPos = xPos; }
 		void SetYPos(int yPos)			{ m_yPos = yPos; }
-		void SetText(const char* text)	{ m_text = text; }
-		void SetColor(ARGB_Color color) { m_color = color; }
+		void SetColor(ARGB_Color color);
+		void SetText(const char* text);
 
 		virtual void Render(color32_t* backBuffer, int width, int height);
 
@@ -44,7 +44,8 @@ namespace FBDraw
 		Font*			m_font;
 		int				m_xPos;
 		int				m_yPos;
-		const char*		m_text;
+		char*			m_text;
+		int				m_lenText;
 
 		int				m_width;
 		int				m_height;

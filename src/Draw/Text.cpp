@@ -4,7 +4,7 @@
 // Copyright Fishbowl Digital 2019
 //
 
-#include <string>
+#include <string.h>
 
 #include "Point.h"
 #include "Text.h"
@@ -21,8 +21,11 @@ namespace FBDraw
 		m_font = pFont;
 		m_xPos = x;
 		m_yPos = y;
-		m_text = text;
 		m_color = ARGB_Color{ 0xFF, 0xFF, 0xFF, 0xFF };
+
+		m_lenText = 0;
+		m_text = new char[1];
+		SetText(text);
 
 		Visible = true;
 	}
@@ -30,14 +33,19 @@ namespace FBDraw
 	Text::Text(Font* pFont, int x, int y, int containerWidth, int containerHeight, const char* text)
 	{
 		m_font = pFont;
-		m_text = text;
 
 		// Bounding area
 		m_width = containerWidth;
 		m_height = containerHeight;
 
+		m_lenText = 0;
+		m_text = new char[1];
+		SetText(text);
+
+		// Center justified
 		m_xPos = x + ((m_width - GetWidth()) / 2);
 		m_yPos = y + ((m_height - GetHeight()) / 2);
+
 
 		Visible = true;
 	}
@@ -82,6 +90,27 @@ namespace FBDraw
 		return 0;
 	}
 
+	void Text::SetColor(ARGB_Color color)
+	{
+		m_color = color;
+	}
+
+	void Text::SetText(const char* text)
+	{
+		int len = strlen(text);
+		if (len > m_lenText)	// reallocate larger string?
+		{
+
+			delete m_text;
+			m_text = new char[len+1];
+			m_lenText = len;
+		}
+
+		// Copy
+		strcpy(m_text, text);
+	}
+
+
 	void Text::Render(color32_t* backBuffer, int width, int height)
 	{
 		if (m_font == NULL)
@@ -108,7 +137,6 @@ namespace FBDraw
 
 				if (charBuffer != NULL)
 				{
-					ARGB_Color mixBGRA = ARGB_Color{ 0x00, 0x00, 0x00, 0x00 };
 					for (int iY = 0; iY < charHeight; iY++)
 					{
 						int iCanvasRowStart = iCanvasStart + (iY * width);
@@ -126,8 +154,7 @@ namespace FBDraw
 							imgColor.Color.Green = (((uint16_t)m_color.Green) * imgColor.Color.Green) >> 8;
 							imgColor.Color.Blue = (((uint16_t)m_color.Blue) * imgColor.Color.Blue) >> 8;
 
-							//uint8_t alpha = 0xFF - imgColor.Color.Alpha;	// CRAP!!! BACKWARDS!!!
-							uint8_t alpha = imgColor.Color.Alpha;	// CRAP!!! BACKWARDS!!!
+							uint8_t alpha = imgColor.Color.Alpha;
 							mixColor.Color.Red = AlphaMix8(backColor.Color.Red, imgColor.Color.Red, alpha);
 							mixColor.Color.Green = AlphaMix8(backColor.Color.Green, imgColor.Color.Green, alpha);
 							mixColor.Color.Blue = AlphaMix8(backColor.Color.Blue, imgColor.Color.Blue, alpha);
