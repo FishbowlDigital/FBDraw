@@ -5,6 +5,7 @@
 //
 
 #include <string.h>
+#include <stdio.h>
 
 #include "Point.h"
 #include "Text.h"
@@ -16,36 +17,52 @@
 namespace FBDraw
 {
 	// Constructor
-	Text::Text(Font* pFont, int x, int y, const char* text)
+	Text::Text(Font* pFont, int x, int y, const char* text, TextJustification position/* = JUSTIFIED_CENTER*/)
 	{
 		m_font = pFont;
 		m_xPos = x;
 		m_yPos = y;
 		m_color = ARGB_Color{ 0xFF, 0xFF, 0xFF, 0xFF };
 
-		m_lenText = 0;
+		m_width = 0;	//Initialize to 0. Will be set in SetText()
+		m_height = 0;	//Initialize to 0. Will be set in SetText()
+
 		m_text = new char[1];
+
+
+		m_textJustification = position;
+
+		m_lenText = 0;
+		m_text = '\0';
 		SetText(text);
+
+		//Center Justified on Height.
+		m_yPos = y + ((m_height - GetHeight()) / 2);
 
 		Visible = true;
 	}
 
-	Text::Text(Font* pFont, int x, int y, int containerWidth, int containerHeight, const char* text)
+	Text::Text(Font* pFont, int x, int y, int containerWidth, int containerHeight, const char* text, TextJustification position /*= JUSTIFIED_CENTER*/)
 	{
 		m_font = pFont;
+
+		m_xPos = x;
+		m_yPos = y;
 
 		// Bounding area
 		m_width = containerWidth;
 		m_height = containerHeight;
 
-		m_lenText = 0;
-		m_text = new char[1];
-		SetText(text);
-
-		// Center justified
-		m_xPos = x + ((m_width - GetWidth()) / 2);
+		//Center Justified on Height.
 		m_yPos = y + ((m_height - GetHeight()) / 2);
 
+		m_text = new char[1];
+
+		m_textJustification = position;
+
+		m_lenText = 0;
+		m_text = '\0';
+		SetText(text);
 
 		Visible = true;
 	}
@@ -98,18 +115,48 @@ namespace FBDraw
 	void Text::SetText(const char* text)
 	{
 		int len = strlen(text);
+
 		if (len > m_lenText)	// reallocate larger string?
 		{
-
 			delete m_text;
 			m_text = new char[len+1];
 			m_lenText = len;
 		}
 
-		// Copy
+		//Copy
 		strcpy(m_text, text);
+
+		if(m_width == 0)
+		{
+			m_width = GetWidth();
+			m_height = m_yPos + GetWidth();
+		}
+
+
+		//This is where the Justification happens
+		switch(m_textJustification)
+		{
+		case JUSTIFIED_LEFT:
+			m_textPosX = m_xPos;
+			break;
+
+		case JUSTIFIED_CENTER:
+			m_textPosX = m_xPos + ((m_width - GetWidth()) / 2);
+			break;
+
+		case JUSTIFIED_RIGHT:
+			m_textPosX = m_xPos + m_width - GetWidth();
+			break;
+		}
+
+
 	}
 
+	void Text::SetJustification(TextJustification position)
+	{
+		m_textJustification = position;
+		SetText(m_text);
+	}
 
 	void Text::Render(color32_t* backBuffer, int width, int height)
 	{
@@ -117,7 +164,7 @@ namespace FBDraw
 			return;
 
 		int iter = 0;
-		int xPos = m_xPos;
+		int xPos = m_textPosX;
 		int charHeight = m_font->Height();
 		char c = m_text[0];
 
