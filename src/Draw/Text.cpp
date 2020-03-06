@@ -36,9 +36,6 @@ namespace FBDraw
 		m_text = '\0';
 		SetText(text);
 
-		//Center Justified on Height.
-		m_yPos = y + ((m_height - GetHeight()) / 2);
-
 		Visible = true;
 	}
 
@@ -52,9 +49,6 @@ namespace FBDraw
 		// Bounding area
 		m_width = containerWidth;
 		m_height = containerHeight;
-
-		//Center Justified on Height.
-		m_yPos = y + ((m_height - GetHeight()) / 2);
 
 		m_text = new char[1];
 
