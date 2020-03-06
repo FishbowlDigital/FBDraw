@@ -16,9 +16,9 @@ namespace FBDraw
 
 	typedef enum
 	{
-		JUSTIFIED_LEFT,
-		JUSTIFIED_CENTER,
-		JUSTIFIED_RIGHT,
+		TEXTALIGN_LEFT,
+		TEXTALIGN_CENTER,
+		TEXTALIGN_RIGHT,
 	}TextJustification;
 
 
@@ -26,8 +26,8 @@ namespace FBDraw
 	{
 	public:
 		// Constructor/Destructor
-		Text(Font* pFont, int x, int y, const char* text = "\0", TextJustification position = JUSTIFIED_CENTER);
-		Text(Font* pFont, int x, int y, int containerWidth, int containerHeight, const char* text = "\0", TextJustification position = JUSTIFIED_CENTER);
+		Text(Font* pFont, int x, int y, const char* text = "\0", TextJustification align = TEXTALIGN_CENTER);
+		Text(Font* pFont, int x, int y, int containerWidth, int containerHeight, const char* text = "\0", TextJustification align = TEXTALIGN_CENTER);
 		~Text();
 
 		//Properties
@@ -42,8 +42,8 @@ namespace FBDraw
 		void SetColor(ARGB_Color color);
 		void SetText(const char* text);
 
-		void 				SetJustification(TextJustification position);
-		TextJustification 	GetJustification() { return m_textJustification; }
+		void 				SetAlignment(TextJustification align);
+		TextJustification 	GetAlignment() { return m_alignment; }
 
 		virtual void Render(color32_t* backBuffer, int width, int height);
 
@@ -66,7 +66,7 @@ namespace FBDraw
 
 		ARGB_Color		m_color;
 
-		TextJustification   m_textJustification;			// Contains the left/center/right Justification for the text.
+		TextJustification   m_alignment;			// Contains the left/center/right Justification for the text.
 	};
 }
 

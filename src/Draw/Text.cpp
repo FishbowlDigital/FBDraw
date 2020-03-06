@@ -17,7 +17,7 @@
 namespace FBDraw
 {
 	// Constructor
-	Text::Text(Font* pFont, int x, int y, const char* text, TextJustification position/* = JUSTIFIED_CENTER*/)
+	Text::Text(Font* pFont, int x, int y, const char* text, TextJustification align/* = TEXTALIGN_CENTER*/)
 	{
 		m_font = pFont;
 		m_xPos = x;
@@ -30,7 +30,7 @@ namespace FBDraw
 		m_text = new char[1];
 
 
-		m_textJustification = position;
+		m_alignment = align;
 
 		m_lenText = 0;
 		m_text = '\0';
@@ -42,7 +42,7 @@ namespace FBDraw
 		Visible = true;
 	}
 
-	Text::Text(Font* pFont, int x, int y, int containerWidth, int containerHeight, const char* text, TextJustification position /*= JUSTIFIED_CENTER*/)
+	Text::Text(Font* pFont, int x, int y, int containerWidth, int containerHeight, const char* text, TextJustification align /*= TEXTALIGN_CENTER*/)
 	{
 		m_font = pFont;
 
@@ -58,7 +58,7 @@ namespace FBDraw
 
 		m_text = new char[1];
 
-		m_textJustification = position;
+		m_alignment = align;
 
 		m_lenText = 0;
 		m_text = '\0';
@@ -134,17 +134,17 @@ namespace FBDraw
 
 
 		//This is where the Justification happens
-		switch(m_textJustification)
+		switch(m_alignment)
 		{
-		case JUSTIFIED_LEFT:
+		case TEXTALIGN_LEFT:
 			m_textPosX = m_xPos;
 			break;
 
-		case JUSTIFIED_CENTER:
+		case TEXTALIGN_CENTER:
 			m_textPosX = m_xPos + ((m_width - GetWidth()) / 2);
 			break;
 
-		case JUSTIFIED_RIGHT:
+		case TEXTALIGN_RIGHT:
 			m_textPosX = m_xPos + m_width - GetWidth();
 			break;
 		}
@@ -152,9 +152,9 @@ namespace FBDraw
 
 	}
 
-	void Text::SetJustification(TextJustification position)
+	void Text::SetAlignment(TextJustification align)
 	{
-		m_textJustification = position;
+		m_alignment = align;
 		SetText(m_text);
 	}
 
