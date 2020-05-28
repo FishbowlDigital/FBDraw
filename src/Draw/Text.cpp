@@ -29,11 +29,12 @@ namespace FBDraw
 
 		m_text = new char[1];
 
-
 		m_alignment = align;
 
+		//Center Justified on Height.
+		m_yPos = y + ((m_height - GetHeight()) / 2);
+
 		m_lenText = 0;
-		m_text = '\0';
 		SetText(text);
 
 		Visible = true;
@@ -54,8 +55,10 @@ namespace FBDraw
 
 		m_alignment = align;
 
+		//Center Justified on Height.
+		m_yPos = y + ((m_height - GetHeight()) / 2);
+
 		m_lenText = 0;
-		m_text = '\0';
 		SetText(text);
 
 		Visible = true;
