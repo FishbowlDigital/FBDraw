@@ -27,10 +27,7 @@ namespace FBDraw
 
 		virtual void 	Render(color32_t* backBuffer, int width, int height);
 
-		virtual bool	HitTest(int x, int y)
-		{
-			return false; /* NOT YET IMPLEMENTED */
-		};
+		virtual bool	HitTest(int x, int y);
 
 		// properties
 		Point			Location() 				{ return m_location; }

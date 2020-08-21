@@ -115,4 +115,11 @@ namespace FBDraw
 		}
 	}
 
+	bool Image::HitTest(int x, int y)
+	{
+	        return  x > m_location.X &&
+	                        x < (m_location.X+m_width) &&
+	                        y > m_location.Y &&
+	                        y < (m_location.Y+m_height);
+	}
 }
