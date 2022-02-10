@@ -32,6 +32,9 @@ namespace FBDraw
 		m_height = h;
 		m_LUT = new ColorLUT(0, 256);
 
+		m_invWidth = 1.0f / m_width;
+		m_invHeight = 1.0f / m_height;
+
 		m_border = new Rectangle(m_location, m_width, m_height, false, 2, ARGB_Color{ 0xFF, 0xFF, 0xFF, 0xCF });
 
 		// Default is Visible
@@ -40,6 +43,9 @@ namespace FBDraw
 
 	ColorTable::~ColorTable()
 	{
+		if (m_LUT != NULL)
+			delete m_LUT;
+
 		if (m_border != NULL)
 			delete m_border;
 	}
@@ -67,7 +73,7 @@ namespace FBDraw
 
 		m_border->Render(backBuffer, width, height);
 
-		for (int iY = yStart; iY < yEnd; iY++)
+		for (int iY = yStart; iY <= yEnd; iY++)
 		{
 			for (int iX = xStart; iX < xEnd; iX++)
 			{
@@ -78,7 +84,7 @@ namespace FBDraw
 				//backBuffer[((yEnd-iY) * width) + iX] = color.U32;
 
 				//Uncomment for alpha mixing
-				int iBack = ((yEnd-iY) * width) + iX;
+				int iBack = ((yEnd - iY + yStart) * width) + iX;
 				backColor.U32 = backBuffer[iBack];
 				mixColor.Color.Red = AlphaMix8(backColor.Color.Red, color.Color.Red, color.Color.Alpha);
 				mixColor.Color.Green = AlphaMix8(backColor.Color.Green, color.Color.Green, color.Color.Alpha);
