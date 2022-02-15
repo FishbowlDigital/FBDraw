@@ -44,7 +44,7 @@ namespace FBDraw
 		void 			HasAlpha(bool hasit) 	{ m_bHasAlpha = hasit; }
 		bool 			HasAlpha()				{ return m_bHasAlpha; }
 
-	private:
+	protected:
 		// Properties
 		Point		m_location;
 		int			m_height;

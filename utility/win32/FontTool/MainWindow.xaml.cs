@@ -53,7 +53,7 @@ namespace FontTool
             if (m_cbFont.SelectedValue != null)
             {
                 m_ctrlFontPreview.Family = m_cbFont.SelectedValue.ToString();
-                m_ctrlFontPreview.Size = (int)(m_cbFontSize.SelectedValue != null ? m_cbFontSize.SelectedValue : 16);
+                m_ctrlFontPreview.Size = (double)(m_cbFontSize.SelectedValue != null ? m_cbFontSize.SelectedValue : 16);
                 m_lblFontInfo.Text = m_ctrlFontPreview.FontDescription;
             }
         }
@@ -61,7 +61,7 @@ namespace FontTool
         private void Window_ContentRendered(object sender, EventArgs e)
         {
             m_ctrlFontPreview.Family = m_cbFont.SelectedValue.ToString();
-            m_ctrlFontPreview.Size = (int)(m_cbFontSize.SelectedValue != null ? m_cbFontSize.SelectedValue : 16);
+            m_ctrlFontPreview.Size = (double)(m_cbFontSize.SelectedValue != null ? m_cbFontSize.SelectedValue : 16);
             m_lblFontInfo.Text = m_ctrlFontPreview.FontDescription;
         }
 

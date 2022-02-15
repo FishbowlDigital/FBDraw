@@ -53,6 +53,11 @@ namespace FontTool
                 InvalidateVisual();
             }
         }
+
+        public FontStyle FontStyle { get; set; } = FontStyles.Normal;
+
+        public FontWeight FontWeight { get; set; } = FontWeights.Normal;
+
         public PixelFormat PxFormat
         {
             get { return m_pxFmt; }
@@ -107,7 +112,8 @@ namespace FontTool
             drawingContext.DrawRectangle(Brushes.Black, pen, new Rect(this.RenderSize));
 
             // Settings
-            Typeface face = new Typeface(Family);
+            FontFamily family = new FontFamily(Family);
+            Typeface face = new Typeface(family, FontStyle, FontWeight, FontStretches.Normal);
 
             // Calculate Width - use 'I' so it's obvious if this font isn't monospaced
             FormattedText sample = new FormattedText("I", System.Globalization.CultureInfo.CurrentCulture, System.Windows.FlowDirection.LeftToRight, face, Size, Brushes.White);
