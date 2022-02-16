@@ -24,7 +24,6 @@ namespace FBDraw
 		// Default is Visible
 		Visible = true;
 	}
-
 	ColorTable::ColorTable(Point loc, int w, int h)
 	{
 		m_location = loc;
@@ -40,7 +39,6 @@ namespace FBDraw
 		// Default is Visible
 		Visible = true;
 	}
-
 	ColorTable::~ColorTable()
 	{
 		if (m_LUT != NULL)
@@ -54,12 +52,32 @@ namespace FBDraw
 	{
 		//Not Yet implemented
 	}
-
 	ARGB_Bytes ColorTable::GetColor(int value)
 	{
 		return m_LUT->GetColor(value);
 	}
 
+	void ColorTable::SetBorderColor(ARGB_Color color)
+	{
+		m_border->SetColor(color);
+
+		Invalidate();
+	}
+	ARGB_Color ColorTable::GetBorderColor()
+	{
+		return m_border->GetColor();
+	}
+
+	void ColorTable::SetBorderThickness(int thickness)
+	{
+		m_border->SetThickness(thickness);
+
+		Invalidate();
+	}
+	int ColorTable::GetBorderThickness()
+	{
+		return m_border->GetThickness();
+	}
 
 	void ColorTable::Render(color32_t* backBuffer, int width, int height)
 	{

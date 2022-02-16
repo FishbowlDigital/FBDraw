@@ -9,7 +9,11 @@
 
 namespace FBDraw
 {
-
+	IDrawable::IDrawable()
+	{
+		m_canvasInvalidateSubscriber = NULL;
+		m_eventInvalidated = NULL;
+	}
 	IDrawable::~IDrawable()
 	{
 		// Does nothing

@@ -23,7 +23,7 @@ namespace FBDraw
 
 	class IDrawable
 	{
-	public:
+	public:		
 		virtual ~IDrawable();
 
 		virtual void Render(color32_t* backBuffer, int width, int height) = 0;
@@ -37,6 +37,9 @@ namespace FBDraw
 
 		// Properties
 		bool Visible;
+
+	protected:
+		IDrawable();
 
 	protected:
 		// Events

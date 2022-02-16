@@ -39,21 +39,23 @@ namespace FontTool
             LoadFonts();
  
             // Available font sizes
-            for (int i = 8; i <= 64; i += 2)
+            for (double i = 8; i <= 64; i += .5)
             {
                 m_cbFontSize.Items.Add(i);
             }
 
             m_cbFont.SelectedValue = m_cbFont.Items[0];
             m_cbFontSize.SelectedValue = 16;
+
+            m_ctrlFontPreview.FontWeight = FontWeights.Bold;
         }
 
         private void m_cbFont_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (m_cbFont.SelectedValue != null)
+            if (m_cbFont.SelectedValue != null && m_cbFontSize.SelectedValue != null)
             {
                 m_ctrlFontPreview.Family = m_cbFont.SelectedValue.ToString();
-                m_ctrlFontPreview.Size = (double)(m_cbFontSize.SelectedValue != null ? m_cbFontSize.SelectedValue : 16);
+                m_ctrlFontPreview.Size = m_cbFontSize.SelectedValue != null ? Convert.ToDouble(m_cbFontSize.SelectedValue) : 16;
                 m_lblFontInfo.Text = m_ctrlFontPreview.FontDescription;
             }
         }
@@ -61,7 +63,7 @@ namespace FontTool
         private void Window_ContentRendered(object sender, EventArgs e)
         {
             m_ctrlFontPreview.Family = m_cbFont.SelectedValue.ToString();
-            m_ctrlFontPreview.Size = (double)(m_cbFontSize.SelectedValue != null ? m_cbFontSize.SelectedValue : 16);
+            m_ctrlFontPreview.Size = m_cbFontSize.SelectedValue != null ? Convert.ToDouble(m_cbFontSize.SelectedValue) : 16;
             m_lblFontInfo.Text = m_ctrlFontPreview.FontDescription;
         }
 

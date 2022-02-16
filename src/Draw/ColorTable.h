@@ -23,6 +23,12 @@ namespace FBDraw
 		void SetColorTable(ARGB_Bytes colors);
 		ARGB_Bytes GetColor(int value);
 
+		void SetBorderColor(ARGB_Color color);
+		ARGB_Color GetBorderColor();
+
+		void SetBorderThickness(int thickness);
+		int GetBorderThickness();
+
 		virtual void Render(color32_t* backBuffer, int width, int height);
 
 		virtual bool HitTest(int x, int y)
