@@ -19,13 +19,17 @@ namespace FBDraw
 	public:
 		Rectangle(Point topLeft, int width, int height, bool fill, ARGB_Color color);
 		Rectangle(Point topLeft, int width, int height, bool fill, int thickness, ARGB_Color color);
+		Rectangle(Point topLeft, int width, int height, bool fill, int thickness, int radius, ARGB_Color color);
+		Rectangle(int x, int y, int width, int height, bool fill, ARGB_Color color);
+		Rectangle(int x, int y, int width, int height, bool fill, int thickness, ARGB_Color color);
+		Rectangle(int x, int y, int width, int height, bool fill, int thickness, int radius, ARGB_Color color);
 		virtual ~Rectangle();
 
 		virtual void 	Render(color32_t* backBuffer, int width, int height) override;
 
 		virtual bool	HitTest(int x, int y)
 		{
-			return false; /* NOT YET IMPLEMENTED */
+			return CheckBounds(x, y);
 		};
 
 		void 			SetColor(ARGB_Color color) { m_color = color; m_borderLine->SetColor(color); }
@@ -38,7 +42,13 @@ namespace FBDraw
 		int				GetHeight() { return m_height; }
 
 		void			SetTopLeft(Point topLeft) { m_topLeft = topLeft; }
+		void			SetRect(Point topLeft, int width, int height);
+		void			SetRect(int x, int y, int width, int height);
 
+	protected:
+		bool			CheckBounds(int x, int y);
+
+		float			Distance(Point pt1, Point pt2);
 
 	protected:
 
@@ -47,6 +57,7 @@ namespace FBDraw
 		int			m_width;
 		bool		m_fill;
 		int			m_thickness;
+		int			m_radius;
 		Point		m_topLeft;
 		Line*		m_borderLine;
 		ARGB_Color	m_color;
