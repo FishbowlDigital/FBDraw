@@ -82,11 +82,9 @@ namespace FBDraw
 
 			while (c != '\0')
 			{
-				c = m_text[iter++];
 				width += m_font->CharWidth(c) + SPACE_BETWEEN_CHARACTERS;
+				c = m_text[++iter];
 			}
-
-			iter--;
 
 			return width;
 		}
