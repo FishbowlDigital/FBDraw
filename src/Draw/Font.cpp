@@ -6,6 +6,8 @@
 
 #include "Font.h"
 
+#define DEFAULT_CHARACTER_SPACING	1
+
 namespace FBDraw
 {
 	// Constructor
@@ -31,6 +33,8 @@ namespace FBDraw
 		m_fontDesc.WidthTable = m_widthTable;
 		m_fontDesc.OffsetTable = m_offsetTable;
 
+		m_characterSpacing = DEFAULT_CHARACTER_SPACING;
+
 	}
 
 	Font::Font(color32_t* fontBuf, int w, int h, char start, char end)
@@ -54,6 +58,8 @@ namespace FBDraw
 
 		m_fontDesc.WidthTable = m_widthTable;
 		m_fontDesc.OffsetTable = m_offsetTable;
+
+		m_characterSpacing = DEFAULT_CHARACTER_SPACING;
 	}
 	
 	Font::Font(FontDescriptor desc)
@@ -66,6 +72,7 @@ namespace FBDraw
 		m_widthTable = NULL;
 		m_offsetTable = NULL;
 
+		m_characterSpacing = DEFAULT_CHARACTER_SPACING;
 	}
 
 
@@ -97,7 +104,7 @@ namespace FBDraw
 
 		while (c != '\0')
 		{
-			width += Width(c) + SPACE_BETWEEN_CHARACTERS;
+			width += Width(c) + m_characterSpacing;
 			c = str[++iter];
 		}
 
@@ -133,4 +140,13 @@ namespace FBDraw
 
 		return NULL;
 	}
+
+	void Font::SetCharacterSpacing(int characterSpacing)
+	{
+		if (characterSpacing >= 0)
+		{
+			m_characterSpacing = characterSpacing;
+		}
+	}
+
 }

@@ -40,6 +40,10 @@ namespace FBDraw
 		//properties
 		int Height() { return m_fontDesc.Height; }
 
+		int				GetCharacterSpacing() { return m_characterSpacing; }
+		void			SetCharacterSpacing(int characterSpacing);
+
+
 	protected:
 		void			InitializeFontTable();
 		int				GetCharIndex(char c);
@@ -50,6 +54,7 @@ namespace FBDraw
 		int				m_fontTable[CHARACTER_COUNT];
 		int*			m_widthTable;
 		int*			m_offsetTable;
+		int				m_characterSpacing;
 
 		FontDescriptor	m_fontDesc;
 	};

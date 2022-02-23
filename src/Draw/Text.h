@@ -36,13 +36,11 @@ namespace FBDraw
 		int GetWidth()					{ return m_width; }
 		int GetHeight()					{ return m_height; }
 		ARGB_Color GetColor()			{ return m_color; }
-		int GetCharacterSpacing()		{ return m_characterSpacing; }
 
 		void SetXPos(int xPos);
 		void SetYPos(int yPos);
 		void SetColor(ARGB_Color color);
 		void SetText(const char* text);
-		void SetCharacterSpacing(int characterSpacing);
 
 		void 				SetAlignment(TextJustification align);
 		TextJustification 	GetAlignment() { return m_alignment; }
@@ -70,8 +68,6 @@ namespace FBDraw
 		bool			m_doUseSpecifiedDimensions;
 		int				m_width;
 		int				m_height;
-
-		int				m_characterSpacing;
 
 		ARGB_Color		m_color;
 
