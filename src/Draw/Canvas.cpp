@@ -19,6 +19,7 @@ namespace FBDraw
 		Canvas(width, height, new color32_t[width*height])
 	{
 		// Default constructor ok
+		m_backBuffer = NULL;
 	}
 
 	Canvas::Canvas(int width, int height, color32_t* backbuffer)

@@ -18,8 +18,9 @@
                 <CheckBox x:Name="m_chkMono" Content="Monospaced Only" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="112,3,0,0" Checked="m_chkMonoOnly_Checked" Unchecked="m_chkMonoOnly_Unchecked"/>
                 <ComboBox x:Name="m_cbExportFontFormat" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="119" RenderTransformOrigin="1.907,1.202"/>
                 <ComboBox x:Name="m_cbFont" HorizontalAlignment="Left" Margin="10,23,0,0" VerticalAlignment="Top" Width="119" SelectionChanged="m_cbFont_SelectionChanged"/>
-                <ComboBox x:Name="m_cbFontSize" HorizontalAlignment="Left" Margin="134,23,0,0" VerticalAlignment="Top" Width="95" SelectionChanged="m_cbFont_SelectionChanged" Text="16"/>
-                <TextBlock x:Name="m_lblFontInfo" HorizontalAlignment="Left" Margin="245,10,0,0" VerticalAlignment="Top" Height="58" Width="260"><Run Text="Font Info"/></TextBlock>
+                <ComboBox x:Name="m_cbFontSize" HorizontalAlignment="Left" Margin="134,23,0,0" VerticalAlignment="Top" Width="95" SelectionChanged="m_cbFont_SelectionChanged" />
+                <ComboBox x:Name="m_cbFontWeight" HorizontalAlignment="Left" Margin="234,23,0,0" VerticalAlignment="Top" Width="95" SelectionChanged="m_cbFont_SelectionChanged" />
+                <TextBlock x:Name="m_lblFontInfo" HorizontalAlignment="Left" Margin="336,10,0,0" VerticalAlignment="Top" Height="58" Width="260" RenderTransformOrigin="0.551,0.493"><Run Text="Font Info"/></TextBlock>
                 <Button x:Name="m_btnExportFont" Content="Export" HorizontalAlignment="Left" Margin="134,50,0,0" VerticalAlignment="Top" Width="95" Click="m_btnExportFont_Click"/>
             </Grid>
         </GroupBox>

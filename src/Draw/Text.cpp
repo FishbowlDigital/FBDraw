@@ -19,20 +19,24 @@ namespace FBDraw
 	// Constructor
 	Text::Text(Font* pFont, int x, int y, const char* text, TextJustification align/* = TEXTALIGN_CENTER*/)
 	{
+		m_numLinesOfText = 0;		// initialize this to 0 and we'll calculate when we set the text
+
 		m_font = pFont;
+
+		m_color = ARGB_Color{ 0xFF, 0xFF, 0xFF, 0xFF };
+
 		m_xPos = x;
 		m_yPos = y;
-		m_color = ARGB_Color{ 0xFF, 0xFF, 0xFF, 0xFF };
 
 		m_width = 0;	//Initialize to 0. Will be set in SetText()
 		m_height = 0;	//Initialize to 0. Will be set in SetText()
+		m_doUseSpecifiedDimensions = false;
 
-		m_text = new char[1];
+		m_text = NULL;
+		m_arrAlignedTextPositionsInX = NULL;
+		m_arrWidths = NULL;
 
 		m_alignment = align;
-
-		//Center Justified on Height.
-		m_yPos = y + ((m_height - GetHeight()) / 2);
 
 		m_lenText = 0;
 		SetText(text);
@@ -41,66 +45,36 @@ namespace FBDraw
 	}
 
 	Text::Text(Font* pFont, int x, int y, int containerWidth, int containerHeight, const char* text, TextJustification align /*= TEXTALIGN_CENTER*/)
+		: Text(pFont, x, y, text, align)
 	{
-		m_font = pFont;
-
-		m_xPos = x;
-		m_yPos = y;
-
 		// Bounding area
 		m_width = containerWidth;
 		m_height = containerHeight;
-
-		m_text = new char[1];
-
-		m_alignment = align;
+		m_doUseSpecifiedDimensions = true;
 
 		//Center Justified on Height.
-		m_yPos = y + ((m_height - GetHeight()) / 2);
-
-		m_lenText = 0;
-		SetText(text);
-
-		Visible = true;
+		if (pFont != NULL)
+			m_yPos = y + ((m_height - pFont->Height()) / 2);
 	}
 
 	// Destructor
 	Text::~Text()
 	{
+		if (m_text != NULL)
+			delete m_text;
 
-		//if (m_text != NULL)
-		//	delete m_text;
+		if (m_arrWidths != NULL)
+			delete m_arrWidths;
+
+		if (m_arrAlignedTextPositionsInX != NULL)
+			delete m_arrAlignedTextPositionsInX;
+
+		m_text = NULL;
+		m_arrWidths = NULL;
+		m_arrAlignedTextPositionsInX = NULL;
 	}
 
-	int Text::GetWidth()
-	{
-		if (m_font)
-		{
-			char c = m_text[0];
-			int iter = 0;
-			int width = 0;
-
-			while (c != '\0')
-			{
-				width += m_font->CharWidth(c) + SPACE_BETWEEN_CHARACTERS;
-				c = m_text[++iter];
-			}
-
-			return width;
-		}
-
-		return 0;
-	}
-
-	int Text::GetHeight()
-	{
-		if (m_font)
-		{
-			return m_font->Height();
-		}
-
-		return 0;
-	}
+	
 
 	void Text::SetColor(ARGB_Color color)
 	{
@@ -109,11 +83,13 @@ namespace FBDraw
 
 	void Text::SetText(const char* text)
 	{
+		// Array allocation
 		int len = strlen(text);
 
 		if (len > m_lenText)	// reallocate larger string?
 		{
-			delete m_text;
+			if (m_text != NULL)
+				delete m_text;
 			m_text = new char[len+1];
 			m_lenText = len;
 		}
@@ -121,30 +97,87 @@ namespace FBDraw
 		//Copy
 		strcpy(m_text, text);
 
-		if(m_width == 0)
+		// Calculate the number of lines of text
+		int numLinesOfText = 1;
+		for (int i = 0; i < m_lenText; i++)
 		{
-			m_width = GetWidth();
-			m_height = m_yPos + GetWidth();
+			if (m_text[i] == '\n')
+			{
+				numLinesOfText++;
+			}
 		}
 
-
-		//This is where the Justification happens
-		switch(m_alignment)
+		// Allocate arrays to keep track of parameters for each line of text
+		//if (numLinesOfText > m_numLinesOfText)
 		{
-		case TEXTALIGN_LEFT:
-			m_textPosX = m_xPos;
-			break;
+			if (m_arrAlignedTextPositionsInX != NULL)
+				delete m_arrAlignedTextPositionsInX;
 
-		case TEXTALIGN_CENTER:
-			m_textPosX = m_xPos + ((m_width - GetWidth()) / 2);
-			break;
+			m_arrAlignedTextPositionsInX = new int[numLinesOfText];
 
-		case TEXTALIGN_RIGHT:
-			m_textPosX = m_xPos + m_width - GetWidth();
-			break;
+			if (m_arrWidths != NULL)
+				delete m_arrWidths;
+
+			m_arrWidths = new int[numLinesOfText];
 		}
 
+		// Cache number of lines of text
+		m_numLinesOfText = numLinesOfText;
 
+		// Calculate widths of each line
+		int indxChar = 0;
+		int indxLineNum = 0;
+		char c = m_text[indxChar];
+		m_arrWidths[0] = 0;
+		while (c != '\0')
+		{
+			if (c == '\n')
+			{
+				m_arrWidths[++indxLineNum] = 0;
+			}
+			else
+			{
+				m_arrWidths[indxLineNum] += m_font->CharWidth(c) + SPACE_BETWEEN_CHARACTERS;
+			}
+
+			c = m_text[++indxChar];
+		}
+		
+		
+		// If dimensions were not specified, specify now
+		// m_width will be the width of the longest line of text
+		if (!m_doUseSpecifiedDimensions)
+		{
+			int maxWidth = 0;
+			for (int i = 0; i < m_numLinesOfText; i++)
+			{
+				if (maxWidth < m_arrWidths[i])
+				{
+					maxWidth = m_arrWidths[i];
+				}
+			}
+			m_width = maxWidth;
+			m_height = m_font->Height();
+		}
+
+		// Justify each line of text
+		for (int lineNum = 0; lineNum < m_numLinesOfText; lineNum++)
+		{
+			switch (m_alignment)
+			{
+			case TEXTALIGN_LEFT:
+				m_arrAlignedTextPositionsInX[lineNum] = m_xPos;
+				break;
+
+			case TEXTALIGN_CENTER:
+				m_arrAlignedTextPositionsInX[lineNum] = m_xPos + ((m_width - m_arrWidths[lineNum]) / 2);
+				break;
+
+			case TEXTALIGN_RIGHT:
+				m_arrAlignedTextPositionsInX[lineNum] = m_xPos + m_width - m_arrWidths[lineNum];
+				break;
+			}
+		}
 	}
 
 	void Text::SetAlignment(TextJustification align)
@@ -158,58 +191,73 @@ namespace FBDraw
 		if (m_font == NULL)
 			return;
 
-		int iter = 0;
-		int xPos = m_textPosX;
+		int indxChar = 0;
+		int indxLineNum = 0;
+		int xPos = m_arrAlignedTextPositionsInX[indxLineNum];
+		int yPos = m_yPos;
 		int charHeight = m_font->Height();
 		char c = m_text[0];
 
 		// Simple Y Bounds check
-		if ((m_yPos < 0) || ((m_yPos + charHeight) > height))
+		if ((yPos < 0) || ((yPos + charHeight) > height))
 			return;
 
 		while (c != '\0')
 		{
-			int iCanvasStart = (m_yPos * width) + xPos;
-			int charWidth = m_font->CharWidth(c);
-
-			// Simple X bounds check
-			if ((xPos >= 0) && ((xPos + charWidth) < width))
+			// Check if we've got a new line
+			if (c == '\n')
 			{
-				color32_t* charBuffer = m_font->GetCharImage(c);
+				xPos = m_arrAlignedTextPositionsInX[++indxLineNum];
+				yPos += charHeight;
+			}
+			else
+			{
+				int iCanvasStart = (yPos * width) + xPos;
+				int charWidth = m_font->CharWidth(c);
 
-				if (charBuffer != NULL)
+				// Simple X bounds check
+				if ((xPos >= 0) && ((xPos + charWidth) < width))
 				{
-					for (int iY = 0; iY < charHeight; iY++)
+					color32_t* charBuffer = m_font->GetCharImage(c);
+
+					if (charBuffer != NULL)
 					{
-						int iCanvasRowStart = iCanvasStart + (iY * width);
-						int iImageRowStart = (iY * charWidth);
-
-						for (int iX = 0; iX < charWidth; iX++)
+						for (int iY = 0; iY < charHeight; iY++)
 						{
-							// Alpha mix the image pixel and the back buffer
-							ARGB_Bytes imgColor, backColor, mixColor;
-							imgColor.U32 = charBuffer[iImageRowStart + iX];
-							backColor.U32 = backBuffer[iCanvasRowStart + iX];
+							int iCanvasRowStart = iCanvasStart + (iY * width);
+							int iImageRowStart = (iY * charWidth);
 
-							// Apply color to the font pixels which is grayscale
-							imgColor.Color.Red = (((uint16_t)m_color.Red) * imgColor.Color.Red) >> 8;
-							imgColor.Color.Green = (((uint16_t)m_color.Green) * imgColor.Color.Green) >> 8;
-							imgColor.Color.Blue = (((uint16_t)m_color.Blue) * imgColor.Color.Blue) >> 8;
+							for (int iX = 0; iX < charWidth; iX++)
+							{
+								// Alpha mix the image pixel and the back buffer
+								ARGB_Bytes imgColor, backColor, mixColor;
+								imgColor.U32 = charBuffer[iImageRowStart + iX];
+								backColor.U32 = backBuffer[iCanvasRowStart + iX];
 
-							uint8_t alpha = imgColor.Color.Alpha;
-							mixColor.Color.Red = AlphaMix8(backColor.Color.Red, imgColor.Color.Red, alpha);
-							mixColor.Color.Green = AlphaMix8(backColor.Color.Green, imgColor.Color.Green, alpha);
-							mixColor.Color.Blue = AlphaMix8(backColor.Color.Blue, imgColor.Color.Blue, alpha);
-							mixColor.Color.Alpha = AlphaMix8(backColor.Color.Alpha, alpha, alpha);
+								// Apply color to the font pixels which is grayscale
+								imgColor.Color.Red = (((uint16_t)m_color.Red) * imgColor.Color.Red) >> 8;
+								imgColor.Color.Green = (((uint16_t)m_color.Green) * imgColor.Color.Green) >> 8;
+								imgColor.Color.Blue = (((uint16_t)m_color.Blue) * imgColor.Color.Blue) >> 8;
 
-							backBuffer[iCanvasRowStart + iX] = mixColor.U32;
+								uint8_t alpha = imgColor.Color.Alpha;
+								mixColor.Color.Red = AlphaMix8(backColor.Color.Red, imgColor.Color.Red, alpha);
+								mixColor.Color.Green = AlphaMix8(backColor.Color.Green, imgColor.Color.Green, alpha);
+								mixColor.Color.Blue = AlphaMix8(backColor.Color.Blue, imgColor.Color.Blue, alpha);
+								mixColor.Color.Alpha = AlphaMix8(backColor.Color.Alpha, alpha, alpha);
+
+								backBuffer[iCanvasRowStart + iX] = mixColor.U32;
+							}
 						}
 					}
 				}
+
+				xPos += charWidth + SPACE_BETWEEN_CHARACTERS;	// 1 pixel between chars
 			}
 
-			xPos += charWidth + SPACE_BETWEEN_CHARACTERS;	// 1 pixel between chars
-			c = m_text[++iter];
+			// next character
+			c = m_text[++indxChar];
 		}
 	}
+
+	
 }

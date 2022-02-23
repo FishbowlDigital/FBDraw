@@ -33,8 +33,8 @@ namespace FBDraw
 		//Properties
 		int GetXPos()					{ return m_xPos; }
 		int GetYPos()					{ return m_yPos; }
-		int GetWidth();
-		int GetHeight();
+		int GetWidth()					{ return m_width; }
+		int GetHeight()					{ return m_height; }
 		ARGB_Color GetColor()			{ return m_color; }
 
 		void SetXPos(int xPos)			{ m_xPos = xPos; }
@@ -53,14 +53,19 @@ namespace FBDraw
 		};
 
 	private:
-		Font*			m_font;
 		int				m_xPos;
 		int				m_yPos;
-		int				m_textPosX;
-		int				m_textPosY;
+
+		int*			m_arrWidths;
+		int*			m_arrAlignedTextPositionsInX;	// This is an array containing the text aligned x position for each line of text
+
+		int				m_numLinesOfText;
+
+		Font*			m_font;
 		char*			m_text;
 		int				m_lenText;
 
+		bool			m_doUseSpecifiedDimensions;
 		int				m_width;
 		int				m_height;
 

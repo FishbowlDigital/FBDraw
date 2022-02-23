@@ -53,6 +53,7 @@ namespace FontTool
                 InvalidateVisual();
             }
         }
+
         public PixelFormat PxFormat
         {
             get { return m_pxFmt; }
@@ -107,7 +108,8 @@ namespace FontTool
             drawingContext.DrawRectangle(Brushes.Black, pen, new Rect(this.RenderSize));
 
             // Settings
-            Typeface face = new Typeface(Family);
+            FontFamily family = new FontFamily(Family);
+            Typeface face = new Typeface(family, FontStyle, FontWeight, FontStretches.Normal);
 
             // Calculate Width - use 'I' so it's obvious if this font isn't monospaced
             FormattedText sample = new FormattedText("I", System.Globalization.CultureInfo.CurrentCulture, System.Windows.FlowDirection.LeftToRight, face, Size, Brushes.White);
@@ -148,7 +150,8 @@ namespace FontTool
             int iBmp = 0;
 
             // Settings
-            Typeface face = new Typeface(Family);
+            FontFamily family = new FontFamily(Family);
+            Typeface face = new Typeface(family, FontStyle, FontWeight, FontStretches.Normal);
 
             // Calculate Width - use 'i' so it's obvious if this font isn't monospaced
             FormattedText sample = new FormattedText("i", System.Globalization.CultureInfo.CurrentCulture, System.Windows.FlowDirection.LeftToRight, face, Size, Brushes.White);
@@ -230,7 +233,8 @@ namespace FontTool
         public void GetCCode(PixelFormat pxFmt, string fName, out string headerText, out string srcText)
         {
             // Settings
-            Typeface face = new Typeface(Family);
+            FontFamily family = new FontFamily(Family);
+            Typeface face = new Typeface(family, FontStyle, FontWeight, FontStretches.Normal);
 
             string fNoExt = System.IO.Path.GetFileNameWithoutExtension(fName);
             string fNoWhite = fNoExt.Replace(' ', '_');
