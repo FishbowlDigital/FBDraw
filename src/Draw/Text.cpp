@@ -12,7 +12,7 @@
 #include "Image.h"
 #include "Macros.h"
 
-#define SPACE_BETWEEN_CHARACTERS		1
+#define DEFAULT_CHARACTER_SPACING	0
 
 namespace FBDraw
 {
@@ -20,7 +20,7 @@ namespace FBDraw
 	Text::Text(Font* pFont, int x, int y, const char* text, TextJustification align/* = TEXTALIGN_CENTER*/)
 	{
 		m_numLinesOfText = 0;		// initialize this to 0 and we'll calculate when we set the text
-
+		m_characterSpacing = DEFAULT_CHARACTER_SPACING;
 		m_font = pFont;
 
 		m_color = ARGB_Color{ 0xFF, 0xFF, 0xFF, 0xFF };
@@ -55,6 +55,8 @@ namespace FBDraw
 		//Center Justified on Height.
 		if (pFont != NULL)
 			m_yPos = y + ((m_height - pFont->Height()) / 2);
+
+		SetText(text);
 	}
 
 	// Destructor
@@ -137,7 +139,7 @@ namespace FBDraw
 			}
 			else
 			{
-				m_arrWidths[indxLineNum] += m_font->CharWidth(c) + SPACE_BETWEEN_CHARACTERS;
+				m_arrWidths[indxLineNum] += m_font->CharWidth(c) + m_characterSpacing;
 			}
 
 			c = m_text[++indxChar];
@@ -184,6 +186,25 @@ namespace FBDraw
 	{
 		m_alignment = align;
 		SetText(m_text);
+	}
+
+	void Text::SetXPos(int xPos)
+	{
+		m_xPos = xPos;
+		SetText(m_text);
+	}
+	void Text::SetYPos(int yPos)
+	{
+		m_yPos = yPos;
+		SetText(m_text);
+	}
+	void Text::SetCharacterSpacing(int characterSpacing)
+	{
+		if (characterSpacing >= 0)
+		{
+			m_characterSpacing = characterSpacing;
+			SetText(m_text);
+		}
 	}
 
 	void Text::Render(color32_t* backBuffer, int width, int height)
@@ -251,7 +272,7 @@ namespace FBDraw
 					}
 				}
 
-				xPos += charWidth + SPACE_BETWEEN_CHARACTERS;	// 1 pixel between chars
+				xPos += charWidth + m_characterSpacing;
 			}
 
 			// next character

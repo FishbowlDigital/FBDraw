@@ -44,8 +44,24 @@ namespace FontTool
                 m_cbFontSize.Items.Add(i);
             }
 
+            FontWeight[] weights = new FontWeight[] { FontWeights.Thin,
+                                                      FontWeights.ExtraLight,
+                                                      FontWeights.Light,
+                                                      FontWeights.Normal,
+                                                      FontWeights.Medium,
+                                                      FontWeights.SemiBold,
+                                                      FontWeights.Bold,
+                                                      FontWeights.ExtraBold,
+                                                      FontWeights.Black,
+                                                      FontWeights.ExtraBlack, };
+            for (int i = 0; i < weights.Length; i++)
+            {
+                m_cbFontWeight.Items.Add(weights[i]);
+            }
+
             m_cbFont.SelectedValue = m_cbFont.Items[0];
-            m_cbFontSize.SelectedValue = 16;
+            m_cbFontSize.SelectedValue = 16.0;
+            m_cbFontWeight.SelectedValue = FontWeights.Normal;
         }
 
         private void m_cbFont_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -54,6 +70,7 @@ namespace FontTool
             {
                 m_ctrlFontPreview.Family = m_cbFont.SelectedValue.ToString();
                 m_ctrlFontPreview.Size = m_cbFontSize.SelectedValue != null ? Convert.ToDouble(m_cbFontSize.SelectedValue) : 16;
+                m_ctrlFontPreview.FontWeight = m_cbFontWeight.SelectedValue != null ? (FontWeight)(m_cbFontWeight.SelectedValue) : FontWeights.Normal;
                 m_lblFontInfo.Text = m_ctrlFontPreview.FontDescription;
             }
         }
@@ -62,6 +79,7 @@ namespace FontTool
         {
             m_ctrlFontPreview.Family = m_cbFont.SelectedValue.ToString();
             m_ctrlFontPreview.Size = m_cbFontSize.SelectedValue != null ? Convert.ToDouble(m_cbFontSize.SelectedValue) : 16;
+            m_ctrlFontPreview.FontWeight = m_cbFontWeight.SelectedValue != null ? (FontWeight)(m_cbFontWeight.SelectedValue) : FontWeights.Normal;
             m_lblFontInfo.Text = m_ctrlFontPreview.FontDescription;
         }
 
@@ -122,7 +140,6 @@ namespace FontTool
         {
             m_ctrlFontPreview.NumbersOnly = false;
         }
-
 
         private void LoadFonts()
         {
