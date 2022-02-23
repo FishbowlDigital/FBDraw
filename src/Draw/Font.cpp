@@ -89,6 +89,22 @@ namespace FBDraw
 		}
 	}
 
+	int Font::Width(char* str)
+	{
+		char c = str[0];
+		int iter = 0;
+		int width = 0;
+
+		while (c != '\0')
+		{
+			width += Width(c) + SPACE_BETWEEN_CHARACTERS;
+			c = str[++iter];
+		}
+
+		return width;
+	}
+
+
 	int Font::GetCharIndex(char c)
 	{
 		int i = -1;

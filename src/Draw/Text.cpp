@@ -12,7 +12,6 @@
 #include "Image.h"
 #include "Macros.h"
 
-#define SPACE_BETWEEN_CHARACTERS		1
 
 namespace FBDraw
 {
@@ -137,7 +136,7 @@ namespace FBDraw
 			}
 			else
 			{
-				m_arrWidths[indxLineNum] += m_font->CharWidth(c) + SPACE_BETWEEN_CHARACTERS;
+				m_arrWidths[indxLineNum] += m_font->Width(c) + SPACE_BETWEEN_CHARACTERS;
 			}
 
 			c = m_text[++indxChar];
@@ -213,7 +212,7 @@ namespace FBDraw
 			else
 			{
 				int iCanvasStart = (yPos * width) + xPos;
-				int charWidth = m_font->CharWidth(c);
+				int charWidth = m_font->Width(c);
 
 				// Simple X bounds check
 				if ((xPos >= 0) && ((xPos + charWidth) < width))

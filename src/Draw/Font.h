@@ -9,7 +9,8 @@
 
 #include "IDrawable.h"
 
-#define	CHARACTER_COUNT			128
+#define	CHARACTER_COUNT					128
+#define SPACE_BETWEEN_CHARACTERS		1
 
 namespace FBDraw
 {
@@ -32,7 +33,8 @@ namespace FBDraw
 		Font(FontDescriptor desc);
 		~Font();
 
-		int				CharWidth(char c) { return m_fontDesc.WidthTable[GetCharIndex(c) - m_startChar]; }
+		int				Width(char* str);
+		int				Width(char c) { return m_fontDesc.WidthTable[GetCharIndex(c) - m_startChar]; }
 		color32_t*		GetCharImage(char c);
 
 		//properties
