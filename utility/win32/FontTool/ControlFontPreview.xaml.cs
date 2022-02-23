@@ -330,8 +330,8 @@ namespace FontTool
                     drawingContext.Close();
 
                     // dimensions
-                    int width = (int)(fmtText.Width + 0.5);
-                    int height = (int)(fmtText.Height + 0.5);
+                    int width = (int)(fmtText.Width);// + 0.5);
+                    int height = (int)(fmtText.Height);// + 0.5);
                     if (c == ' ')
                     {
                         width = defaultWidth;       // workaround for spaces getting culled

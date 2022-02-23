@@ -19,7 +19,6 @@ namespace FBDraw
 	Text::Text(Font* pFont, int x, int y, const char* text, TextJustification align/* = TEXTALIGN_CENTER*/)
 	{
 		m_numLinesOfText = 0;		// initialize this to 0 and we'll calculate when we set the text
-
 		m_font = pFont;
 
 		m_color = ARGB_Color{ 0xFF, 0xFF, 0xFF, 0xFF };
@@ -54,6 +53,8 @@ namespace FBDraw
 		//Center Justified on Height.
 		if (pFont != NULL)
 			m_yPos = y + ((m_height - pFont->Height()) / 2);
+
+		SetText(text);
 	}
 
 	// Destructor
@@ -136,7 +137,7 @@ namespace FBDraw
 			}
 			else
 			{
-				m_arrWidths[indxLineNum] += m_font->Width(c) + SPACE_BETWEEN_CHARACTERS;
+				m_arrWidths[indxLineNum] += m_font->Width(c) + m_font->GetCharacterSpacing();
 			}
 
 			c = m_text[++indxChar];
@@ -182,6 +183,17 @@ namespace FBDraw
 	void Text::SetAlignment(TextJustification align)
 	{
 		m_alignment = align;
+		SetText(m_text);
+	}
+
+	void Text::SetXPos(int xPos)
+	{
+		m_xPos = xPos;
+		SetText(m_text);
+	}
+	void Text::SetYPos(int yPos)
+	{
+		m_yPos = yPos;
 		SetText(m_text);
 	}
 
@@ -250,7 +262,7 @@ namespace FBDraw
 					}
 				}
 
-				xPos += charWidth + SPACE_BETWEEN_CHARACTERS;	// 1 pixel between chars
+				xPos += charWidth + m_font->GetCharacterSpacing();
 			}
 
 			// next character
