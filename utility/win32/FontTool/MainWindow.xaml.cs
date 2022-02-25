@@ -39,7 +39,7 @@ namespace FontTool
             LoadFonts();
  
             // Available font sizes
-            for (double i = 8; i <= 64; i += .5)
+            for (double i = 8; i <= 200; i += .5)
             {
                 m_cbFontSize.Items.Add(i);
             }

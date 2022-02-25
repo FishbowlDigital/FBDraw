@@ -26,7 +26,7 @@ namespace FontTool
         double m_fontSize = 16;
         PixelFormat m_pxFmt = PixelFormats.Bgra32;
         char[] m_asciiTable = new char[95];
-        char[] m_numbersOnlyChars = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', (char)103};
+        char[] m_numbersOnlyChars = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', ',', '%', 'E', 'e', 'x', 'X', '-', '+', '*', '/', '(', ')' };
         public ControlFontPreview()
         {
             InitializeComponent();
@@ -271,114 +271,89 @@ namespace FontTool
             int defaultWidth = (int)sample.Width;
             int defaultHeight = (int)sample.Height;
 
-            //// 26 character alphabet
-            //int bytesPerPixel = pxFmt.BitsPerPixel / 8;
-            //int bytesPerBmp = width * height * bytesPerPixel;
-            //byte[] charTable = new byte[95 * bytesPerBmp];
-            //byte[] bmpBytes = new byte[bytesPerBmp]; 
-
-            //// Create transparrent pen
-            //Pen pen = new Pen(Brushes.Transparent, 1);
-
-
-            if (m_bNumbersOnly)
+ 
+            //// DRaw the font
+            int numChars = m_asciiTable.Length;
+            int iChar = 0;
+            int iOffset = 0;
+            foreach (char c in m_asciiTable)
             {
-                //// Numbers
-                //foreach (char c in m_numbersOnlyChars)
-                //{
-                //    DrawingVisual drawingVisual = new DrawingVisual();
-                //    DrawingContext drawingContext = drawingVisual.RenderOpen();
+                DrawingVisual drawingVisual = new DrawingVisual();
+                DrawingContext drawingContext = drawingVisual.RenderOpen();
 
-                //    // Draw Transparent background
-                //    drawingContext.DrawRectangle(Brushes.Transparent, pen, new Rect(0, 0, width, height));
+                // Draw Transparent background
+                //drawingContext.DrawRectangle(Brushes.Transparent, pen, new Rect(0, 0, width, height));
 
-                //    // Draw text
-                //    FormattedText fmtText = new FormattedText(c.ToString(), System.Globalization.CultureInfo.CurrentCulture, System.Windows.FlowDirection.LeftToRight, face, Size, Brushes.White);
-                //    drawingContext.DrawText(fmtText, new Point(0, 0));
-                //    drawingContext.Close();
+                // Draw text
+                FormattedText fmtText = new FormattedText(c.ToString(), System.Globalization.CultureInfo.CurrentCulture, System.Windows.FlowDirection.LeftToRight, face, Size, Brushes.White);
+                drawingContext.DrawText(fmtText, new Point(0, 0));
+                drawingContext.Close();
 
-                //    // Create image to draw to
-                //    RenderTargetBitmap bmp = new RenderTargetBitmap(width, height, 96, 96, PixelFormats.Pbgra32);
-                //    BitmapSource outSrc = new FormatConvertedBitmap(bmp, pxFmt, null, 0);
-
-                //    // DRaw to bitmap and copy the pixels
-                //    bmp.Render(drawingVisual);
-                //    outSrc.CopyPixels(bmpBytes, bmp.PixelWidth * bytesPerPixel, 0);
-                //    Buffer.BlockCopy(bmpBytes, 0, charTable, iBmp, bytesPerBmp);
-
-                //    // Increment char table byte index
-                //    iBmp += bytesPerBmp;
-                //}
-            }
-            else
-            {
-                //// DRaw the font
-                int numChars = m_asciiTable.Length;
-                int iChar = 0;
-                int iOffset = 0;
-                foreach (char c in m_asciiTable)
+                // dimensions
+                int width = (int)(fmtText.Width + 0.5);
+                int height = (int)(fmtText.Height + 0.5);
+                if (c == ' ')
                 {
-                    DrawingVisual drawingVisual = new DrawingVisual();
-                    DrawingContext drawingContext = drawingVisual.RenderOpen();
+                    width = defaultWidth;       // workaround for spaces getting culled
+                }
+                else if (m_bNumbersOnly && !m_numbersOnlyChars.Contains(c))
+                {
+                    // No image for this character
+                    width = 0;
+                    height = 0;
+                }
 
-                    // Draw Transparent background
-                    //drawingContext.DrawRectangle(Brushes.Transparent, pen, new Rect(0, 0, width, height));
-
-                    // Draw text
-                    FormattedText fmtText = new FormattedText(c.ToString(), System.Globalization.CultureInfo.CurrentCulture, System.Windows.FlowDirection.LeftToRight, face, Size, Brushes.White);
-                    drawingContext.DrawText(fmtText, new Point(0, 0));
-                    drawingContext.Close();
-
-                    // dimensions
-                    int width = (int)(fmtText.Width);// + 0.5);
-                    int height = (int)(fmtText.Height);// + 0.5);
-                    if (c == ' ')
-                    {
-                        width = defaultWidth;       // workaround for spaces getting culled
-                    }
+                if (c == ' ')
+                {
+                    width = defaultWidth;       // workaround for spaces getting culled
+                }
+                else if (m_bNumbersOnly && !m_numbersOnlyChars.Contains(c))
+                {
+                    // No image for this character
+                    width = 0;
+                    height = 0;
+                }
 
 
-                    bool hasImage = (width > 0) && (height > 0);
-
- 
-                    // Create image to draw to
-                    RenderTargetBitmap bmp = null;
-                    BitmapSource outSrc = null;
-                    if (hasImage)
-                    {
-                        bmp = new RenderTargetBitmap(width, height, 96, 96, PixelFormats.Pbgra32);
-                        outSrc = new FormatConvertedBitmap(bmp, pxFmt, null, 0);
-
-                        // DRaw to bitmap and copy the pixels
-                        bmp.Render(drawingVisual);
-                    }
+                bool hasImage = (width > 0) && (height > 0);
 
  
-                    // Add to tables
-                    bool lastChar = ++iChar >= numChars;
-                    sWidthTable.Append(width.ToString() + (lastChar ? "" : ", "));
-                    sOffsetTable.Append(iOffset.ToString() + (lastChar ? "" : ", "));
+                // Create image to draw to
+                RenderTargetBitmap bmp = null;
+                BitmapSource outSrc = null;
+                if (hasImage)
+                {
+                    bmp = new RenderTargetBitmap(width, height, 96, 96, PixelFormats.Pbgra32);
+                    outSrc = new FormatConvertedBitmap(bmp, pxFmt, null, 0);
 
-                    System.Diagnostics.Debug.WriteLine(c + " = " + width);
+                    // DRaw to bitmap and copy the pixels
+                    bmp.Render(drawingVisual);
+                }
 
-                    if (hasImage)
+ 
+                // Add to tables
+                bool lastChar = ++iChar >= numChars;
+                sWidthTable.Append(width.ToString() + (lastChar ? "" : ", "));
+                sOffsetTable.Append(iOffset.ToString() + (lastChar ? "" : ", "));
+
+                System.Diagnostics.Debug.WriteLine(c + " = " + width);
+
+                if (hasImage)
+                {
+                    // Output bytes
+                    int bytesPerPx = (pxFmt.BitsPerPixel / 8);
+                    byte[] pixels = new byte[width * height * bytesPerPx];
+                    outSrc.CopyPixels(pixels, bmp.PixelWidth * bytesPerPx, 0);
+
+                    sImageBuffer.Append("\t/* " + c.ToString() + " */ ");
+                    for (int i = 0; i < pixels.Length - 1; i++)
                     {
-                        // Output bytes
-                        int bytesPerPx = (pxFmt.BitsPerPixel / 8);
-                        byte[] pixels = new byte[width * height * bytesPerPx];
-                        outSrc.CopyPixels(pixels, bmp.PixelWidth * bytesPerPx, 0);
-
-                        sImageBuffer.Append("\t/* " + c.ToString() + " */ ");
-                        for (int i = 0; i < pixels.Length - 1; i++)
-                        {
-                            sImageBuffer.Append(String.Format("0x{0:X2}, ", pixels[i]));
-                        }
-                        sImageBuffer.Append(String.Format("0x{0:X2}" + (lastChar ? "\n" : ",\n"), pixels[pixels.Length - 1]));
-
-                        // Increment offset
-                        iOffset += (width * height * bytesPerPx);
+                        sImageBuffer.Append(String.Format("0x{0:X2}, ", pixels[i]));
                     }
+                    sImageBuffer.Append(String.Format("0x{0:X2}" + (lastChar ? "\n" : ",\n"), pixels[pixels.Length - 1]));
 
+                    // Increment offset
+                    iOffset += (width * height * bytesPerPx);
                 }
             }
 
