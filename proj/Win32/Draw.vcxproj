@@ -32,9 +32,7 @@
     <ClInclude Include="..\..\src\Draw\Macros.h" />
     <ClInclude Include="..\..\src\Draw\Plot1D.h" />
     <ClInclude Include="..\..\src\Draw\Point.h" />
-    <ClInclude Include="..\..\src\Draw\Range.h" />
     <ClInclude Include="..\..\src\Draw\Rectangle.h" />
-    <ClInclude Include="..\..\src\Draw\Test.h" />
     <ClInclude Include="..\..\src\Draw\Text.h" />
     <ClInclude Include="..\..\src\Draw\Types.h" />
   </ItemGroup>
@@ -50,9 +48,7 @@
     <ClCompile Include="..\..\src\Draw\Line.cpp" />
     <ClCompile Include="..\..\src\Draw\Plot1D.cpp" />
     <ClCompile Include="..\..\src\Draw\Point.cpp" />
-    <ClCompile Include="..\..\src\Draw\Range.cpp" />
     <ClCompile Include="..\..\src\Draw\Rectangle.cpp" />
-    <ClCompile Include="..\..\src\Draw\Test.cpp" />
     <ClCompile Include="..\..\src\Draw\Text.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -125,7 +121,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_MBCS;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_MBCS;WIN32;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -136,7 +132,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_MBCS;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_MBCS;WIN32;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -149,6 +145,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -163,6 +160,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
