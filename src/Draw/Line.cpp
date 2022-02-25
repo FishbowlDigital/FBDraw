@@ -174,7 +174,7 @@ namespace FBDraw
 				int iY = (int)((m * iX) + b);
 
 				int iY2 = (int)((m * (iX + 1)) + b);
-				int barHeight = (fabs(iY2 - iY)) + m_thickness;
+				int barHeight = (int) (fabs(iY2 - iY)) + m_thickness;
 				if (barHeight < 1) { barHeight = 1; }
 
 				fbhRemAccum += fbhRem;	// Increment remainder

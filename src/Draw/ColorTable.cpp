@@ -116,7 +116,7 @@ namespace FBDraw
 			for (int iX = xStart; iX < xEnd; iX++)
 			{
 				scale = ((iY - yStart) * m_invHeight);
-				colorValue = (scale * (m_lutSize-1));
+				colorValue = (int) (scale * (m_lutSize-1));
 				color = m_LUT->GetColor(colorValue);
 
 				//backBuffer[((yEnd-iY) * width) + iX] = color.U32;
