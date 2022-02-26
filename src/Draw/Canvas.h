@@ -63,7 +63,6 @@ namespace FBDraw
 		int				GetHeight();
 
 		color32_t*		GetBackBuffer();
-		color32_t*		GetFrontBuffer();
 
 	protected:
 		void			DrawableInvalidated(IDrawable& drawable);
@@ -81,7 +80,6 @@ namespace FBDraw
 
 		// The rendering backbuffer (always 32-bit color)
 		color32_t*		m_backBuffer;
-		color32_t*		m_frontBuffer;
 
 		// List of drawables
 		IDrawable**		m_drawables;
