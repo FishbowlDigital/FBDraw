@@ -45,7 +45,6 @@
 #include "Data1D.h"
 #include "ColorLUT.h"
 #include "Point.h"
-#include "Range.h"
 
 #include "Image.h"
 #include "Point.h"
