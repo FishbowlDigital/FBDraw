@@ -48,7 +48,7 @@ namespace FBDraw
 		m_height = 0;	//Initialize to 0. Will be set in SetText()
 		m_doUseSpecifiedDimensions = false;
 
-		m_text = NULL;
+		m_text = new char[1] { '\0' };
 		m_arrAlignedTextPositionsInX = NULL;
 		m_arrWidths = NULL;
 
@@ -68,9 +68,10 @@ namespace FBDraw
 		m_height = containerHeight;
 		m_doUseSpecifiedDimensions = true;
 
+		// NOTE! - need to add a vertical alignment
 		//Center Justified on Height.
-		if (pFont != NULL)
-			m_yPos = y + ((m_height - pFont->Height()) / 2);
+		//if (pFont != NULL)
+		//	m_yPos = y + ((m_height - pFont->Height()) / 2);
 
 		SetText(text);
 	}
@@ -117,7 +118,7 @@ namespace FBDraw
 
 		// Calculate the number of lines of text
 		int numLinesOfText = 1;
-		for (int i = 0; i < m_lenText; i++)
+		for (int i = 0; i < len; i++)
 		{
 			if (m_text[i] == '\n')
 			{
