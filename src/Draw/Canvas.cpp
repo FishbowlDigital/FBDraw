@@ -44,7 +44,6 @@ namespace FBDraw
 	{
 		// Create the backbuffer
 		m_backBuffer = backbuffer;
-		m_frontBuffer = new color32_t[width * height];
 
 		// Store configuration
 		m_width = width;
@@ -186,16 +185,6 @@ namespace FBDraw
 	color32_t* Canvas::GetBackBuffer()
 	{
 		return m_backBuffer;
-	}
-
-	color32_t* Canvas::GetFrontBuffer()
-	{
-		// Mem copy back to front
-		int numPx = m_width * m_height;
-		for (int i = 0; i < numPx; i++) { m_frontBuffer[i] = m_backBuffer[i]; }
-
-		// Return it
-		return m_frontBuffer;
 	}
 
 	/////////////////////////////
