@@ -43,8 +43,6 @@ namespace FBDraw
 		void			ReplaceBuffer(color32_t* image, int w, int h);
 		void			ReplaceBuffer(color32_t* image, Point loc, int w, int h);
 
-		color32_t* Image::GetImage();
-
 		virtual void 	Render(color32_t* backBuffer, int width, int height);
 
 		virtual bool	HitTest(int x, int y);
@@ -58,8 +56,6 @@ namespace FBDraw
 
 		int				Height()				{ return m_height; }
 		void 			SetHeight(int h)		{ m_height = h; }
-
-		color32_t*		ImageData()				{ return m_imageBuffer; }
 
 		void 			HasAlpha(bool hasit) 	{ m_bHasAlpha = hasit; }
 		bool 			HasAlpha()				{ return m_bHasAlpha; }
