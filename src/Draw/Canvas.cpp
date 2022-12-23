@@ -36,14 +36,15 @@ namespace FBDraw
 	Canvas::Canvas(int width, int height) :
 		Canvas(width, height, new color32_t[width*height])
 	{
-		// Default constructor ok
-		m_backBuffer = NULL;
+		// This version maintains it's own back buffer. Note for cleanup later
+		m_ownsBackBuffer = true;
 	}
 
 	Canvas::Canvas(int width, int height, color32_t* backbuffer)
 	{
-		// Create the backbuffer
+		// Save the backbuffer
 		m_backBuffer = backbuffer;
+		m_ownsBackBuffer = false;
 
 		// Store configuration
 		m_width = width;
@@ -69,7 +70,7 @@ namespace FBDraw
 
 	Canvas::~Canvas()
 	{
-		if (m_backBuffer != NULL)
+		if (m_ownsBackBuffer && m_backBuffer != NULL)
 		{
 			delete m_backBuffer;
 		}

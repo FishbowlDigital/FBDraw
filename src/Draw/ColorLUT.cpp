@@ -43,6 +43,9 @@ namespace FBDraw
 		{
 			m_colorTable[i].Color = ARGB_Color{ (uint8_t)i, (uint8_t)i, (uint8_t)i, 0xFF};
 		}
+
+		// This version maintains it's own table. Note for cleanup later
+		m_ownsColorTable = true;
 	}
 
 	ColorLUT::ColorLUT(ARGB_Bytes* table, int size, int min, int max)
@@ -53,11 +56,13 @@ namespace FBDraw
 		m_max = max;
 
 		m_invRange = 1.0f / (m_max - m_min);
+
+		m_ownsColorTable = false;
 	}
 
 	ColorLUT::~ColorLUT()
 	{
-		if (m_colorTable != NULL)
+		if (m_ownsColorTable && m_colorTable != NULL)
 			delete m_colorTable;
 	}
 

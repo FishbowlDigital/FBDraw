@@ -80,6 +80,7 @@ namespace FBDraw
 
 		// The rendering backbuffer (always 32-bit color)
 		color32_t*		m_backBuffer;
+		bool				m_ownsBackBuffer;
 
 		// List of drawables
 		IDrawable**		m_drawables;

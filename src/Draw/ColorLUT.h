@@ -42,15 +42,16 @@ namespace FBDraw
 		int GetMax();
 		void SetMax(int value);
 
-		ARGB_Bytes*	m_colorTable;
-
 	private:
 		// Properties
-		int			m_size;
-		int			m_min;
-		int			m_max;
+		ARGB_Bytes*		m_colorTable;
+		bool					m_ownsColorTable;
 
-		float		m_invRange;
+		int						m_size;
+		int						m_min;
+		int						m_max;
+
+		float					m_invRange;
 	};
 }
 
