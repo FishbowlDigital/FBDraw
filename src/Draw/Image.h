@@ -43,6 +43,8 @@ namespace FBDraw
 		void			ReplaceBuffer(color32_t* image, int w, int h);
 		void			ReplaceBuffer(color32_t* image, Point loc, int w, int h);
 
+		color32_t* Image::GetImage();
+
 		virtual void 	Render(color32_t* backBuffer, int width, int height);
 
 		virtual bool	HitTest(int x, int y);

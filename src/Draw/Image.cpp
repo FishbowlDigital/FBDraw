@@ -71,6 +71,11 @@ namespace FBDraw
 		ReplaceBuffer(image, m_location, w, h);
 	}
 
+	color32_t* Image::GetImage()
+	{
+		return m_imageBuffer;
+	}
+
 	void Image::ReplaceBuffer(color32_t* image, Point loc, int w, int h)
 	{
 		// Clean old buffer?
