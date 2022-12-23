@@ -26,7 +26,7 @@ namespace FontTool
         double m_fontSize = 16;
         PixelFormat m_pxFmt = PixelFormats.Bgra32;
         char[] m_asciiTable = new char[95];
-        char[] m_numbersOnlyChars = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', ',', '%', 'E', 'e', 'x', 'X', '-', '+', '*', '/', '(', ')' };
+        char[] m_numbersOnlyChars = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', ',', '%', 'E', 'e', 'x', 'X', '-', '+', '*', '/', '(', ')', '<', '=', '>' };
         public ControlFontPreview()
         {
             InitializeComponent();
