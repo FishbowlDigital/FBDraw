@@ -1,7 +1,25 @@
 // RotateImage.cpp
-// Implementation file for the Image class
+// Implementation file for the Rotatable Image class
 //
-// Copyright Fishbowl Digital 2019
+// Copyright(c) 2017 - 2022 Fishbowl Digital LLC
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files(the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions :
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
 //
 
 #include "RotImage.h"
@@ -85,7 +103,7 @@ namespace FBDraw
 
 	Point RotatableImage::GetRotatedPoint(Point pt)
 	{
-		float angle = -m_theta * (PI / 180.0);
+		float angle = (float)(-m_theta * (PI / 180.0));
 
 		// Translate to center
 		int x1 = pt.X - m_ptRotate.X;
@@ -104,16 +122,16 @@ namespace FBDraw
 
 	void RotatableImage::Render(color32_t* backBuffer, int width, int height)
 	{
-		if (ImageData() == NULL)
+		if (m_imageBuffer == NULL)
 			return;
 
-		color32_t* imageBuffer = ImageData();
+		color32_t* imageBuffer = m_imageBuffer;
 		int xLoc = Location().X;
 		int yLoc = Location().Y;
 		int imgWidth = Width();
 		int imgHeight = Height();
 		//int iCanvasStart = (yLoc * width) + xLoc;
-		float angle = -m_theta * (PI/180.0); //GetAngle(xLoc, yLoc);
+		float angle = (float) ( -m_theta * (PI / 180.0)); //GetAngle(xLoc, yLoc);
 
 		//Canvas coordinates four corners of the image
 		Point topLeft = Point(xLoc, yLoc);
@@ -181,8 +199,8 @@ namespace FBDraw
 				int y1 = iY - m_ptRotate.Y;
 
 				// Rotate
-				int xRot = (x1 * cos(-angle)) + (y1 * sin(-angle));
-				int yRot = (x1 * -sin(-angle)) + (y1 * cos(-angle));
+				int xRot = (int) ((x1 * cos(-angle)) + (y1 * sin(-angle)));
+				int yRot = (int) ((x1 * -sin(-angle)) + (y1 * cos(-angle)));
 
 				// Revert center translation
 				int x2 = xRot + m_ptRotate.X;
